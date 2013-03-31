@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+  <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Alice</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="Alice database">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap-responsive.css') }}">
+
+        <!-- Get Font from Google http://www.google.com/webfonts -->
+        <link href='http://fonts.googleapis.com/css?family=Peralta' rel='stylesheet' type='text/css'>
+
+        <!-- Icons and Favicons -->
+        <link rel="shortcut icon" href="ico/favicon.ico">
+        <link rel="apple-touch-icon-precomposed" sizes="144x144" href="ico/apple-touch-icon-144-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="ico/apple-touch-icon-114-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="72x72" href="ico/apple-touch-icon-72-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" href="ico/apple-touch-icon-57-precomposed.png">
+
+        {% block styles %}{% endblock %}
+        
+  </head>
+
+  <!-- Begin of the body -->
+  <body>
+
+    <!-- Logo - Header -->
+    <div class="row-fluid">
+      <div class="top-logo">
+        <div class="hero-one">
+          <a href="/"><img src="{{ url_for('static', filename='img/logo_alice02.png') }}" class="brand" alt=""></a>
+         </div>
+      </div>
+    </div>
+
+    <!-- Naviation Menu -->
+    <div class="navbar navbar-inverse">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          
+          <div class="nav-collapse collapse">
+            <ul class="nav">
+              <li class="active"><a href="/">Home</a></li>
+              <li><a href="/submit">Submit</a></li>
+              <li><a href="/contact">Contact</a></li>
+                </ul>
+              </li>
+            </ul>
+
+            <!-- Login -->
+            <ul class="nav nav-bar pull-right">
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Sign in <b class="caret"></b></a>
+                  <ul class="dropdown-menu">
+                    <li>
+                      <form class="navbar-form login">
+                        <fieldset class="login-box">
+                          <label class="email">
+                            <span>Email</span>
+                              <input class="span2" type="text">
+                          </label>
+                          <label class="password">
+                            <span>Password</span>
+                              <input class="span2" type="password">
+                          </label>
+                        </fieldset>
+                        <fieldset>
+                          <button type="submit" class="btn">Sign in</button>
+                        </fieldset>
+                      </form>
+                    </li>
+                    <li class="divider"></li>
+                    <li class="nav-header">New to Sth Borrowed?</li>
+                    <li><a href="#">Sign up</a></li>
+                </ul>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+   
+   {% block body %}{% endblock %}
+
+
+
+
+      <!-- Categories -->
+      
+      <div class="row-fluid">
+        <div class="span12">
+          <div class="hero-unit categories">
+            <h1>Find by interest</h1>
+            <hr>
+            <div class="span3">
+              <ul class="unstyled">
+                <li><h2><a href="#">Brunch Place</a></h2></li>
+                <li><h2><a href="#">Fun with Friends</a></h2></li>
+                <li><h2><a href="#">Date Spots</a></h2></li>
+                <li><h2><a href="#">Special Eats</a></h2></li>
+              </ul>
+            </div>
+            <div class="span3">
+              <ul class="unstyled">
+                <li><h2><a href="#">City Secrets</a></h2></li>
+                <li><h2><a href="#">Ready for Adventure</a></h2></li>
+                <li><h2><a href="#">I need coffee!</a></h2></li>
+                <li><h2><a href="#">Let's party</a></h2></li>
+              </ul>
+            </div>
+            <div class="span3">
+              <ul class="unstyled">
+                <li><h2><a href="#">Exploring NYC</a></h2></li>
+                <li><h2><a href="#">Cool & Cheap</a></h2></li>
+                <li><h2><a href="#">Lifetime experience</a></h2></li>
+                <li><h2><a href="#">Unusual Edibles</a></h2></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    <!-- Footer -->
+    <footer>
+      <div class="row-fluid">
+          <div class="span12 quatro">
+                  </br></br>
+                  <p style="color:#B2B844;">&copy; Alice || ITP 2013</p>
+              </div>
+          </div>
+      </div>
+    </footer>
+
+    
+
+
+    <!-- End of the HTML Structure -->
+    
+
+
+    <!-- Javascript files -->
+
+    <script src="{{ url_for('static', filename='js/jquery.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap-transition.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap-alert.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap-modal.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap-dropdown.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap-scrollspy.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap-tab.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap-tooltip.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap-popover.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap-button.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap-collapse.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap-carousel.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap-typeahead.js') }}"></script>
+
+    {% block scripts %}{% endblock %}
+
+
+  </body>
+</html>

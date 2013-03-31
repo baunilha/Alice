@@ -1,0 +1,73 @@
+{% extends "/layout_alice.html" %}
+{% from "_form_helpers.html" import render_error, render_textarea %}
+
+{% block styles %}{% endblock %}
+
+{% block body %}
+
+      <!-- Submit a new book item form -->
+    <div class="container middle">
+      	<div class="row-fluid">
+            
+            <form method='POST' action="/submit">
+                <legend><h1>Adding a new experience:</h1></legend>
+
+                <p>
+                    <label for="title"><h3>Title with a tagline:</h3></label>
+                    {{ form.title(class='myTextboxCssClass', type='textarea') }}
+                    {{ render_error(form.title) }}  {# render_error inside _form_helpers.html #}
+                </p>
+                <!--
+                {{ form.title.label(class='myLabelCssClass') }}
+                <input type="text" id="title" name="title">
+                -->
+
+                <br>
+                <p>
+                <label><h3>Categorizing by Interest:</h3></label>
+                <em><span class="help-block">(Select as many as you need)</span></em>
+
+                {# comment - loop through interest and create checkboxes #}
+                {% for i in interest|sort %}
+                <label class="checkbox">
+                <input type="checkbox" name="interest" value="{{ i|replace(" ","_") }}" {% if i|replace(" ","_") in form.interest.data %}checked=checked{% endif %} > {{ i|title }}
+                </label>
+                {% endfor %}
+                </p>
+                <!-- Categorize by Interest -->
+
+                <br>
+                <p>
+                <label><h3>Best Period of the Day to Go:</h3></label>
+                <em><span class="help-block">(Select as many as you need)</span></em>
+
+                {# comment - loop through period and create checkboxes #}
+                {% for p in period|sort %}
+                <label class="checkbox">
+                <input type="checkbox" name="period" value="{{ p|replace(" ","_") }}" {% if p|replace(" ","_") in form.period.data %}checked=checked{% endif %} > {{ p|title }}
+                </label>
+                {% endfor %}
+                <!-- Period good for the Experience -->
+                </p>
+
+                <br>
+                <label for="description"><h3>Description:</h3></label>
+                {{ render_textarea(form.description, cols="50", rows="6") }} {# render_textarea inside _form_helpers.html #}
+                {{ render_error(form.description) }} {# render_error inside _form_helpers.html #}
+                <!--
+                {{ form.description.label }}
+                <input type="text" id="description" name="description">
+                -->
+
+                <hr>
+
+                <button type="submit" class="btn btn-warning btn-large">Add Experience</button>
+          </form>
+
+        </div>
+    </div>
+
+{% endblock %}
+
+
+{% block scripts %}{% endblock %}

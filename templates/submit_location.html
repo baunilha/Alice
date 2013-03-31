@@ -1,0 +1,77 @@
+{% extends "/layout_alice.html" %}
+{% from "_form_helpers.html" import render_error, render_textarea %}
+
+{% block styles %}{% endblock %}
+
+{% block body %}
+
+
+<div class="container middle">
+
+	<!-- Retrieve the Experience from the database and show in the page -->
+    <div class="row-fluid">
+		<div class="span4 offset1">
+			<h2>{{ experience.title }}</h2>
+			<img src="http://placehold.it/360x270" alt="">
+			<p></p>
+			<br>
+			<p><em>[{% for p in experience.period %}{{ p|replace("_"," ")}} {% endfor %}]</em></p>
+			<p><em>[{% for i in experience.interest %}{{ i|replace("_"," ")}} {% endfor %}]</em></p>
+			<hr>
+			<p>{{ experience.description }}</p>
+
+			<br>
+			<hr>
+			<p>added: {{ experience.timestamp }}</p> 
+			<p>id: {{ experience.id }}</p>
+		</div>	
+	</div>
+
+	<!-- Submit new locations for that particular experience -->
+	<div class="row-fluid">
+		<div class="span4 offset1">
+			<form method="POST" action="alice/experiences/{{ experience.slug }}/submit-location">
+
+			<p>
+				<label for="name"><h3>Location Name:</h3></label>
+				{{ form.name(class='myTextboxCssClass', type='textarea') }}
+				{{ render_error(form.name) }}  {# render_error inside _form_helpers.html #}
+			</p>
+
+            <p>
+				<label for="address"><h3>Address:</h3></label>
+				{{ render_textarea(form.address, cols="40", rows="3") }} {# render_textarea inside _form_helpers.html #}
+				{{ render_error(form.address) }} {# render_error inside _form_helpers.html #}
+            </p>
+
+            <p>
+				<label for="neighborhood"><h3>Neighborhood:</h3></label>
+				{{ form.neighborhood(class='myTextboxCssClass', type='textarea') }}
+				{{ render_error(form.neighborhood) }}  {# render_error inside _form_helpers.html #}
+			</p>
+
+			<p>
+				<label for="website"><h3>Website:</h3></label>
+				{{ form.website(class='myTextboxCssClass', type='textarea') }}
+				{{ render_error(form.website) }}  {# render_error inside _form_helpers.html #}
+			</p>
+
+			<p>
+				<label for="phone"><h3>Phone:</h3></label>
+				{{ form.phone(class='myTextboxCssClass', type='textarea') }}
+				{{ render_error(form.phone) }}  {# render_error inside _form_helpers.html #}
+			</p>
+				
+				<label>
+				<button type="submit" class="btn btn-warning">Submit Location</button>
+				</label>
+			</form>
+		</div>
+	</div>
+			
+</div>
+
+{% endblock %}
+
+
+{% block scripts %}{% endblock %}

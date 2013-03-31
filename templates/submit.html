@@ -1,0 +1,97 @@
+{% extends "/layout_alice.html" %}
+{% from "_form_helpers.html" import render_error, render_textarea %}
+
+{% block body %}
+
+<!-- Display Experience -->
+<div class="container middle">
+    <div class="row-fluid">
+
+		<div class="span5">
+			    <legend><h2>Adding a new experience:</h2></legend>
+			    {% if form.errors %}
+					<ul class="errors">
+						{% for field_name, field_errors in form.errors|dictsort if field_errors %}
+							{% for error in field_errors %}
+								<li class="alert alert-error">
+									{{ form[field_name].label.text }} - {{ error }}
+								</li>
+							{% endfor %}
+						{% endfor %}
+					</ul>
+				{% endif %}
+
+				<form method="POST" enctype="multipart/form-data">
+					
+					<label><h3>Title with a tagline:</h3></label>
+					{{ form.title }}
+					<br>
+
+					<p>
+						<label><h3>Categorize by Interest:</h3></label>
+						<em><span class="help-block">(Select as many as you need)</span></em>
+
+						{# comment - loop through interest and create checkboxes #}
+						{% for i in interest|sort %}
+							<label class="checkbox">
+							<input type="checkbox" name="interest" value="{{ i|replace(" ","_") }}" {% if i|replace(" ","_") in form.interest.data %}checked=checked{% endif %} > {{ i|title }}
+							</label>
+						{% endfor %}
+					</p>
+
+					<p>
+						<label><h3>Best Period of the Day to Go:</h3></label>
+						<em><span class="help-block">(Select as many as you need)</span></em>
+
+						{# comment - loop through period and create checkboxes #}
+						{% for p in period|sort %}
+							<label class="checkbox">
+							<input type="checkbox" name="period" value="{{ p|replace(" ","_") }}" {% if p|replace(" ","_") in form.period.data %}checked=checked{% endif %} > {{ p|title }}
+							</label>
+						{% endfor %}
+					</p>
+
+					<label><h3>Description:</h3></label>
+					{{ render_textarea(form.description, cols="50", rows="6") }} {# render_textarea inside _form_helpers.html #}
+					<br>
+
+					<label><h3>Upload an image file:</h3></label>
+					{{ form.fileupload }}
+					<br><br>
+					<input class="btn btn-warning btn-large" type="submit" value="Add Experience">
+				</form>
+			</div>
+
+			<div class="span7">
+				<h2>Recently added experiences:</h2>
+				<hr>
+				{% for exp in experiences %}
+					<a title="{{exp.title}}" alt="Title:{{exp.title}}. Description: {{exp.description}}" href="https://s3.amazonaws.com/aliceapp/{{exp.filename}}">
+					<img src="https://s3.amazonaws.com/aliceapp/{{exp.filename}}" class="img-rounded"></a>
+					<br>
+					<h3>{{exp.title}}</h3>
+					<p>{{exp.description}}
+						<br>
+						[ {% for i in exp.interest %}{{ i|replace("_"," ")}} {% endfor %} - {{ exp.timestamp.strftime("%m/%d/%y")}} ]
+					</p>
+					<a href="/experiences/{{ exp.slug }}" class="btn btn-warning">view</a>
+					<a href="/delete/{{exp.id}}" class="btn btn-danger">delete</a>
+					<hr>
+				{% endfor %}
+			</div>
+		</div>
+	</div>	
+</div><!-- row -->
+	
+
+{% endblock %}
+
+
+{% block styles %}
+<style>
+img {
+	width:320px;
+}
+</style>
+{% endblock %}
+{% block scripts %}{% endblock %}

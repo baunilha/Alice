@@ -1,0 +1,343 @@
+/* Changing the CSS */
+
+/* Body and structure
+-------------------------------------------------- */
+body {
+  background-image: url('../img/squares_gray.png');
+  color: #462532;
+}
+
+a {
+  color: #B2B844;
+  text-decoration: none;
+}
+
+p {
+  color: #462532;
+}
+
+/* LOGO
+-------------------------------------------------- */
+.hero-one {
+  position: fixed;
+  right: 0;
+  left: 0;
+  z-index: 1030;
+  margin-bottom: 0;
+  border: 0;
+  padding-right: 0;
+  padding-left: 0;
+  -webkit-border-radius: 0;
+     -moz-border-radius: 0;
+          border-radius: 0;
+  top: 0;
+  background: -webkit-gradient(linear, left bottom, right top, color-stop(0%,#2B122A), color-stop(100%,#2B122A));
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#2B122A', endColorstr='#2B122A',GradientType=1 );
+    background-color: #2B122A; 
+}
+
+.hero-one p {
+}
+
+.top-logo {
+  height: 114px;
+}
+
+.brand {
+  width: 400px;
+  padding-bottom: 10px;
+  height: auto;
+  margin-left: 30px;
+}
+
+
+
+/* Navigation Bar
+-------------------------------------------------- */
+.navbar {
+  position: fixed;
+  right: 0;
+  left: 0;
+  z-index: 1030;
+  margin-bottom: 0;
+  border: 0;
+  padding-right: 0;
+  padding-left: 0;
+}
+
+.navbar-inverse {
+  color: #E0AEA4;
+}
+
+.navbar-inverse .navbar-inner {
+  background-color: #4F214E;
+  background-image: -moz-linear-gradient(top, #4F214E, #2B122A);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#4F214E), to(#2B122A));
+  background-image: -webkit-linear-gradient(top, #4F214E, #2B122A);
+  background-image: -o-linear-gradient(top, #4F214E, #2B122A);
+  background-image: linear-gradient(to bottom, #4F214E, #2B122A);
+  background-repeat: repeat-x;
+  border-color: #4F214E;
+  filter: progid:dximagetransform.microsoft.gradient(startColorstr='#ff222222', endColorstr='#ff111111', GradientType=0);
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0;
+}
+
+/* Active menu color - purple */
+.navbar-inverse .nav .active > a, .navbar-inverse .nav .active > a:hover, .navbar-inverse .nav .active > a:focus {
+  color: #69345C;
+  background-color: #2B122A;
+}
+
+/* Normal menu color - green */
+.navbar-inverse .brand, .navbar-inverse .nav > li > a {
+  color: #B2B844;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+}
+
+
+/* Login Dropdown
+-------------------------------------------------- */
+.dropdown-menu {
+  background-image: -moz-linear-gradient(top, #4F214E, #2B122A);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#4F214E), to(#2B122A));
+  background-image: -webkit-linear-gradient(top, #4F214E, #2B122A);
+  background-image: -o-linear-gradient(top, #4F214E, #2B122A);
+  background-image: linear-gradient(to bottom, #4F214E, #2B122A);
+}
+
+.dropdown-menu a {
+  color: #B2B844;
+}
+
+input.span2, textarea.span2, .uneditable-input.span2 {
+  width: 165px;
+}
+
+.login {
+  margin: 0px 10px;
+}
+
+.nav-header {
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.5);
+  font-size: 14px;
+  color: #54b4d6;
+  text-transform: none;
+  padding: 6px 15px;
+}
+
+/* Big Header
+-------------------------------------------------- */
+.hero-unit {
+  -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+  -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+  background: -webkit-gradient(linear, left bottom, right top, color-stop(0%,#e8e8e8), color-stop(100%,#e7e7e7));
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e8e8e8', endColorstr='#e7e7e7',GradientType=1 );
+  -webkit-border-radius: 0px;
+     -moz-border-radius: 0px;
+          border-radius: 0px;
+  margin-bottom: 0px;
+
+  padding: 60px 60px 50px 60px;
+}
+
+.hero-unit h1 {
+  color: #ACB22F;
+}
+
+
+
+/* Search bar in the middle 
+--------------------------------------------------------*/
+.content-container {
+  width: 700px;
+  height: 45px;
+  display: block;
+  margin: auto;
+  background: #e0e0e0;
+  border: solid 1px #B2B844;
+  padding: 0px 0px 5px 9px;
+  margin-top: 22px;
+   -webkit-border-radius: 4px;
+     -moz-border-radius: 4px;
+          border-radius: 4px;
+}
+
+.middle {
+  margin-top: 50px;
+}
+
+
+.dois {
+  height: 100px;
+  background: -webkit-gradient(linear, left bottom, right top, color-stop(0%,#2B122A), color-stop(100%,#4F214E));
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#2B122A', endColorstr='#4F214E',GradientType=1 );
+}
+
+.navbar-search {
+  background: #e0e0e0;
+}
+
+.navbar-search .search-query {
+  padding: 10px 10px;
+  width: 635px;
+  background: #e0e0e0;
+  color: #4F214E;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 20px;
+  font-weight: normal;
+  line-height: 2;
+  border: 0px;
+  -webkit-box-shadow: inset 0 0px 0px rgba(0, 0, 0, 0);
+  -moz-box-shadow: inset 0 0px 0px rgba(0, 0, 0, 0);
+  box-shadow: inset 0 0px 0px rgba(0, 0, 0, 0);
+}
+
+
+.navbar-search input[type="text"], input[type="password"] {
+  -webkit-transition: border linear 0.2s, box-shadow linear 0.2s;
+     -moz-transition: border linear 0.2s, box-shadow linear 0.2s;
+       -o-transition: border linear 0.2s, box-shadow linear 0.2s;
+          transition: border linear 0.2s, box-shadow linear 0.2s;
+  background-color: #e0e0e0;
+  border: 0px solid #e0e0e0;
+  -webkit-box-shadow: inset 0 0px 0px rgba(0, 0, 0, 0);
+     -moz-box-shadow: inset 0 0px 0px rgba(0, 0, 0, 0);
+          box-shadow: inset 0 0px 0px rgba(0, 0, 0, 0);
+}
+
+.navbar-search input[type="text"]:focus, input[type="password"]:focus {
+  border-color: ##e0e0e0;
+  outline: 0;
+  outline: thin dotted \9;
+  /* IE6-9 */
+  -webkit-box-shadow: inset 0 0px 0px rgba(0, 0, 0, 0), 0 0 0px rgba(0, 0, 0, 0);
+     -moz-box-shadow: inset 0 0px 0px rgba(0, 0, 0, 0), 0 0 0px rgba(0, 0, 0, 0);
+          box-shadow: inset 0 0px 0px rgba(0, 0, 0, 0), 0 0 0px rgba(0, 0, 0, 0);
+
+}
+
+
+
+
+/* Navigation with Categories 
+--------------------------------------------------------*/
+.tres {
+  height: 60px;
+  background: -webkit-gradient(linear, left bottom, right top, color-stop(0%,#2B122A), color-stop(100%,#4F214E));
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#2B122A', endColorstr='#4F214E',GradientType=1 );
+  border-color: #B2B844;
+  border-width: 1px 0px 1px 0px;
+  border-style: solid;
+  text-align: center;
+}
+
+.nav-pills {
+  display: block;
+  margin: auto;
+  width: 450px;
+  padding: 0px 0px 5px 9px;
+  margin-top: 11px;
+} 
+
+.nav-pills > .active > a, .nav-pills > .active > a:hover {
+  color: #472431;
+  background-color: #B2B844;
+}
+
+.nav-tabs > li > a, .nav-pills > li > a {
+  margin-right: 7px;
+}
+
+.nav-pills a:hover {
+  color: #472431;
+  background-color: #B2B844;
+}
+
+
+/* Thumbnails images
+--------------------------------------------------------*/
+.thumbnail {
+  background: -webkit-gradient(linear, left bottom, right top, color-stop(0%,#2B122A), color-stop(100%,#4F214E));
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#2B122A', endColorstr='#4F214E',GradientType=1 );
+  border: 0px;
+  -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+.thumbnail h3 {
+  color: #B2B844;
+  font-size: 22px;
+  line-height: 1em;
+  margin-bottom: 2px;
+}
+
+.thumbnail p > strong {
+  font-size: 16px;
+}
+
+.thumbnail img {
+  height: 240px;
+  width: 100%;
+}
+
+.thumbnail p {
+  color: #e0e0e0;
+  max-height: 138px;
+  overflow: hidden;
+}
+
+.caption .btn {
+  margin-top: 0px;
+  margin-left: 170px;
+}
+
+
+
+/* Pagination
+--------------------------------------------------------*/
+.pagination .active a, .pagination .active span {
+  color: #4F214E;
+  cursor: default;
+  background: #FBF6ED;
+}
+
+.pagination ul {
+  background: #EEEAE5;
+}
+
+
+
+
+/* Categories
+--------------------------------------------------------*/
+.categories {
+  padding: 40px 60px;
+  height: 290px;
+  margin-top: 50px;
+}
+
+.unstyled h2, .unstyled a {
+  font-size: 21px;
+  line-height: 1.2em;
+  color: #f79d00;
+}
+
+.unstyled {
+  margin-top: 10px;
+}
+
+
+
+
+/* Categories
+--------------------------------------------------------*/
+.quatro {
+  height: 100px;
+  background: -webkit-gradient(linear, left bottom, right top, color-stop(0%,#2B122A), color-stop(100%,#4F214E));
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#2B122A', endColorstr='#4F214E',GradientType=1 );
+  text-align: center;
+}

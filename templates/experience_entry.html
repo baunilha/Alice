@@ -1,0 +1,116 @@
+{% extends "/layout_alice.html" %}
+{% from "_form_helpers.html" import render_error, render_textarea %}
+
+
+{% block body %}
+
+<!-- Display Experience -->
+<div class="container middle">
+    <div class="row-fluid">
+		<div class="span4 offset1">
+			<h2>{{ experience.title }}</h2>
+			<img src="https://s3.amazonaws.com/aliceapp/{{experience.filename}}" class="img-rounded"></a>
+			<p></p>
+			<br>
+			<p><em>[{% for p in experience.period %}{{ p|replace("_"," ")}} {% endfor %}]</em></p>
+			<p><em>[{% for i in experience.interest %}{{ i|replace("_"," ")}} {% endfor %}]</em></p>
+			<hr>
+			<p>{{ experience.description }}</p>
+
+			<br>
+			<hr>
+			<p><small>added: {{ experience.timestamp.strftime("%a %m/%d %I:%M%p ") }}</small></p>
+			<p><small>id: {{ experience.id }}</small></p>
+			<hr>
+		</div>	
+	</div>
+
+
+	<!-- Display locations -->
+	<div class="row-fluid">
+		<div class="span4 offset1">
+			{% for location in experience.locations %}
+			<div class="location">
+				<span class="location"><h2>{{ location.name }}</h2></span>
+				<br>
+				<p>{{ location.address }}</p>
+				<p>{{ location.neighborhood }}</p>
+				<p>{{ location.website }}</p>
+				<p>{{ location.phone }}</p>
+				<p><small>{{ location.timestamp.strftime("%a %m/%d %I:%M%p ") }}</small></p>
+			</div>
+			<hr>
+			{% endfor %}
+		</div>
+	</div>
+
+
+	<!-- Submit new locations for that particular experience -->
+	<div class="row-fluid">
+		<div class="span4 offset1">
+			<form method="POST" action="/experiences/{{ experience.id }}/location">
+
+				<p>
+					<label for="name"><h3>Location Name:</h3></label>
+					<input type="text" id="name" name="name">
+				</p>
+
+	            <p>
+					<label for="address"><h3>Address:</h3></label>
+					<textarea cols="50" rows="3" id="address" name="address"></textarea>
+	            </p>
+
+	            <p>
+					<label for="neighborhood"><h3>Neighborhood:</h3></label>
+					<input type="text" id="neighborhood" name="neighborhood">
+				</p>
+
+				<label>City</label>
+                {# comment - loop through city and create a dropdown menu #}
+                <label class="dropdown">
+	                <select name="city">
+	                {% for c in city|sort %}
+	                <option value="{{ c|replace(" ","_") }}" {% if c|replace(" ","_") in form.city.data %} checked=checked {% endif %} > 
+	                {{ c|title }}
+	                {% endfor %}
+	                </select>
+                </label>
+
+                <br>
+                <p>
+                <label><h3>City 2:</h3></label>
+                <em><span class="help-block">(Select as many as you need)</span></em>
+
+                {# comment - loop through interest and create checkboxes #}
+                {% for i in interest|sort %}
+                <label class="checkbox">
+                <input type="checkbox" name="interest" value="{{ i|replace(" ","_") }}" {% if i|replace(" ","_") in form.interest.data %}checked=checked{% endif %} > {{ i|title }}
+                </label>
+                {% endfor %}
+                </p>
+                <br>
+
+				<p>
+					<label for="website"><h3>Website:</h3></label>
+					<input type="text" id="website" name="website">
+				</p>
+
+				<p>
+					<label for="phone"><h3>Phone:</h3></label>
+					<input type="text" id="phone" name="phone">
+				</p>
+				
+				<label>
+				<button type="submit" class="btn btn-warning">Submit Location</button>
+				</label>
+			</form>
+		</div>
+	</div>
+
+</div>
+
+{% endblock %}
+
+
+{% block styles %}{% endblock %}
+{% block scripts %}{% endblock %}
