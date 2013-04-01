@@ -1,3 +1,5 @@
+#################  import libraries ##########################
+
 # -*- coding: utf-8 -*-
 from flask.ext.mongoengine.wtf import model_form
 from wtforms.fields import * # for our custom signup form
@@ -5,10 +7,16 @@ from flask.ext.mongoengine.wtf.orm import validators
 from flask.ext.mongoengine import *
 from datetime import datetime
 
+
+#################  comments - not using ##########################
+
 class Comment(mongoengine.EmbeddedDocument):
 	name = mongoengine.StringField()
 	comment = mongoengine.StringField()
 	timestamp = mongoengine.DateTimeField(default=datetime.now())
+
+
+#################  create location and experience ##########################
 
 class Location(mongoengine.EmbeddedDocument):
 	name = mongoengine.StringField(max_length=50)
@@ -56,6 +64,45 @@ Experienceform = model_form(Experience)
 # We are adding in a separate field for the file upload called 'fileupload'
 class photo_upload_form(Experienceform):
 	fileupload = FileField('Upload an image file', validators=[])
+
+
+#######################  user models/forms ##########################
+
+class User(mongoengine.Document):
+	username = mongoengine.StringField(unique=True, max_length=30, required=True, verbose_name="Pick a Username")
+	email = mongoengine.EmailField(unique=True, required=True, verbose_name="Email Address")
+	password = mongoengine.StringField(default=True,required=True)
+	active = mongoengine.BooleanField(default=True)
+	isAdmin = mongoengine.BooleanField(default=False)
+	timestamp = mongoengine.DateTimeField(default=datetime.now())
+
+user_form = model_form(User, exclude=['password'])
+
+# Signup Form created from user_form
+class SignupForm(user_form):
+	password = PasswordField('Password', validators=[validators.Required(), validators.EqualTo('confirm', message='Passwords must match')])
+	confirm = PasswordField('Repeat Password')
+
+# Login form will provide a Password field (WTForm form field)
+class LoginForm(user_form):
+	password = PasswordField('Password',validators=[validators.Required()])
+
+
+###################  end of user models/forms ##########################
+
+
+class Content(mongoengine.Document):
+    user = mongoengine.ReferenceField('User', dbref=True) # ^^^ points to User model ^^^
+    title = mongoengine.StringField(max_length="100",required=True)
+    content = mongoengine.StringField(required=True)
+    timestamp = mongoengine.DateTimeField(default=datetime.now())
+
+    @mongoengine.queryset_manager
+    def objects(doc_cls, queryset):
+    	return queryset.order_by('-timestamp')
+
+# content form
+content_form = model_form(Content)
 
 
 

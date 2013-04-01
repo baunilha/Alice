@@ -1,0 +1,42 @@
+<!-- Login -->
+            <ul class="nav nav-bar pull-right">
+              <li class="dropdown">
+                {% if current_user.is_anonymous() %}
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Login <b class="caret"></b></a>
+                  <ul class="dropdown-menu">
+                    <li>
+                      <form class="navbar-form login" method="post" action="/login">
+                        <fieldset class="login-box">
+                          <label class="email">
+                            <span>Email</span>
+                              {{ form.email(type="email") }}
+                          </label>
+                          <label class="password">
+                            <span>Password</span>
+                              {{ form.password }}
+                          </label>
+                          <input type="checkbox" name="remember" value="yes"> Remember me
+                        </fieldset>
+                        <fieldset>
+                          <input class="btn btn-warning" type="submit" value="Login">
+                        </fieldset>
+                      </form>
+                    </li>
+                    <li class="divider"></li>
+                    <li class="nav-header">New to Alice?</li>
+                    <li><a href="/register">Register</a></li>
+                  </ul>
+
+                  {% else %}
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ current_user.username}} <b class="caret"></b></a>
+                  <ul class="dropdown-menu">
+                    <li class="nav-header">Hello, {{ current_user.username}}!</li>
+                    <li><a href="/admin">All Experiences</a></li>
+                    <li><a href="/users/{{current_user.username}}">My Experiences</a></li>
+                    <li class="divider"></li>
+                    <li><a href="/logout">Logout</a></li>
+                  </ul>
+                  {% endif %}
+                </li>  
+            </ul>
+            

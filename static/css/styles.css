@@ -66,7 +66,7 @@ p {
 }
 
 .navbar-inverse {
-  color: #E0AEA4;
+  color: #FFFFFF;
 }
 
 .navbar-inverse .navbar-inner {
@@ -122,7 +122,7 @@ input.span2, textarea.span2, .uneditable-input.span2 {
 .nav-header {
   text-shadow: 0 1px 0 rgba(0, 0, 0, 0.5);
   font-size: 14px;
-  color: #54b4d6;
+  color: #f79d00;
   text-transform: none;
   padding: 6px 15px;
 }

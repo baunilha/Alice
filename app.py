@@ -1,13 +1,24 @@
 # --------- Import Libraries ----------------------------------------------------
 
 # -*- coding: utf-8 -*-
-import os, datetime, re
-from flask import Flask, request, render_template, redirect, abort
+import os, datetime, re, sys
+from flask import Flask, session, request, url_for, escape, render_template, json, jsonify, flash, redirect, abort
 from werkzeug import secure_filename
 from unidecode import unidecode
 
 # import all of mongoengine
 from flask.ext.mongoengine import mongoengine
+
+# Flask-Login 
+from flask.ext.login import (LoginManager, current_user, login_required,
+                            login_user, logout_user, UserMixin, AnonymousUser,
+                            confirm_login, fresh_login_required)
+
+# Library
+from flaskext.bcrypt import Bcrypt
+
+#custom user library - maps User object to User model
+from libs.user import *
 
 # import data models
 import models
@@ -22,16 +33,52 @@ import StringIO
 # --------- Config ----------------------------------------------------
 
 app = Flask(__name__)   # create our flask app
+app.debug = True
 app.secret_key = os.environ.get('SECRET_KEY') # put SECRET_KEY variable inside .env file with a random string of alphanumeric characters
 app.config['CSRF_ENABLED'] = False
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024 # 16 megabyte file upload
 
+# Flask BCrypt will be used to salt the user password
+flask_bcrypt = Bcrypt(app)
 
 # --------- Database Connection ----------------------------------------------------
 
+
 # MongoDB connection to MongoLab's database
-mongoengine.connect('mydata', host=os.environ.get('MONGOLAB_URI'))
+# uses .env file to get connection string
+# using a remote db get connection string from heroku config
+# 	using a local mongodb put this in .env
+#   MONGOLAB_URI=mongodb://localhost:27017/dwdfall2012
+mongoengine.connect('userdemo', host=os.environ.get('MONGOLAB_URI'))
 app.logger.debug("Connecting to MongoLabs")
+
+# Login management defined
+# reference http://packages.python.org/Flask-Login/#configuring-your-application
+login_manager = LoginManager()
+login_manager.anonymous_user = Anonymous
+login_manager.login_view = "login"
+login_manager.login_message = u"Please log in to access this page."
+login_manager.refresh_view = "reauth"
+
+# Flask-Login requires a 'user_loader' callback 
+# This method will called with each Flask route request automatically
+# When this callback runs, it will populate the User object, current_user
+# reference http://packages.python.org/Flask-Login/#how-it-works
+@login_manager.user_loader
+def load_user(id):
+	if id is None:
+		redirect('/login')
+
+	user = User()
+	user.get_by_id(id)
+	if user.is_active():
+		return user
+	else:
+		return None
+
+# connect the login manager to the main Flask app
+login_manager.setup_app(app)
+
 
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
 
@@ -50,7 +97,7 @@ hourClose = ['12:00am', '1:00am', '2:00am', '3:00am', '4:00am', '5:00am', '6:00a
 
 
 
-# --------- Routes ----------
+# --------- Routes -----------------------------------------------------------
 
 # this is our main page
 @app.route("/")
@@ -205,11 +252,11 @@ def submit_location(experience_id):
 
 
 
-@app.route('/delete/<imageid>')
-def delete_image(imageid):
+@app.route('/delete/<experience_id>')
+def delete_experience(experience_id):
 	
-	image = models.Experience.objects.get(id=imageid)
-	if image:
+	experience = models.Experience.objects.get(id=experience_id)
+	if experience:
 
 		# delete from s3
 	
@@ -220,29 +267,161 @@ def delete_image(imageid):
 		# set the mimetype, content and access control
 		bucket = s3conn.get_bucket(os.environ.get('AWS_BUCKET')) # bucket name defined in .env
 		k = bucket.new_key(bucket)
-		k.key = image.filename
+		k.key = experience.filename
 		bucket.delete_key(k)
 
 		# delete from Mongo	
-		image.delete()
+		experience.delete()
 
-		return redirect('/')
+		return redirect('/submit')
 
 	else:
 		return "Unable to find requested image in database."
 
 
+# --------- Login & Register -------------------------------------------------------------------------
+
+
+#
+# Register new user
+#
+@app.route("/register", methods=['GET','POST'])
+def register():
+	
+	# prepare registration form 
+	registerForm = models.SignupForm(request.form)
+	app.logger.info(request.form)
+
+	if request.method == 'POST' and registerForm.validate():
+		email = request.form['email']
+		username = request.form['username']
+
+		# generate password hash
+		password_hash = flask_bcrypt.generate_password_hash(request.form['password'])
+		
+		# prepare User
+		user = User(username=username, email=email, password=password_hash)
+		
+		# save new user, but there might be exceptions (uniqueness of email and/or username)
+		try:
+			user.save()	
+			if login_user(user, remember="no"):
+				flash("Logged in!")
+				return redirect(request.args.get("next") or '/')
+			else:
+				flash("unable to log you in")
+
+		# got an error, most likely a uniqueness error
+		except mongoengine.queryset.NotUniqueError:
+			e = sys.exc_info()
+			exception, error, obj = e
+			
+			app.logger.error(e)
+			app.logger.error(error)
+			app.logger.error(type(error))
+
+			# uniqueness error was raised. tell user (via flash messaging) which error they need to fix.
+			if str(error).find("email") > -1:			
+				flash("Email submitted is already registered.","register")
+	
+			elif str(error).find("username") > -1:
+				flash("Username is already registered. Pick another.","register")
+
+			app.logger.error(error)	
+
+	# prepare registration form			
+	templateData = {
+		'form' : registerForm
+	}
+	
+	return render_template("/auth/register.html", **templateData)
+
+# Login route - will display login form and receive POST to authenicate a user
+@app.route("/login", methods=["GET", "POST"])
+def login():
+
+	# get the login and registration forms
+	loginForm = models.LoginForm(request.form)
+	
+	# is user trying to log in?
+	# 
+	if request.method == "POST" and 'email' in request.form:
+		email = request.form["email"]
+
+		user = User().get_by_email_w_password(email)
+		
+		# if user in database and password hash match then log in.
+	  	if user and flask_bcrypt.check_password_hash(user.password,request.form["password"]) and user.is_active():
+			remember = request.form.get("remember", "no") == "yes"
+
+			if login_user(user, remember=remember):
+				flash("Logged in!")
+				return redirect(request.args.get("next") or '/admin')
+			else:
+
+				flash("unable to log you in","login")
+	
+		else:
+			flash("Incorrect email and password submission","login")
+			return redirect("/login")
+
+	else:
+
+		templateData = {
+			'form' : loginForm
+		}
+
+		return render_template('/auth/login.html', **templateData)
+
+
+
+
+@app.route('/admin', methods=['GET','POST'])
+@login_required
+def admin_main():
+
+	templateData = {
+		'allContent' : models.Content.objects(user=current_user.id),
+		'experiences': models.Experience.objects()
+	}
+
+	return render_template('admin.html', **templateData)
+
+
+@app.route("/reauth", methods=["GET", "POST"])
+@login_required
+def reauth():
+    if request.method == "POST":
+        confirm_login()
+        flash(u"Reauthenticated.")
+        return redirect(request.args.get("next") or url_for("index"))
+    
+    templateData = {}
+    return render_template("/auth/reauth.html", **templateData)
+
+
+@app.route("/logout")
+@login_required
+def logout():
+	logout_user()
+	flash("Logged out.")
+	return redirect("/")
+
 
 
 # --------- Additional Basic Pages ------------------------------------------------------------------
 
+
+def datetimeformat(value, format='%H:%M / %d-%m-%Y'):
+	return value.strftime(format)
+
 @app.errorhandler(404)
 def page_not_found(error):
-    return render_template('404.html'), 404
+	return render_template('404.html'), 404
 
 def allowed_file(filename):
-    return '.' in filename and \
-           filename.lower().rsplit('.', 1)[1] in ALLOWED_EXTENSIONS
+	return '.' in filename and \
+		filename.lower().rsplit('.', 1)[1] in ALLOWED_EXTENSIONS
 
 # slugify the title 
 # via http://flask.pocoo.org/snippets/5/
@@ -254,7 +433,11 @@ def slugify(text, delim=u'-'):
 		result.extend(unidecode(word).split())
 	return unicode(delim.join(result))
 
-# --------- Server On ----------
+
+
+
+# --------- Server On ----------------------------------------------------------------------------------
+
 # start the webserver
 if __name__ == "__main__":
 	app.debug = True

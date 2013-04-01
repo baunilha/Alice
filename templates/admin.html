@@ -1,0 +1,46 @@
+{% extends "layout_alice.html" %}
+
+{% block body %}
+
+<!-- Register a new account -->
+<div class="container middle">
+    <div class="row-fluid">
+    	<h1>Welcome back, {{ current_user.username }}!</h1>
+
+    	<br>
+    	{# display any Flash/Session messages #}
+			{% with messages = get_flashed_messages() %}
+	          {% if messages %}
+	            {% for message in messages %}
+	              <p><span class="alert alert-success">{{ message }}</span></p>
+	            {% endfor %}
+	          {% endif %}
+	        {% endwith %}
+	        {# end of Flash/Sesssion messages #}
+		<hr>
+
+		<br>
+		<h1>All experiences:</h1>	
+		<br>
+		 <ul class="thumbnails">
+              
+					{% for experience in experiences %}
+          <li class="span3">
+              <div class="thumbnail">
+                <div class="caption">
+                  <img src="https://s3.amazonaws.com/aliceapp/{{experience.filename}}" class="img-rounded"></a>
+    
+                    <h3>{{ experience.title }}</h3>
+                    <p><em>[ {% for i in experience.interest %}{{ i|replace("_"," ")}} {% endfor %}]</em></p>
+                    <p><em>"{{ experience.description }}"</em></p>
+                    <a href="/experiences/{{ experience.slug }}" class="btn btn-warning">Spy</a>
+                </div>
+              </div>
+          </li>  
+					{% endfor %}
+
+            </ul>
+	</div>
+</div>
+
+{% endblock %}

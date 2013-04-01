@@ -2703,31 +2703,30 @@ table .span24 {
 .dropdown-submenu:hover > a {
   color: #ffffff;
   text-decoration: none;
-  background-color: #B2B844;
+  background-color: #f79d00;
   background-color: #0081c2;
-  background-image: -moz-linear-gradient(top, #B2B844, #43adbb);
-  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#B2B844), to(#43adbb));
-  background-image: -webkit-linear-gradient(top, #B2B844, #43adbb);
-  background-image: -o-linear-gradient(top, #B2B844, #43adbb);
-  background-image: linear-gradient(to bottom, #B2B844, #43adbb);
+  background-image: -moz-linear-gradient(top, #f79d00, #E0780B);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#f79d00), to(#E0780B));
+  background-image: -webkit-linear-gradient(top, #f79d00, #E0780B);
+  background-image: -o-linear-gradient(top, #f79d00, #E0780B);
+  background-image: linear-gradient(to bottom, #f79d00, #E0780B);
   background-repeat: repeat-x;
-  filter: progid:dximagetransform.microsoft.gradient(startColorstr='#ffB2B844', endColorstr='#ff43adbb', GradientType=0);
+  filter: progid:dximagetransform.microsoft.gradient(startColorstr='#f79d00', endColorstr='#E0780B', GradientType=0);
 }
 
 .dropdown-menu .active > a,
 .dropdown-menu .active > a:hover {
   color: #ffffff;
   text-decoration: none;
-  background-color: #B2B844;
-  background-color: #0081c2;
-  background-image: linear-gradient(to bottom, #B2B844, #43adbb);
-  background-image: -moz-linear-gradient(top, #B2B844, #43adbb);
-  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#B2B844), to(#43adbb));
-  background-image: -webkit-linear-gradient(top, #B2B844, #43adbb);
-  background-image: -o-linear-gradient(top, #B2B844, #43adbb);
+  background-color: #f79d00;
+  background-image: linear-gradient(to bottom, #f79d00, #E0780B);
+  background-image: -moz-linear-gradient(top, #f79d00, #E0780B);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#f79d00), to(#E0780B));
+  background-image: -webkit-linear-gradient(top, #f79d00, #E0780B);
+  background-image: -o-linear-gradient(top, #f79d00, #E0780B);
   background-repeat: repeat-x;
   outline: 0;
-  filter: progid:dximagetransform.microsoft.gradient(startColorstr='#ffB2B844', endColorstr='#ff43adbb', GradientType=0);
+  filter: progid:dximagetransform.microsoft.gradient(startColorstr='#f79d00', endColorstr='#E0780B', GradientType=0);
 }
 
 .dropdown-menu .disabled > a,
