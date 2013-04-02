@@ -75,7 +75,7 @@
 						[ {% for i in exp.interest %}{{ i|replace("_"," ")}} {% endfor %} - {{ exp.timestamp.strftime("%m/%d/%y")}} ]
 					</p>
 					<a href="/experiences/{{ exp.slug }}" class="btn btn-warning">view</a>
-					<a href="/delete/{{exp.id}}" class="btn btn-danger">delete</a>
+					<a href="experiences/delete/{{exp.id}}" class="btn btn-danger">delete</a>
 					<hr>
 				{% endfor %}
 			</div>

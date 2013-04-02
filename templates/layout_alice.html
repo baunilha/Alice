@@ -60,9 +60,10 @@
               
               {% else %}
 
-              <li class="active"><a href="/admin">All Experiences</a></li>
-              <li><a href="/users/{{current_user.username}}">My Experiences</a></li>
-              <li><a href="/submit">Submit</a></li>
+              <li class="active"><a href="/">All Experiences</a></li>
+              <li><a href="/admin">My Experiences</a></li>
+              <li><a href="/create">Create new list</a></li>
+              <li><a href="/submit">Submit new experience</a></li>
               <li><a href="/logout">Logout {{ current_user.username}}</a></li>
               
               {% endif %}

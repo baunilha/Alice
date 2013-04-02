@@ -1,0 +1,26 @@
+{% extends "/layout_alice.html" %}
+{% from "_form_helpers.html" import render_error, render_textarea %}
+
+
+{% block body %}
+
+<!-- Display List -->
+<div class="container middle">
+    <div class="row-fluid">
+		<div class="span4">
+			<h2>{{ listsCreated.listName }}</h2>
+			<img src="https://s3.amazonaws.com/aliceapp/{{listsCreated.filename}}" class="img-rounded"></a>
+			<br><br>
+			<p>{{ listsCreated.listDescription }}</p>
+			<hr>
+			<p>[ Location: {% for c in listsCreated.city %}{{ c|replace("_"," ")}}{% endfor %} | Created by: {{ listsCreated.user.username }} | Date: {{ listsCreated.timestamp.strftime("%m/%d/%y")}} ]</p>
+		</div>	
+	</div>
+
+</div>
+
+{% endblock %}
+
+
+{% block styles %}{% endblock %}
+{% block scripts %}{% endblock %}

@@ -97,7 +97,7 @@ hourClose = ['12:00am', '1:00am', '2:00am', '3:00am', '4:00am', '5:00am', '6:00a
 
 
 
-# --------- Routes -----------------------------------------------------------
+# --------- Main Page, Add, View and Delete Experiences  -----------------------------------------------------------
 
 # this is our main page
 @app.route("/")
@@ -250,9 +250,7 @@ def submit_location(experience_id):
 
 
 
-
-
-@app.route('/delete/<experience_id>')
+@app.route('/experiences/delete/<experience_id>')
 def delete_experience(experience_id):
 	
 	experience = models.Experience.objects.get(id=experience_id)
@@ -274,6 +272,149 @@ def delete_experience(experience_id):
 		experience.delete()
 
 		return redirect('/submit')
+
+	else:
+		return "Unable to find requested image in database."
+
+
+
+
+# --------- Create a new List  --------------------------------------------------------------------------
+
+
+# To create a new list
+@app.route("/create", methods=['GET','POST'])
+@login_required
+def create():
+
+	# get List form from models.py based on the photo
+	photo_upload_list = models.photo_upload_list(request.form)
+
+	# get created lists
+	app.logger.debug(request.form.getlist('city'))
+	
+	# if form was submitted and it is valid...
+	if request.method == "POST" and photo_upload_list.validate():
+		
+		uploaded_file = request.files['photoupload']
+		
+		# Uploading is fun
+		# 1 - Generate a file name with the datetime prefixing filename
+		# 2 - Connect to s3
+		# 3 - Get the s3 bucket, put the file
+		# 4 - After saving to s3, save data to database
+
+		if uploaded_file and allowed_file(uploaded_file.filename):
+			# create filename, prefixed with datetime
+			now = datetime.datetime.now()
+			filename = now.strftime('%Y%m%d%H%M%s') + "-" + secure_filename(uploaded_file.filename)
+			# thumb_filename = now.strftime('%Y%m%d%H%M%s') + "-" + secure_filename(uploaded_file.filename)
+
+			# connect to s3
+			s3conn = boto.connect_s3(os.environ.get('AWS_ACCESS_KEY_ID'),os.environ.get('AWS_SECRET_ACCESS_KEY'))
+
+			# open s3 bucket, create new Key/file
+			# set the mimetype, content and access control
+			b = s3conn.get_bucket(os.environ.get('AWS_BUCKET')) # bucket name defined in .env
+			k = b.new_key(b)
+			k.key = filename
+			k.set_metadata("Content-Type", uploaded_file.mimetype)
+			k.set_contents_from_string(uploaded_file.stream.read())
+			k.make_public()
+
+			# save information to MONGO database
+			# did something actually save to S3
+			if k and k.size > 0:
+				
+				createList = models.List()
+				createList.listName = request.form.get('listName')
+				createList.slug = slugify(createList.listName)
+				createList.listDescription = request.form.get('listDescription')
+				createList.city = request.form.getlist('city')
+				createList.postedby = request.form.get('postedby')
+				createList.filename = filename # same filename of s3 bucket file
+				#link to current user
+				createList.user = current_user.get()
+
+				try:
+					createList.save()
+
+				except:
+					e = sys.exc_info()
+					app.logger.error(e)
+				
+
+			return redirect('/create')
+
+		else:
+			return "uhoh there was an error " + uploaded_file.filename
+
+	else:
+		# get existing listsCreated
+		listsCreated = models.List.objects.order_by('timestamp')
+
+		if request.form.getlist('city'):
+			for c in request.form.getlist('city'):
+				photo_upload_list.interest.append_entry(c)
+		
+		# render the template
+		templateData = {
+			'current_user' : current_user,
+			'users' : models.User.objects(),
+			'listsCreated' : listsCreated,
+			'city' : city,
+			'form' : photo_upload_list
+		}
+
+		app.logger.debug(current_user)
+
+		return render_template("create_list.html", **templateData)
+
+
+
+# pages for lists
+@app.route("/lists/<list_slug>")
+def list_display(list_slug):
+	
+	# get lists by list_slug
+	try:
+		listsCreated = models.List.objects.get(slug=list_slug)
+	except:
+		abort(404)
+
+	# prepare template data
+	templateData = {
+		'listsCreated' : listsCreated
+	}
+
+	# render and return the template
+	return render_template('list_entry.html', **templateData)
+
+
+
+# To delete a List
+@app.route('/lists/delete/<list_id>')
+def delete_list(list_id):
+	
+	listsCreated = models.List.objects.get(id=list_id)
+	if listsCreated:
+
+		# delete from s3
+	
+		# connect to s3
+		s3conn = boto.connect_s3(os.environ.get('AWS_ACCESS_KEY_ID'),os.environ.get('AWS_SECRET_ACCESS_KEY'))
+
+		# open s3 bucket, create new Key/file
+		# set the mimetype, content and access control
+		bucket = s3conn.get_bucket(os.environ.get('AWS_BUCKET')) # bucket name defined in .env
+		k = bucket.new_key(bucket)
+		k.key = listsCreated.filename
+		bucket.delete_key(k)
+
+		# delete from Mongo	
+		listsCreated.delete()
+
+		return redirect('/create')
 
 	else:
 		return "Unable to find requested image in database."
@@ -336,6 +477,8 @@ def register():
 	
 	return render_template("/auth/register.html", **templateData)
 
+
+
 # Login route - will display login form and receive POST to authenicate a user
 @app.route("/login", methods=["GET", "POST"])
 def login():
@@ -375,7 +518,7 @@ def login():
 
 
 
-
+# User profile page
 @app.route('/admin', methods=['GET','POST'])
 @login_required
 def admin_main():
@@ -386,6 +529,7 @@ def admin_main():
 	}
 
 	return render_template('admin.html', **templateData)
+
 
 
 @app.route("/reauth", methods=["GET", "POST"])

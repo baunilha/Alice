@@ -39,19 +39,19 @@ class Experience(mongoengine.Document):
 	title = mongoengine.StringField(max_length=120, required=True, verbose_name="Experience")
 	slug = mongoengine.StringField()
 	description = mongoengine.StringField(max_length=500, verbose_name="Description")
-	postedby = mongoengine.StringField(max_length=120, verbose_name="Your name")
+	filename = mongoengine.StringField()
 	
 	# Period of the day and interest are lists of Strings
 	period = mongoengine.ListField(mongoengine.StringField(max_length=30))
 	interest = mongoengine.ListField(mongoengine.StringField(max_length=30))
 
-	filename = mongoengine.StringField()
-
 	# Location is an embedded element
 	locations = mongoengine.ListField( mongoengine.EmbeddedDocumentField(Location) )
 	
 	# Comments is a list of Document type 'Comments' defined above
+	# not using
 	comments = mongoengine.ListField( mongoengine.EmbeddedDocumentField(Comment) )
+	postedby = mongoengine.StringField(max_length=120, verbose_name="Your name")
 
 	# Timestamp will record the date and time idea was created.
 	timestamp = mongoengine.DateTimeField(default=datetime.now())
@@ -59,8 +59,8 @@ class Experience(mongoengine.Document):
 Experienceform = model_form(Experience)
 
 # Create a WTForm form for the photo upload.
-# This form will inhirit the Photo model above
-# It will have all the fields of the Photo model
+# This form will inhirit the Experience model above
+# It will have all the fields of the Experience model
 # We are adding in a separate field for the file upload called 'fileupload'
 class photo_upload_form(Experienceform):
 	fileupload = FileField('Upload an image file', validators=[])
@@ -86,6 +86,29 @@ class SignupForm(user_form):
 # Login form will provide a Password field (WTForm form field)
 class LoginForm(user_form):
 	password = PasswordField('Password',validators=[validators.Required()])
+
+
+#################  create a new list ################################
+
+
+class List(mongoengine.Document):
+	user = mongoengine.ReferenceField('User', dbref=True) # ^^^ points to User model ^^^
+	listName = mongoengine.StringField(max_length=50, required=True, verbose_name="Name of the List")
+	slug = mongoengine.StringField()
+	listDescription = mongoengine.StringField(max_length=500, verbose_name="Description")
+	filename = mongoengine.StringField()
+	timestamp = mongoengine.DateTimeField(default=datetime.now())
+
+	city = mongoengine.ListField(mongoengine.StringField(max_length=50))
+
+Listform = model_form(List)
+
+# Create a WTForm form for the photo upload.
+# This form will inhirit the List model above
+# It will have all the fields of the List model
+# We are adding in a separate field for the file upload called 'photoupload'
+class photo_upload_list(Listform):
+	photoupload = FileField('Upload an image file', validators=[])
 
 
 ###################  end of user models/forms ##########################

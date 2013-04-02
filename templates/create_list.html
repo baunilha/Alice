@@ -1,0 +1,86 @@
+{% extends "/layout_alice.html" %}
+{% from "_form_helpers.html" import render_error, render_textarea %}
+
+{% block body %}
+
+<!-- Display Experience -->
+<div class="container middle">
+    <div class="row-fluid">
+
+		<div class="span5">
+			    <h2>Create a new list:</h2>
+			    <hr>
+			    {% if form.errors %}
+					<ul class="errors">
+						{% for field_name, field_errors in form.errors|dictsort if field_errors %}
+							{% for error in field_errors %}
+								<li class="alert alert-error">
+									{{ form[field_name].label.text }} - {{ error }}
+								</li>
+							{% endfor %}
+						{% endfor %}
+					</ul>
+				{% endif %}
+
+				<form method="POST" enctype="multipart/form-data">
+					
+					<label><h3>Title of your list:</h3>
+					Be creative!</label>
+					<br>{{ form.listName }}
+					<br>
+
+					<label><h3>Describe your list:</h3></label>
+					{{ render_textarea(form.listDescription, cols="50", rows="6") }} {# render_textarea inside _form_helpers.html #}
+					<br>
+
+					<p>
+						<label><h3>City:</h3></label>
+						{# comment - loop through bookType and create a dropdown menu #}
+		                <label class="dropdown">
+		                <select name="city">
+		                {% for c in city|sort %}
+		                <option value='{{ c|replace(" ","_") }} {% if c|replace(" ","_") in form.city.data %} checked=checked {% endif %}' > {{ c|title }}
+		                {% endfor %}
+		                </select>
+		                </label>
+					</p>
+
+					<br>
+					<label><h3>Upload an image file:</h3></label>
+					{{ form.photoupload }}
+					<br><br>
+					<input class="btn btn-warning btn-large" type="submit" value="Create List">
+				</form>
+			</div>
+
+			<div class="span7">
+				<h2>Recently created lists:</h2>
+				<hr>
+				{% for l in listsCreated %}
+					<a title="{{l.listName}}" alt="Title:{{l.listName}}. Description: {{l.listDescription}}" href="https://s3.amazonaws.com/aliceapp/{{l.filename}}">
+					<img src="https://s3.amazonaws.com/aliceapp/{{l.filename}}" class="img-rounded"></a>
+					<br>
+					<h3>{{l.listName}}</h3>
+					<p>{{l.listDescription}}</p>
+					<p>[ Location: {% for c in l.city %}{{ c|replace("_"," ")}}{% endfor %} | Created by: {{ l.user.username }} | Date: {{ l.timestamp.strftime("%m/%d/%y")}} ]</p>
+					<a href="/lists/{{ l.slug }}" class="btn btn-warning">view</a>
+					<a href="lists/delete/{{l.id}}" class="btn btn-danger">delete</a>
+					<hr>
+				{% endfor %}
+			</div>
+		</div>
+	</div>	
+</div><!-- row -->
+	
+
+{% endblock %}
+
+
+{% block styles %}
+<style>
+img {
+	width:320px;
+}
+</style>
+{% endblock %}
+{% block scripts %}{% endblock %}
