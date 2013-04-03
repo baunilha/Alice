@@ -105,7 +105,7 @@ def indexAlice():
 	# render the template, retrieve 'experiences' from the database
 	return render_template("main_alice.html", experiences=models.Experience.objects())
 
-# this is our main page
+# this is the submit experiences page
 @app.route("/submit", methods=['GET','POST'])
 def submit():
 
