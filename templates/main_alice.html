@@ -30,10 +30,10 @@
     <div class="row-fluid">
         <div class="span12 tres">
                 <ul class="nav nav-pills">
-                  <li class="active"><a href="#"><span class="icon_nav"></span>Everything</a></li>
-                  <li class=""><a href="#"><span class="icon_nav"></span>Brunch Place</a></li>
-                  <li class=""><a href="#"><span class="icon_nav"></span>Fun with Friends</a></li>
-                  <li class=""><a href="#"><span class="icon_nav"></span>Date Spot</a></li>
+                  <li class="active"><a href="/experiences"><span class="icon_nav"></span>Everything</a></li>
+                  <li class=""><a href="/interest/Brunch_Place"><span class="icon_nav"></span>Brunch Place</a></li>
+                  <li class=""><a href="/interest/Relax"><span class="icon_nav"></span>Relax</a></li>
+                  <li class=""><a href="/interest/Date_Spot"><span class="icon_nav"></span>Date Spot</a></li>
                 </ul>  
         </div>
     </div>
@@ -53,7 +53,7 @@
                     <h3>{{ experience.title }}</h3>
                     <p><em>[ {% for i in experience.interest %}{{ i|replace("_"," ")}} {% endfor %}]</em></p>
                     <p><em>"{{ experience.description }}"</em></p>
-                    <a href="/experiences/{{ experience.slug }}" class="btn btn-warning">Spy</a>
+                    <a href="/experiences/{{ experience.slug }}" class="btn btn-warning">View</a>
                 </div>
               </div>
           </li>  

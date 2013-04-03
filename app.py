@@ -87,7 +87,7 @@ ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
 
 # Create the lists that match the name of the ListField in the models.py
 period = ['Morning', 'Afternoon', 'Night']
-interest = ['Brunch Place', 'City Secrets', 'Cool & Cheap', 'Date Spots', 'Exploring NYC', 'Fun with Friends', 'I need Coffee!', 'Learn Something', "Let's Party!", 'Lifetime Experiences', 'Ready for Adventure', 'Special Eats', 'Unusual Edibles']
+interest = ['Brunch Place', 'City Secrets', 'Cool & Cheap', 'Date Spots', 'Exploring NYC', 'Fun with Friends', 'I need Coffee!', 'Learn Something', "Let's Party!", 'Lifetime Experiences', 'Ready for Adventure', 'Relax', 'Special Eats', 'Unusual Edibles']
 
 # Create the lists for LOCATIONS that match the name of the ListField in the models.py
 city = ['New York', 'San Francisco']
@@ -284,6 +284,30 @@ def delete_experience(experience_id):
 		return "Unable to find requested image in database."
 
 
+# Display all experiences for a specific category
+@app.route("/interest/<int_name>")
+def by_interest(int_name):
+
+	# try and get experiences where int_name is inside the interest list
+	try:
+		experiences = models.Experience.objects(interest=int_name)
+
+	# not found, abort w/ 404 page
+	except:
+		abort(404)
+
+	# prepare data for template
+	templateData = {
+		'current_interest' : {
+			'slug' : int_name,
+			'name' : int_name.replace('_',' ')
+		},
+		'experiences' : experiences,
+		'interest' : interest
+	}
+
+	# render and return template
+	return render_template('interest_listing.html', **templateData)
 
 
 # --------- Create a new List  --------------------------------------------------------------------------

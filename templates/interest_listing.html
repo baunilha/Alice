@@ -26,28 +26,27 @@
     </div>
 
 
-      <!-- Thumbnails -->
+    <!-- Showing Experiences from a specific category -->
     <div class="container middle">
-      	<div class="row-fluid">
-            <ul class="thumbnails">
-              
-					{% for experience in experiences %}
-          <li class="span3">
-              <div class="thumbnail">
-                <div class="caption">
-                  <img src="https://s3.amazonaws.com/aliceapp/{{experience.filename}}" class="img-rounded"></a>
-    
-                    <h3>{{ experience.title }}</h3>
-                    <p><em>[ {% for i in experience.interest %}{{ i|replace("_"," ")}} {% endfor %}]</em></p>
-                    <p><em>"{{ experience.description }}"</em></p>
-                    <a href="/experiences/{{ experience.slug }}" class="btn btn-warning">View</a>
+      <div class="row-fluid">
+        <h3>Interest: {{ current_interest.get('name')|title }}</h3>
+        <br>
+        
+        {% for experience in experiences %}
+            <li class="span3">
+                <div class="thumbnail">
+                  <div class="caption">
+                    <img src="https://s3.amazonaws.com/aliceapp/{{experience.filename}}" class="img-rounded"></a>
+      
+                      <h3>{{ experience.title }}</h3>
+                      <p><em>[ {% for i in experience.interest %}{{ i|replace("_"," ")}} {% endfor %}]</em></p>
+                      <p><em>"{{ experience.description }}"</em></p>
+                      <a href="/experiences/{{ experience.slug }}" class="btn btn-warning">View</a>
+                  </div>
                 </div>
-              </div>
-          </li>  
-					{% endfor %}
-
-            </ul>
-        </div>
+            </li>  
+            {% endfor %}      
+      </div>
     </div>
 
           <!-- Pagination -->

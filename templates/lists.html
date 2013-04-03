@@ -27,7 +27,7 @@
                     <h3>{{ list.listName }}</h3>
                     <p><em>[ {% for l in list.city %}{{ l|replace("_"," ")}}{% endfor %} by {{ list.user.username }} ]</em></p>
                     <p><em>"{{ list.listDescription }}"</em></p>
-                    <a href="/lists/{{ list.slug }}" class="btn btn-warning">Spy</a>
+                    <a href="/lists/{{ list.slug }}" class="btn btn-warning">View</a>
                 </div>
               </div>
           </li>  

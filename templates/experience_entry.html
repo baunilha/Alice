@@ -7,7 +7,7 @@
 <!-- Display Experience -->
 <div class="container middle">
     <div class="row-fluid">
-		<div class="span4 offset1">
+		<div class="span5 offset1">
 			<h2>{{ experience.title }}</h2>
 			<img src="https://s3.amazonaws.com/aliceapp/{{experience.filename}}" class="img-rounded"></a>
 			<p></p>
@@ -28,7 +28,7 @@
 
 	<!-- Display locations -->
 	<div class="row-fluid">
-		<div class="span4 offset1">
+		<div class="span5 offset2">
 			{% for location in experience.locations %}
 			<div class="location">
 				<span class="location"><h2>{{ location.name }}</h2></span>
@@ -47,7 +47,7 @@
 
 	<!-- Submit new locations for that particular experience -->
 	<div class="row-fluid">
-		<div class="span4 offset1">
+		<div class="span5 offset1">
 			<form method="POST" action="/experiences/{{ experience.id }}/location">
 
 				<p>
