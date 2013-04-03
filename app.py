@@ -187,7 +187,14 @@ def submit():
 		return render_template("submit.html", **templateData)
 
 
-# pages for experiences
+# pages for all experiences
+@app.route("/experiences")
+def experiences():
+	# render the template, retrieve 'experiences' from the database
+	return render_template("experiences.html", experiences=models.Experience.objects())
+
+
+# pages for individual experiences
 @app.route("/experiences/<experience_slug>")
 def experience_display(experience_slug):
 	
@@ -370,6 +377,12 @@ def create():
 
 		return render_template("create_list.html", **templateData)
 
+
+# pages for all lists
+@app.route("/lists")
+def lists():
+	# render the template, retrieve 'lists' from the database
+	return render_template("lists.html", listsCreated=models.List.objects())
 
 
 # pages for lists

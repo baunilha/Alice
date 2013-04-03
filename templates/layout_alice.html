@@ -55,15 +55,17 @@
               {% if current_user.is_anonymous() %}
 
               <li class="active"><a href="/">Home</a></li>
+              <li><a href="/lists">Lists</a></li>
               <li><a href="/login">Login</a></li>
               <li><a href="/register">Register</a></li>
               
               {% else %}
 
-              <li class="active"><a href="/">All Experiences</a></li>
-              <li><a href="/admin">My Experiences</a></li>
+              <li class="active"><a href="/experiences">Experiences</a></li>
+              <li><a href="/submit">Add new experience</a></li>
+              <li><a href="/lists">Lists</a></li>
               <li><a href="/create">Create new list</a></li>
-              <li><a href="/submit">Submit new experience</a></li>
+              <li><a href="/admin">Profile</a></li>
               <li><a href="/logout">Logout {{ current_user.username}}</a></li>
               
               {% endif %}
