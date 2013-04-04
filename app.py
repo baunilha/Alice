@@ -331,7 +331,8 @@ def search():
 		search_experiences.append(s)
 
 	templateData = {
-		'experiences' : search_experiences
+		'experiences' : search_experiences,
+		'search_str' : search_str
 	}
 
 	return render_template("search.html", **templateData)
@@ -355,7 +356,8 @@ def slist():
 		search_list.append(s)
 
 	templateData = {
-		'listsCreated' : search_list
+		'listsCreated' : search_list,
+		'search_str' : search_str
 	}
 
 	return render_template("search_list.html", **templateData)
