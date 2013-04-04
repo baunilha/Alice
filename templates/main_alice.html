@@ -20,7 +20,10 @@
     <div class="row-fluid">
         <div class="span12 dois" style="position: static; top: 0px; ">
             <div class="content-container">
-                <form class="navbar-search"><img src="{{ url_for('static', filename='img/search-icon.png') }}" alt="" height="40px" width="40px"><input type="text" class="search-query" placeholder="Search for experiences"></form>
+                <form class="navbar-search" action="/search" method="post"><img src="{{ url_for('static', filename='img/search-icon.png') }}" alt="" height="40px" width="40px">
+                  <input type="text" class="search-query" id="search" name="search" placeholder="Search for experiences">
+                  </textarea>
+                </form>
             </div>
         </div>
     </div>

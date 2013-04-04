@@ -5,11 +5,11 @@
 {% block body %}
 
     <!-- Search Bar -->
-    <div class="row-fluid">
+   <div class="row-fluid">
         <div class="span12 dois" style="position: static; top: 0px; margin-top: 43px; ">
             <div class="content-container">
                 <form class="navbar-search" action="/slist" method="post"><img src="{{ url_for('static', filename='img/search-icon.png') }}" alt="" height="40px" width="40px">
-                  <input type="text" class="search-query" id="slist" name="search" placeholder="Search for lists">
+                  <input type="text" class="search-query" id="search" name="search" placeholder="Search for lists">
                   </textarea>
                 </form>
             </div>
@@ -34,7 +34,7 @@
                 </div>
               </div>
           </li>  
-					{% endfor %}
+          {% endfor %}
 
             </ul>
         </div>

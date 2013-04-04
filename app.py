@@ -87,7 +87,7 @@ ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
 
 # Create the lists that match the name of the ListField in the models.py
 period = ['Morning', 'Afternoon', 'Night']
-interest = ['Brunch Place', 'City Secrets', 'Cool & Cheap', 'Date Spots', 'Exploring NYC', 'Fun with Friends', 'I need Coffee!', 'Learn Something', "Let's Party!", 'Lifetime Experiences', 'Ready for Adventure', 'Relax', 'Special Eats', 'Unusual Edibles']
+interest = ['Brunch Place', 'City Secrets', 'Cool & Cheap', 'Date Spots', 'Enjoy the Nature', 'Exploring NYC', 'Fun with Friends', 'I need Coffee!', 'Learn Something', "Let's Party!", 'Lifetime Experiences', 'Ready for Adventure', 'Relax', 'Special Eats', 'Unusual Edibles']
 
 # Create the lists for LOCATIONS that match the name of the ListField in the models.py
 city = ['New York', 'San Francisco']
@@ -308,6 +308,57 @@ def by_interest(int_name):
 
 	# render and return template
 	return render_template('interest_listing.html', **templateData)
+
+
+# --------- Search Pages!!!!  --------------------------------------------------------------------------
+
+
+# Search Experiences
+@app.route("/search", methods=['POST'])
+def search():
+
+	# Create an empty string for the searched experiences
+	search_experiences = []
+	# Get the searched string from the website and store it in a new variable
+	search_str = request.form.get('search')
+
+	# Compare the searched string in the website with the titles of the experiences
+	search_display = models.Experience.objects()
+	search_display = models.Experience.objects(title__icontains=search_str)
+
+	# for all the results, append them in the website
+	for s in search_display:
+		search_experiences.append(s)
+
+	templateData = {
+		'experiences' : search_experiences
+	}
+
+	return render_template("search.html", **templateData)
+
+
+# Search Lists
+@app.route("/slist", methods=['POST'])
+def slist():
+
+	# Create an empty string for the searched lists
+	search_list = []
+	# Get the searched string from the website and store it in a new variable
+	search_str = request.form.get('search')
+
+	# Compare the searched string in the website with the descriptions of the lists
+	search_display = models.List.objects()
+	search_display = models.List.objects(listDescription__icontains=search_str)
+
+	# for all the results, append them in the website
+	for s in search_display:
+		search_list.append(s)
+
+	templateData = {
+		'listsCreated' : search_list
+	}
+
+	return render_template("search_list.html", **templateData)
 
 
 # --------- Create a new List  --------------------------------------------------------------------------
