@@ -83,6 +83,7 @@ login_manager.setup_app(app)
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
 
 
+
 # --------- Lists ----------------------------------------------------
 
 # Create the lists that match the name of the ListField in the models.py
@@ -92,9 +93,9 @@ interest = ['Brunch Place', 'City Secrets', 'Cool & Cheap', 'Date Spots', 'Enjoy
 # Create the lists for LOCATIONS that match the name of the ListField in the models.py
 city = ['New York', 'San Francisco']
 price = ['$','$$','$$$','$$$$','$$$$$']
-hourOpen = ['12:00am', '1:00am', '2:00am', '3:00am', '4:00am', '5:00am', '6:00am', '7:00am', '8:00am', '9:00am', '10:00am', '11:00am', '12:00pm', '1:00pm', '2:00pm', '3:00pm', '4:00pm', '5:00pm', '6:00pm', '7:00pm', '8:00pm', '9:00pm', '10:00pm', '11:00pm']
-hourClose = ['12:00am', '1:00am', '2:00am', '3:00am', '4:00am', '5:00am', '6:00am', '7:00am', '8:00am', '9:00am', '10:00am', '11:00am', '12:00pm', '1:00pm', '2:00pm', '3:00pm', '4:00pm', '5:00pm', '6:00pm', '7:00pm', '8:00pm', '9:00pm', '10:00pm', '11:00pm']
-
+hourOpen = ['12:00 am', '1:00 am', '2:00 am', '3:00 am', '4:00 am', '5:00 am', '6:00 am', '7:00 am', '8:00 am', '9:00 am', '10:00 am', '11:00 am', '12:00 pm', '1:00 pm', '2:00 pm', '3:00 pm', '4:00 pm', '5:00 pm', '6:00 pm', '7:00 pm', '8:00 pm', '9:00 pm', '10:00 pm', '11:00 pm']
+hourClose = ['12:00 am', '1:00 am', '2:00 am', '3:00 am', '4:00 am', '5:00 am', '6:00 am', '7:00 am', '8:00 am', '9:00 am', '10:00 am', '11:00 am', '12:00 pm', '1:00 pm', '2:00 pm', '3:00 pm', '4:00 pm', '5:00 pm', '6:00 pm', '7:00 pm', '8:00 pm', '9:00 pm', '10:00 pm', '11:00 pm']
+category = ['Bar', 'Museum', 'Park', 'Restaurant']
 
 
 # --------- Main Page, Add, View and Delete Experiences  -----------------------------------------------------------
@@ -104,6 +105,7 @@ hourClose = ['12:00am', '1:00am', '2:00am', '3:00am', '4:00am', '5:00am', '6:00a
 def indexAlice():
 	# render the template, retrieve 'experiences' from the database
 	return render_template("main_alice.html", experiences=models.Experience.objects())
+
 
 # this is the submit experiences page
 @app.route("/submit", methods=['GET','POST'])
@@ -197,7 +199,7 @@ def experiences():
 # pages for individual experiences
 @app.route("/experiences/<experience_slug>")
 def experience_display(experience_slug):
-	
+
 	# get experience by experience_slug
 	try:
 		experience = models.Experience.objects.get(slug=experience_slug)
@@ -213,22 +215,22 @@ def experience_display(experience_slug):
 	return render_template('experience_entry.html', **templateData)
 
 
-
 # submit locations for experiences
 @app.route("/experiences/<experience_id>/location", methods=['POST'])
 def submit_location(experience_id):
-
-	# get created lists
-	app.logger.debug(request.form.getlist('city'))
 
 	# show location details (retrieving the data from the database)
 	name = request.form.get('name')
 	address = request.form.get('address')
 	neighborhood = request.form.get('neighborhood')
-	website = request.form.get('name')
+	website = request.form.get('website')
+	city = request.form.get('city')
+	# hourOpen = request.form.get('hourOpen')
+	# hourClose = request.form.get(str('hourClose'))
+	price = request.form.get('price')
 	phone = request.form.get('phone')
 
-	if name == '' or address == '' or neighborhood == '' or website == '' or phone == '':
+	if name == '' or address == '' or neighborhood == '':
 		# no name or comment, return to page
 		return redirect(request.referrer)
 
@@ -244,14 +246,25 @@ def submit_location(experience_id):
 	location.name = request.form.get('name')
 	location.address = request.form.get('address')
 	location.neighborhood = request.form.get('neighborhood')
+	location.city = request.form.get('city')
+	location.price = request.form.get('price')
+	# location.hourOpen = request.form.get('hourOpen')
+	# location.hourClose = request.form.get(str('hourClose'))
 	location.website = request.form.get('website')
 	location.phone = request.form.get('phone')
-	
-	# append locations to experience
-	experience.locations.append(location)
 
-	# save it
+	# for reference field, save the location
+	location.save() # saves a separate Location document (not embedded)
+
+	# append location to experience
+	experience.location_refs.append(location)
+
+	# save the experience object
 	experience.save()
+
+	#if request.form.getlist('hourOpen'):
+	#	for h in request.form.getlist('hourOpen'):
+	#		location.hourOpen.append_entry(h)
 
 	return redirect('/experiences/%s' % experience.slug)
 
@@ -439,7 +452,7 @@ def create():
 
 		if request.form.getlist('city'):
 			for c in request.form.getlist('city'):
-				photo_upload_list.interest.append_entry(c)
+				photo_upload_list.city.append_entry(c)
 		
 		# render the template
 		templateData = {
@@ -508,6 +521,33 @@ def delete_list(list_id):
 
 	else:
 		return "Unable to find requested image in database."
+
+
+# submit locations for experiences
+@app.route("/list/<list_id>/add/<experience_id>", methods=['GET','POST'])
+def list_add_experience(list_id, experience_id):
+
+	# get experience by experience_slug
+	try:
+		experience = models.Experience.objects.get(id=experience_id)
+	except:
+		# error, return to where you came from
+		return redirect(request.referrer)
+
+
+	# get list by experience_slug
+	try:
+		listsCreated = models.List.objects.get(id=list_id)
+	except:
+		# error, return to where you came from
+		return redirect(request.referrer)
+
+
+	listsCreated.experiences.append( experience )
+	listsCreated.save()
+
+	return redirect('/lists/' + listsCreated.slug)
+
 
 
 # --------- Login & Register -------------------------------------------------------------------------

@@ -1,13 +1,14 @@
 {% extends "/layout_alice.html" %}
 {% from "_form_helpers.html" import render_error, render_textarea %}
 
+{% block styles %}{% endblock %}
 
 {% block body %}
 
 <!-- Display Experience -->
 <div class="container middle">
     <div class="row-fluid">
-		<div class="span5 offset1">
+		<div class="span6">
 			<h2>{{ experience.title }}</h2>
 			<img src="https://s3.amazonaws.com/aliceapp/{{experience.filename}}" class="img-rounded"></a>
 			<p></p>
@@ -23,20 +24,22 @@
 			<p><small>id: {{ experience.id }}</small></p>
 			<hr>
 		</div>	
-	</div>
+
 
 
 	<!-- Display locations -->
-	<div class="row-fluid">
-		<div class="span5 offset2">
-			{% for location in experience.locations %}
+
+		<div class="span4 offset1">
+			
+			{% for location in experience.location_refs %}
 			<div class="location">
 				<span class="location"><h2>{{ location.name }}</h2></span>
-				<br>
-				<p>{{ location.address }}</p>
-				<p>{{ location.neighborhood }}</p>
-				<p>{{ location.website }}</p>
-				<p>{{ location.phone }}</p>
+				<p>Address: {{ location.address }}, {{ location.neighborhood }}</p>
+				<p>City: {{ location.city }}</p>
+				<p>Price: {{ location.price }}</p>
+				<p>Site: {{ location.website }}</p>
+				<!-- <p>Hours: {{ location.hourOpen }} - {{ location.hourClose }} </p> -->
+				<p>Phone: {{ location.phone }}</p>
 				<p><small>{{ location.timestamp.strftime("%a %m/%d %I:%M%p ") }}</small></p>
 			</div>
 			<hr>
@@ -47,7 +50,7 @@
 
 	<!-- Submit new locations for that particular experience -->
 	<div class="row-fluid">
-		<div class="span5 offset1">
+		<div class="span5">
 			<form method="POST" action="/experiences/{{ experience.id }}/location">
 
 				<p>
@@ -65,29 +68,90 @@
 					<input type="text" id="neighborhood" name="neighborhood">
 				</p>
 
-				<label>City</label>
-                {# comment - loop through city and create a dropdown menu #}
-                <label class="dropdown">
-	                <select name="city">
-	                {% for c in city|sort %}
-	                <option value="{{ c|replace(" ","_") }}" {% if c|replace(" ","_") in form.city.data %} checked=checked {% endif %} > 
-	                {{ c|title }}
-	                {% endfor %}
-	                </select>
-                </label>
-
+                <label for="city"><h3>City:</h3></label>
+					  <select id="city" name="city">
+					    <option value="New York">New York</option>
+					    <option value="San Francisco">San Francisco</option>
+					  </select>       
                 <br>
-                <p>
-                <label><h3>City 2:</h3></label>
-                <em><span class="help-block">(Select as many as you need)</span></em>
 
-                {# comment - loop through interest and create checkboxes #}
-                {% for i in interest|sort %}
-                <label class="checkbox">
-                <input type="checkbox" name="interest" value="{{ i|replace(" ","_") }}" {% if i|replace(" ","_") in form.interest.data %}checked=checked{% endif %} > {{ i|title }}
-                </label>
-                {% endfor %}
-                </p>
+                <label for="price"><h3>Price:</h3></label>
+					  <select id="price" name="price">
+					    <option value="$">$</option>
+					    <option value="$$">$$</option>
+					    <option value="$$$">$$$</option>
+					    <option value="$$$$">$$$$</option>
+					    <option value="$$$$$">$$$$$</option>
+					  </select>       
+                <br>
+
+                <label for="hourOpen"><h3>Open Hour:</h3></label>
+					  <select id="hourOpen" name="hourOpen">
+					    <option value="12:00 am">12:00 am</option>
+					    <option value="1:00 am">1:00 am</option>
+					    <option value="2:00 am">2:00 am</option>
+					    <option value="3:00 am">3:00 am</option>
+					    <option value="4:00 am">4:00 am</option>
+					    <option value="5:00 am">5:00 am</option>
+					    <option value="6:00 am">6:00 am</option>
+					    <option value="7:00 am">7:00 am</option>
+					    <option value="8:00 am">8:00 am</option>
+					    <option value="9:00 am">9:00 am</option>
+					    <option value="10:00 am">10:00 am</option>
+					    <option value="11:00 am">11:00 am</option>
+					    <option value="12:00 pm">12:00 pm</option>
+					    <option value="1:00 pm">1:00 pm</option>
+					    <option value="2:00 pm">2:00 pm</option>
+					    <option value="3:00 pm">3:00 pm</option>
+					    <option value="4:00 pm">4:00 pm</option>
+					    <option value="5:00 pm">5:00 pm</option>
+					    <option value="6:00 pm">6:00 pm</option>
+					    <option value="7:00 pm">7:00 pm</option>
+					    <option value="8:00 pm">8:00 pm</option>
+					    <option value="9:00 pm">9:00 pm</option>
+					    <option value="10:00 pm">10:00 pm</option>
+					    <option value="11:00 pm">11:00 pm</option>
+					  </select>       
+                <br>
+
+                <!--
+                 <label for="hourOpen"><h3>Open Hour:</h3></label>
+					  <select id="hourOpen" name="hourOpen">
+					 	{% for h in hourOpen %}
+		                <option value='{{ h }}' > {{ h }}
+		                {% endfor %}
+						</option>
+					  </select>
+				 <br>       
+            	-->
+
+            	<label for="hourClose"><h3>Closing Hour:</h3></label>
+					  <select id="hourClose" name="hourClose">
+					    <option value="12:00 am">12:00 am</option>
+					    <option value="1:00 am">1:00 am</option>
+					    <option value="2:00 am">2:00 am</option>
+					    <option value="3:00 am">3:00 am</option>
+					    <option value="4:00 am">4:00 am</option>
+					    <option value="5:00 am">5:00 am</option>
+					    <option value="6:00 am">6:00 am</option>
+					    <option value="7:00 am">7:00 am</option>
+					    <option value="8:00 am">8:00 am</option>
+					    <option value="9:00 am">9:00 am</option>
+					    <option value="10:00 am">10:00 am</option>
+					    <option value="11:00 am">11:00 am</option>
+					    <option value="12:00 pm">12:00 pm</option>
+					    <option value="1:00 pm">1:00 pm</option>
+					    <option value="2:00 pm">2:00 pm</option>
+					    <option value="3:00 pm">3:00 pm</option>
+					    <option value="4:00 pm">4:00 pm</option>
+					    <option value="5:00 pm">5:00 pm</option>
+					    <option value="6:00 pm">6:00 pm</option>
+					    <option value="7:00 pm">7:00 pm</option>
+					    <option value="8:00 pm">8:00 pm</option>
+					    <option value="9:00 pm">9:00 pm</option>
+					    <option value="10:00 pm">10:00 pm</option>
+					    <option value="11:00 pm">11:00 pm</option>
+					  </select>       
                 <br>
 
 				<p>
@@ -112,5 +176,4 @@
 {% endblock %}
 
 
-{% block styles %}{% endblock %}
 {% block scripts %}{% endblock %}

@@ -51,6 +51,18 @@
 			</p>
 
 			<p>
+				<label><h3>City:</h3></label>
+				{# comment - loop through bookType and create a dropdown menu #}
+                <label class="dropdown">
+                <select name="city">
+                {% for c in city|sort %}
+                <option value='{{ c|replace(" ","_") }} {% if c|replace(" ","_") in form.city.data %} checked=checked {% endif %}' > {{ c|title }}
+                {% endfor %}
+                </select>
+                </label>
+			</p>
+
+			<p>
 				<label for="website"><h3>Website:</h3></label>
 				{{ form.website(class='myTextboxCssClass', type='textarea') }}
 				{{ render_error(form.website) }}  {# render_error inside _form_helpers.html #}

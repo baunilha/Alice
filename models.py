@@ -18,7 +18,7 @@ class Comment(mongoengine.EmbeddedDocument):
 
 #################  create location and experience ##########################
 
-class Location(mongoengine.EmbeddedDocument):
+class Location(mongoengine.Document):
 	name = mongoengine.StringField(max_length=50)
 	address = mongoengine.StringField()
 	neighborhood = mongoengine.StringField(max_length=50)
@@ -26,10 +26,26 @@ class Location(mongoengine.EmbeddedDocument):
 	phone = mongoengine.StringField(max_length=50)
 
 	# City, Price and hours are lists of Strings
-	city = mongoengine.ListField(mongoengine.StringField(max_length=50))
-	price = mongoengine.ListField(mongoengine.StringField(max_length=20))
-	hourOpen = mongoengine.ListField(mongoengine.StringField(max_length=20))
-	hourClose = mongoengine.ListField(mongoengine.StringField(max_length=20))
+	city = mongoengine.StringField(max_length=50)
+	price = mongoengine.StringField()
+	# hourOpen = mongoengine.StringField()
+	# hourClose = mongoengine.StringField()
+
+	# Timestamp will record the date and time idea was created.
+	timestamp = mongoengine.DateTimeField(default=datetime.now())
+
+class LocationEmbed(mongoengine.EmbeddedDocument):
+	name = mongoengine.StringField(max_length=50)
+	address = mongoengine.StringField()
+	neighborhood = mongoengine.StringField(max_length=50)
+	website = mongoengine.StringField(max_length=50)
+	phone = mongoengine.StringField(max_length=50)
+
+	# City, Price and hours are lists of Strings
+	city = mongoengine.StringField(max_length=50)
+	price = mongoengine.StringField()
+	# hourOpen = mongoengine.StringField()
+	# hourClose = mongoengine.StringField()
 
 	# Timestamp will record the date and time idea was created.
 	timestamp = mongoengine.DateTimeField(default=datetime.now())
@@ -46,7 +62,9 @@ class Experience(mongoengine.Document):
 	interest = mongoengine.ListField(mongoengine.StringField(max_length=30))
 
 	# Location is an embedded element
-	locations = mongoengine.ListField( mongoengine.EmbeddedDocumentField(Location) )
+	# locations = mongoengine.ListField( mongoengine.EmbeddedDocumentField(LocationEmbed) )
+
+	location_refs = mongoengine.ListField( mongoengine.ReferenceField(Location))
 	
 	# Comments is a list of Document type 'Comments' defined above
 	# not using
@@ -98,6 +116,7 @@ class List(mongoengine.Document):
 	listDescription = mongoengine.StringField(max_length=500, verbose_name="Description")
 	filename = mongoengine.StringField()
 	timestamp = mongoengine.DateTimeField(default=datetime.now())
+	experiences = mongoengine.ListField( mongoengine.ReferenceField(Experience) )
 
 	city = mongoengine.ListField(mongoengine.StringField(max_length=50))
 
