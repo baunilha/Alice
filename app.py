@@ -103,6 +103,7 @@ category = ['Bar', 'Museum', 'Park', 'Restaurant']
 # this is our main page
 @app.route("/")
 def indexAlice():
+
 	# render the template, retrieve 'experiences' from the database
 	return render_template("main_alice.html", experiences=models.Experience.objects())
 
@@ -487,11 +488,41 @@ def list_display(list_slug):
 
 	# prepare template data
 	templateData = {
-		'listsCreated' : listsCreated
+		'listsCreated' : listsCreated,
+		'experiences': models.Experience.objects()
 	}
 
 	# render and return the template
 	return render_template('list_entry.html', **templateData)
+
+
+# not working
+# Display all the lists for a given user.
+@app.route('/lists/<username>')
+@login_required
+def user_list(username):
+
+	# Does requested username exists, 404 if not
+	try:
+		user = models.User.objects.get(username=username)
+
+	except Exception:
+		e = sys.exc_info()
+		app.logger.error(e)
+		abort(404)
+
+	# get content that is linked to user, 
+	user_list = models.List.objects(user=user)
+
+	# prepare the template data dictionary
+	templateData = {
+		'user' : user,
+		'current_user' : current_user,
+		'user_list' : user_list,
+		'users' : models.User.objects()
+	}
+
+	return render_template('lists_user.html', **templateData)
 
 
 
@@ -523,7 +554,31 @@ def delete_list(list_id):
 		return "Unable to find requested image in database."
 
 
-# submit locations for experiences
+
+# User profile page
+@app.route('/chooselist/<experience_id>')
+@login_required
+def choose_list(experience_id):
+
+	# get experience by experience_slug
+	try:
+		experience = models.Experience.objects.get(id=experience_id)
+	except:
+		# error, return to where you came from
+		return redirect(request.referrer)
+
+	templateData = {
+		'allLists' : models.List.objects(user=current_user.id),
+		'current_user' : current_user,
+		'experience' : experience
+	}
+
+	return render_template('choose_list.html', **templateData)
+
+
+
+# save an experience in a list
+# not working
 @app.route("/list/<list_id>/add/<experience_id>", methods=['GET','POST'])
 def list_add_experience(list_id, experience_id):
 
@@ -541,7 +596,6 @@ def list_add_experience(list_id, experience_id):
 	except:
 		# error, return to where you came from
 		return redirect(request.referrer)
-
 
 	listsCreated.experiences.append( experience )
 	listsCreated.save()
@@ -649,12 +703,13 @@ def login():
 
 
 # User profile page
-@app.route('/admin', methods=['GET','POST'])
+@app.route('/admin')
 @login_required
 def admin_main():
 
 	templateData = {
-		'allContent' : models.Content.objects(user=current_user.id),
+		'allLists' : models.List.objects(user=current_user.id),
+		'current_user' : current_user,
 		'experiences': models.Experience.objects()
 	}
 

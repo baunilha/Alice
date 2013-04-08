@@ -18,27 +18,26 @@
 
       <!-- Thumbnails -->
     <div class="container middle">
-      	<div class="row-fluid">
-          <ul class="thumbnails">
-              
-  					{% for list in listsCreated %}
-            <li class="span3">
-                <div class="thumbnail">
-                  <div class="caption">
-                    <img src="https://s3.amazonaws.com/aliceapp/{{list.filename}}" class="img-rounded"></a>
-      
-                      <h3>{{ list.listName }}</h3>
-                      <p><em>[ {% for l in list.city %}{{ l|replace("_"," ")}}{% endfor %} by {{ list.user.username }} ]</em></p>
-                      <p><em>"{{ list.listDescription }}"</em></p>
-                      <a href="/lists/{{ list.slug }}" class="btn btn-warning">View</a>
-                  </div>
-                </div>
-            </li>  
-  					{% endfor %}
+        <div class="row-fluid">
+            <h1>{{ user.username }}'s lists</h1>
+            
+            <ul class="thumbnails">
 
-          </ul>
-
-
+              {% for l in user_content %}
+               <li class="span3">
+                    <div class="thumbnail">
+                      <div class="caption">
+                        <img src="https://s3.amazonaws.com/aliceapp/{{list.filename}}" class="img-rounded"></a>
+          
+                          <h3>{{ list.listName }}</h3>
+                          <p><em>[ {% for l in list.city %}{{ l|replace("_"," ")}}{% endfor %} by {{ list.user.username }} ]</em></p>
+                          <p><em>"{{ list.listDescription }}"</em></p>
+                          <a href="/lists/{{ list.slug }}" class="btn btn-warning">View</a>
+                      </div>
+                    </div>
+                </li>  
+              {% endfor %}
+            </ul>
         </div>
     </div>
 

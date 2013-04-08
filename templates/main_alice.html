@@ -52,11 +52,15 @@
               <div class="thumbnail">
                 <div class="caption">
                   <img src="https://s3.amazonaws.com/aliceapp/{{experience.filename}}" class="img-rounded"></a>
+
     
                     <h3>{{ experience.title }}</h3>
                     <p><em>[ {% for i in experience.interest %}{{ i|replace("_"," ")}} {% endfor %}]</em></p>
                     <p><em>"{{ experience.description }}"</em></p>
-                    <a href="/experiences/{{ experience.slug }}" class="btn btn-warning">View</a>
+                    <p>
+                      <a href="/chooselist/{{ experience.id }}" class="btn btn-success">Add to List</a>
+                      <a href="/experiences/{{ experience.slug }}" class="btn btn-warning">View</a>
+                    </p>
                 </div>
               </div>
           </li>  
