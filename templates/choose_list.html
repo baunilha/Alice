@@ -5,13 +5,18 @@
 {% block body %}
 
 <script>
+    // Select the first item of the list
+    function firstOption() {
+        var selectOption = document.formlist.listId.options[0].value;
+        document.formlist.action = "/list/" + selectOption + "/add/{{ experience.id }}";
+    }
+
 	// Function to get the value from the dropdown and change the url in the submit button
 	function checkOption() {
 		var select = document.formlist.listId.selectedIndex;
 		var selectOption = document.formlist.listId.options[select].value;
 		document.formlist.action = "/list/" + selectOption + "/add/{{ experience.id }}";
 	}
-
 </script>
 
 <!-- Display List -->
@@ -33,10 +38,14 @@
             {% endfor %}
             </select>
             </label>
-            <input class='btn btn-warning btn-large' type='submit' value='Create List'>
+            <input class='btn btn-warning btn-large' type='submit' value='Add to List'>
         	</form>
-		</p>           
+		</p> 
+        <h3>Or</h3>
+        <a href="/create"class="btn btn-large btn-warning">Create new list</a>      
 	</div>
+
+    <script>firstOption();</script>
 
 </div>
 

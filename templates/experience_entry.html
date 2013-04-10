@@ -18,8 +18,10 @@
 			<hr>
 			<p>{{ experience.description }}</p>
 
-			<br>
 			<hr>
+			<a href="/chooselist/{{ experience.id }}" class="btn btn-success">Add to a List</a>
+			<p></p>
+
 			<p><small>added: {{ experience.timestamp.strftime("%a %m/%d %I:%M%p ") }}</small></p>
 			<p><small>id: {{ experience.id }}</small></p>
 			<hr>
@@ -76,6 +78,7 @@
 
                 <label for="price"><h3>Price:</h3></label>
 					  <select id="price" name="price">
+					  	<option value="Free">Free</option>
 					    <option value="$">$</option>
 					    <option value="$$">$$</option>
 					    <option value="$$$">$$$</option>

@@ -8,14 +8,6 @@ from flask.ext.mongoengine import *
 from datetime import datetime
 
 
-#################  comments - not using ##########################
-
-class Comment(mongoengine.EmbeddedDocument):
-	name = mongoengine.StringField()
-	comment = mongoengine.StringField()
-	timestamp = mongoengine.DateTimeField(default=datetime.now())
-
-
 #################  create location and experience ##########################
 
 class Location(mongoengine.Document):
@@ -34,21 +26,6 @@ class Location(mongoengine.Document):
 	# Timestamp will record the date and time idea was created.
 	timestamp = mongoengine.DateTimeField(default=datetime.now())
 
-class LocationEmbed(mongoengine.EmbeddedDocument):
-	name = mongoengine.StringField(max_length=50)
-	address = mongoengine.StringField()
-	neighborhood = mongoengine.StringField(max_length=50)
-	website = mongoengine.StringField(max_length=50)
-	phone = mongoengine.StringField(max_length=50)
-
-	# City, Price and hours are lists of Strings
-	city = mongoengine.StringField(max_length=50)
-	price = mongoengine.StringField()
-	# hourOpen = mongoengine.StringField()
-	# hourClose = mongoengine.StringField()
-
-	# Timestamp will record the date and time idea was created.
-	timestamp = mongoengine.DateTimeField(default=datetime.now())
 
 class Experience(mongoengine.Document):
 
@@ -61,15 +38,7 @@ class Experience(mongoengine.Document):
 	period = mongoengine.ListField(mongoengine.StringField(max_length=30))
 	interest = mongoengine.ListField(mongoengine.StringField(max_length=30))
 
-	# Location is an embedded element
-	# locations = mongoengine.ListField( mongoengine.EmbeddedDocumentField(LocationEmbed) )
-
 	location_refs = mongoengine.ListField( mongoengine.ReferenceField(Location))
-	
-	# Comments is a list of Document type 'Comments' defined above
-	# not using
-	comments = mongoengine.ListField( mongoengine.EmbeddedDocumentField(Comment) )
-	postedby = mongoengine.StringField(max_length=120, verbose_name="Your name")
 
 	# Timestamp will record the date and time idea was created.
 	timestamp = mongoengine.DateTimeField(default=datetime.now())

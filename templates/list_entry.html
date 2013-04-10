@@ -26,7 +26,6 @@
               <p><em>[ {% for i in exp.interest %}{{ i|replace("_"," ")}} {% endfor %}]</em></p>
               <p><em>"{{ exp.description }}"</em></p>
 	            <p>
-	              <a href="/chooselist/{{ exp.id }}" class="btn btn-success">Add to List</a>
 	              <a href="/experiences/{{ exp.slug }}" class="btn btn-warning">View</a>
 	            </p>
 	          <hr>
