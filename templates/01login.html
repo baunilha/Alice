@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+  <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Alice</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="Alice database">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap1.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap-responsive.css') }}">
+
+        <!-- Get Font from Google http://www.google.com/webfonts -->
+        <link href='http://fonts.googleapis.com/css?family=Peralta' rel='stylesheet' type='text/css'>
+
+        <!-- Icons and Favicons -->
+        <link rel="shortcut icon" href="ico/favicon.ico">
+        <link rel="apple-touch-icon-precomposed" sizes="144x144" href="ico/apple-touch-icon-144-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="ico/apple-touch-icon-114-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="72x72" href="ico/apple-touch-icon-72-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" href="ico/apple-touch-icon-57-precomposed.png">
+
+        {% block styles %}{% endblock %}
+        
+  </head>
+
+  <!-- Begin of the body -->
+  <body>
+
+    <div class="navbar navbar-inverse navbar-fixed-top">
+          <div class="navbar-inner">
+            <div class="container">
+            </div>
+          </div>
+    </div>
+
+
+    <div class="container middle">
+        <!-- Alice's Logo Purple -->
+        <div class="row-fluid">
+            <img id="logo-login" src="{{ url_for('static', filename='img/logo_purple.png') }}" class="brand" alt="">
+        </div>
+        <br>
+
+        <!-- Login with existing account -->
+        <div class="row-fluid">
+            <div class="span5">
+
+                {% with messages = get_flashed_messages(category_filter=["login"]) %}
+                  {% if messages %}
+                    <ul class=flashes>
+                    {% for message in messages %}
+                      <li class="alert">{{ message }}</li>
+                    {% endfor %}
+                    </ul>
+                  {% endif %}
+                {% endwith %}
+
+                <form class="well" method="post" action="/login">
+                    <h4>Already have an account?</h4>
+                    {{ form.email.label }} {{ form.email(type="email", class="input-block-level") }}
+                    {{ form.password.label }} {{ form.password(class="input-block-level") }}<br>
+                    <input type="checkbox" name="remember" value="yes"> Remember me
+                    <br><br>
+                    <input class="btn btn-large btn-block btn-warning" type="submit" value="Login">
+                </form>
+            </div>
+        </div>
+        <br>
+
+        <!-- Link to Register Page -->
+        <div class="row-fluid">
+            <div class="well span5">
+                <h4>New to Alice?</h4>
+                <a class="btn btn-large btn-block btn-success">Register</a>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- End of the HTML Structure -->
+    
+
+
+    <!-- Javascript files -->
+
+    <script src="{{ url_for('static', filename='js/bootstrap-button.js') }}"></script>
+
+    {% block scripts %}{% endblock %}
+
+
+  </body>
+</html>

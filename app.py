@@ -99,11 +99,41 @@ category = ['Bar', 'Museum', 'Park', 'Restaurant']
 # --------- Main Page, Add, View and Delete Experiences  -----------------------------------------------------------
 
 # this is our main page
-@app.route("/")
-def indexAlice():
+@app.route("/", methods=["GET", "POST"])
+def loginnew():
 
-	# render the template, retrieve 'experiences' from the database
-	return render_template("main_alice.html", experiences=models.Experience.objects())
+	# get the login and registration forms
+	loginForm = models.LoginForm(request.form)
+	
+	# is user trying to log in?
+	# 
+	if request.method == "POST" and 'email' in request.form:
+		email = request.form["email"]
+
+		user = User().get_by_email_w_password(email)
+		
+		# if user in database and password hash match then log in.
+	  	if user and flask_bcrypt.check_password_hash(user.password,request.form["password"]) and user.is_active():
+			remember = request.form.get("remember", "no") == "yes"
+
+			if login_user(user, remember=remember):
+				flash("Logged in!")
+				return redirect(request.args.get("next") or '/admin')
+			else:
+
+				flash("unable to log you in","login")
+	
+		else:
+			flash("Incorrect email and password submission","login")
+			return redirect("/login")
+
+	else:
+
+		templateData = {
+			'form' : loginForm
+		}
+
+		return render_template('/01login.html', **templateData)
 
 
 # this is the submit experiences page

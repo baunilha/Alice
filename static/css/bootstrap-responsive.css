@@ -862,6 +862,12 @@
   .nav-collapse {
     -webkit-transform: translate3d(0, 0, 0);
   }
+  #logo-login {
+  width: 60%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  }
   .page-header h1 small {
     display: block;
     line-height: 20px;

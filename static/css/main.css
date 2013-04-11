@@ -1,22 +1,69 @@
 
 
 /* ==========================================================================
-   Author's custom styles
+   Alice's custom styles
    ========================================================================== */
 
 
-span.label a {
-	color:#fff;
+/* Body and structure
+-------------------------------------------------- */
+body {
+  background-image: url('../img/squares_gray.png');
+  color: #462532;
+}
+
+h4 {
+	text-shadow: 1px 1px 1px #fbfcfd;
+	color: #4F214E;
 }
 
 
+/* Navigation Bar
+-------------------------------------------------- */
 
+.navbar {
+  position: static;
+  right: 0;
+  left: 0;
+  z-index: 1030;
+  margin-bottom: 0;
+  border: 0;
+  padding-right: 0;
+  padding-left: 0;
+}
 
+.navbar-inverse .navbar-inner {
+	background-color: #4F214E;
+	background-image: -moz-linear-gradient(top, #4F214E, #2B122A);
+	background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#4F214E), to(#2B122A));
+	background-image: -webkit-linear-gradient(top, #4F214E, #2B122A);
+	background-image: -o-linear-gradient(top, #4F214E, #2B122A);
+	background-image: linear-gradient(to bottom, #4F214E, #2B122A);
+	background-repeat: repeat-x;
+	border-color: #4F214E;
+	filter: progid:dximagetransform.microsoft.gradient(startColorstr='#ff222222', endColorstr='#ff111111', GradientType=0);
+	-webkit-border-radius: 0;
+	-moz-border-radius: 0;
+	border-radius: 0;
+	height: 44px;
+}
 
+.navbar-inverse {
+  color: #FFFFFF;
+}
 
+#logo-login {
+	width: 365px;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
 
-
-
+.well {
+	box-shadow: rgba(0, 0, 0, 0.14) 0px 1px 4px 1px;
+	-webkit-box-shadow: rgba(0, 0, 0, 0.14) 0px 1px 4px 1px;
+	-moz-box-shadow: rgba(0, 0, 0, 0.14) 0px 1px 4px 1px;
+}
 
 
 
