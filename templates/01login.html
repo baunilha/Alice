@@ -47,7 +47,7 @@
 
         <!-- Login with existing account -->
         <div class="row-fluid">
-            <div class="span5">
+            <div class="box-login">
 
                 {% with messages = get_flashed_messages(category_filter=["login"]) %}
                   {% if messages %}
@@ -69,13 +69,14 @@
                 </form>
             </div>
         </div>
-        <br>
 
         <!-- Link to Register Page -->
         <div class="row-fluid">
-            <div class="well span5">
-                <h4>New to Alice?</h4>
-                <a class="btn btn-large btn-block btn-success">Register</a>
+            <div class="box-login">
+                <div class="well">
+                    <h4>New to Alice?</h4>
+                    <a href="/register" class="btn btn-large btn-block btn-success">Register</a>
+                </div>
             </div>
         </div>
     </div>

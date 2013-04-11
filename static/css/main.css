@@ -53,10 +53,16 @@ h4 {
 }
 
 #logo-login {
-	width: 365px;
+	width: 280px;
 	display: block;
+	padding-top: 10px;
 	margin-left: auto;
 	margin-right: auto;
+}
+
+.box-login {
+	margin: 0 auto;
+	max-width: 416px;
 }
 
 .well {
