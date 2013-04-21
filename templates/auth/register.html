@@ -1,13 +1,22 @@
-{% extends "/layout_alice.html" %}
+{% extends "/layout.html" %}
 
 {% block body %}
 
+<div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+            <img id="logo-small" src="{{ url_for('static', filename='img/logo-small.png') }}" height="115" width="74">
+        </div>
+      </div>
+</div>
+
 <!-- Register a new account -->
 <div class="container middle">
+    <br>
+
     <div class="row-fluid">
-        <div class="span5">
-            <h1>Register</h1>
-            <br>
+        <div class="box-login">
+
             {% with messages = get_flashed_messages(category_filter=["register"]) %}
               {% if messages %}
                 <ul class=flashes>
@@ -28,18 +37,18 @@
             </ul>
             {% endif %}
 
-
-            <div class="well">
-                <form action="/register" method="POST">
+                <form class="well" action="/register" method="POST">
+                    <h3>Register</h3>
                     {{ form.csrf_token }}
-                    {{ form.username.label }} {{ form.username }}
-                    {{ form.email.label }} {{ form.email }}
-                    {{ form.password.label }} {{ form.password }}
-                    {{ form.confirm.label }} {{ form.confirm }}
+                    {{ form.username.label }} {{ form.username(class="input-block-level") }}
+                    {{ form.email.label }} {{ form.email(class="input-block-level") }}
+                    {{ form.password.label }} {{ form.password(class="input-block-level") }}
+                    {{ form.confirm.label }} {{ form.confirm(class="input-block-level") }}
+                    <br><br>
+                    <input class="btn btn-large btn-block btn-purple" type="submit" value="Register">
                     <br>
-                    <input class="btn btn-warning " type="submit" value="Register"><small> (all fields required)</small>
+                    <a href="/"><strong>Already have an account?</strong></a>
                 </form>
-            </div>
         </div>
     </div>
 </div>
