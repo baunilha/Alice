@@ -30,7 +30,7 @@ a:hover {
 -------------------------------------------------- */
 
 .navbar {
-  position: fixed;
+  position: static;
   right: 0;
   left: 0;
   z-index: 1030;
@@ -59,6 +59,10 @@ a:hover {
 
 .navbar-inverse {
   color: #FFFFFF;
+}
+
+#menu-top {
+	position: fixed;
 }
 
 #logo-small {
