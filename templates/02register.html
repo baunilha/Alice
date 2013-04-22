@@ -1,0 +1,59 @@
+{% extends "/layout.html" %}
+
+{% block body %}
+
+<div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+            <img id="logo-small" src="{{ url_for('static', filename='img/logo-small.png') }}" height="115" width="74">
+        </div>
+      </div>
+</div>
+
+<!-- Register a new account -->
+<div class="container middle">
+    <br>
+
+    <div class="row-fluid">
+        <div class="box-login">
+
+            {% with messages = get_flashed_messages(category_filter=["register"]) %}
+              {% if messages %}
+                <ul class=flashes>
+                {% for message in messages %}
+                  <li class="alert">{{ message }}</li>
+                {% endfor %}
+                </ul>
+              {% endif %}
+            {% endwith %}
+
+            {% if form.errors %}
+            <ul class="errors">
+                {% for field_name, field_errors in form.errors|dictsort if field_errors %}
+                    {% for error in field_errors %}
+                        <li class="alert">{{ form[field_name].label }}: {{ error }}</li>
+                    {% endfor %}
+                {% endfor %}
+            </ul>
+            {% endif %}
+
+                <form class="well" action="/register" method="POST">
+                    <h3>Register</h3>
+                    {{ form.csrf_token }}
+                    {{ form.username.label }} {{ form.username(class="input-block-level") }}
+                    {{ form.email.label }} {{ form.email(class="input-block-level") }}
+                    {{ form.password.label }} {{ form.password(class="input-block-level") }}
+                    {{ form.confirm.label }} {{ form.confirm(class="input-block-level") }}
+                    <br><br>
+                    <input class="btn btn-large btn-block btn-purple" type="submit" value="Register">
+                    <br>
+                    <a href="/"><strong>Already have an account?</strong></a>
+                </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+
+{% block styles %}{% endblock %}
+{% block scripts %}{% endblock %}

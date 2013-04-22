@@ -67,7 +67,7 @@ login_manager.refresh_view = "reauth"
 @login_manager.user_loader
 def load_user(id):
 	if id is None:
-		redirect('/login')
+		redirect('/')
 
 	user = User()
 	user.get_by_id(id)
@@ -118,14 +118,14 @@ def loginnew():
 
 			if login_user(user, remember=remember):
 				flash("Logged in!")
-				return redirect(request.args.get("next") or '/admin')
+				return redirect(request.args.get("next") or '/mood')
 			else:
 
 				flash("unable to log you in","login")
 	
 		else:
 			flash("Incorrect email and password submission","login")
-			return redirect("/login")
+			return redirect("/")
 
 	else:
 
@@ -216,6 +216,13 @@ def submit():
 		}
 
 		return render_template("submit.html", **templateData)
+
+
+# Mood page
+@app.route("/mood")
+def mood():
+	# render the template, retrieve 'experiences' from the database
+	return render_template("03mood.html", experiences=models.Experience.objects())
 
 
 # pages for all experiences
@@ -679,47 +686,7 @@ def register():
 		'form' : registerForm
 	}
 	
-	return render_template("/auth/register.html", **templateData)
-
-
-
-# Login route - will display login form and receive POST to authenicate a user
-@app.route("/login", methods=["GET", "POST"])
-def login():
-
-	# get the login and registration forms
-	loginForm = models.LoginForm(request.form)
-	
-	# is user trying to log in?
-	# 
-	if request.method == "POST" and 'email' in request.form:
-		email = request.form["email"]
-
-		user = User().get_by_email_w_password(email)
-		
-		# if user in database and password hash match then log in.
-	  	if user and flask_bcrypt.check_password_hash(user.password,request.form["password"]) and user.is_active():
-			remember = request.form.get("remember", "no") == "yes"
-
-			if login_user(user, remember=remember):
-				flash("Logged in!")
-				return redirect(request.args.get("next") or '/admin')
-			else:
-
-				flash("unable to log you in","login")
-	
-		else:
-			flash("Incorrect email and password submission","login")
-			return redirect("/login")
-
-	else:
-
-		templateData = {
-			'form' : loginForm
-		}
-
-		return render_template('/auth/login.html', **templateData)
-
+	return render_template("/02register.html", **templateData)
 
 
 # User profile page
@@ -793,6 +760,52 @@ if __name__ == "__main__":
 	
 	port = int(os.environ.get('PORT', 5000)) # locally PORT 5000, Heroku will assign its own port
 	app.run(host='0.0.0.0', port=port)
+
+
+
+
+
+# --------- Not using! ----------------------------------------------------------------------------------
+
+# Login route - will display login form and receive POST to authenicate a user
+# Not being used!!!
+@app.route("/login", methods=["GET", "POST"])
+def login():
+
+	# get the login and registration forms
+	loginForm = models.LoginForm(request.form)
+	
+	# is user trying to log in?
+	# 
+	if request.method == "POST" and 'email' in request.form:
+		email = request.form["email"]
+
+		user = User().get_by_email_w_password(email)
+		
+		# if user in database and password hash match then log in.
+	  	if user and flask_bcrypt.check_password_hash(user.password,request.form["password"]) and user.is_active():
+			remember = request.form.get("remember", "no") == "yes"
+
+			if login_user(user, remember=remember):
+				flash("Logged in!")
+				return redirect(request.args.get("next") or '/admin')
+			else:
+
+				flash("unable to log you in","login")
+	
+		else:
+			flash("Incorrect email and password submission","login")
+			return redirect("/login")
+
+	else:
+
+		templateData = {
+			'form' : loginForm
+		}
+
+		return render_template('/auth/login.html', **templateData)
+
+
 
 
 

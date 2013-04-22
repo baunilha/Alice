@@ -1,0 +1,57 @@
+{% extends "/layout.html" %}
+
+{% block body %}
+
+    <div class="navbar navbar-inverse navbar-fixed-top">
+          <div class="navbar-inner">
+            <div class="container">
+                <img id="logo-small" src="{{ url_for('static', filename='img/logo-small.png') }}" height="115" width="74">
+            </div>
+          </div>
+    </div>
+
+
+    <div class="container middle">
+
+        <!-- Login with existing account -->
+        <div class="row">
+            <div class="box-login">
+                <h3 style="font-size:30px;">I'm feeling...</h3>
+                <a href="#">
+                    <img src="{{ url_for('static', filename='img/box1.png') }}" height="125" width="150" >
+                </a>
+                <a href="#">
+                    <img src="{{ url_for('static', filename='img/box3.png') }}" height="125" width="150" >
+                </a>
+                <a href="#">
+                    <img src="{{ url_for('static', filename='img/box3.png') }}" height="125" width="150" >
+                </a>
+                <a href="#">
+                    <img src="{{ url_for('static', filename='img/box4.png') }}" height="125" width="150" >
+                </a>
+                <br><br>
+                <a href="#">
+                    <img src="{{ url_for('static', filename='img/box-surprise.png') }}" height="125" width="304" >
+                </a>
+            </div>
+        </div>
+    </div>
+    <br><br>
+    <br><br>
+    <br><br>
+
+    <div class="navbar navbar-inverse navbar-fixed-bottom" id="footer">
+          <div class="navbar-inner">
+            <div class="container">
+                <ul class="nav">
+                  <li><a href="#">Link</a></li>
+                  <li><input type="text" placeholder="Search"></li>
+                </ul>
+            </div>
+          </div>
+          <a href="#"><img id="tab-bar-search" src="{{ url_for('static', filename='img/tab-bar-search.png') }}" height="66" width="81"></a>
+    </div>
+
+
+
+{% endblock %}
