@@ -30,7 +30,7 @@ a:hover {
 -------------------------------------------------- */
 
 .navbar {
-  position: static;
+  position: fixed;
   right: 0;
   left: 0;
   z-index: 1030;
@@ -54,6 +54,7 @@ a:hover {
 	-moz-border-radius: 0;
 	border-radius: 0;
 	height: 44px;
+	top: 0;
 }
 
 .navbar-inverse {
