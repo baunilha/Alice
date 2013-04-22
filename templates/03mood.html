@@ -19,16 +19,16 @@
         <div class="box-login">
             <h3 style="font-size:30px;">I'm feeling...</h3>
 
-            <a href="#">
+            <a href="/mood/Zippy">
                 <img src="{{ url_for('static', filename='img/box1.png') }}" height="49%" width="49%" >
             </a>
-            <a href="#">
+            <a href="/mood/Chill">
                 <img src="{{ url_for('static', filename='img/box2.png') }}" height="49%" width="49%" >
             </a>
-            <a href="#">
+            <a href="/mood/Hungry">
                 <img src="{{ url_for('static', filename='img/box3.png') }}" height="49%" width="49%" >
             </a>
-            <a href="#">
+            <a href="/mood/Curious">
                 <img src="{{ url_for('static', filename='img/box4.png') }}" height="49%" width="49%" >
             </a>
             <br><br>
@@ -42,10 +42,18 @@
     <br><br>
 
 
+    <form class="navbar-search" action="/search" method="post"><img src="{{ url_for('static', filename='img/search-icon.png') }}" alt="" height="40px" width="40px">
+                  <input type="text" class="search-query" id="search" name="search" placeholder="Search for experiences">
+                  </textarea>
+                </form>
+
+
     <div class="navbar navbar-inverse" id="footer">
           <div class="navbar-inner">
             <div class="container">
-                <input class="input-medium" id="tab-search" type="text" placeholder="Search"></li>
+                <form action="/search" method="post">
+                <input class="input-medium" id="tab-search" name="search" type="text" placeholder="Search"></textarea>
+                </form>
             </div>
           </div>
           <a href="#"><img id="icon-tab-search" src="{{ url_for('static', filename='img/tab-bar-search.png') }}" height="66" width="81"></a>

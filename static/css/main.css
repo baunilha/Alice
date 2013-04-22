@@ -155,7 +155,7 @@ a:hover {
    position:fixed;
    /*position: absolute;*/
    left:0px;
-   height: 50px;
+   height: 60px;
    bottom:0px;
    width:100%;
    background:#50224e;
@@ -174,6 +174,60 @@ a:hover {
 }
 
 
+/* Interests Page - Inside Mood
+-------------------------------------------------- */
+
+.box-interests {
+	width: 100%;
+	background-color: #eff2f3;
+	height: 65px;
+}
+
+.box-interests h3 {
+	font-size: 23px;
+}
+
+.icons-med {
+	margin: 8px 10px;
+}
+
+.icons-next {
+	float:right;
+	margin: 22px;
+}
+
+.tab-boxes {
+	width: 25%;
+	height: 100%;
+	background-color: #50224e;
+	display: block;
+    float: left;
+    position: relative;
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.tab-boxes * {
+    vertical-align: middle;
+}
+
+/*Border inside the box*/
+.tab-boxes:before {
+    border: 2px solid #592d57;
+    content: "";
+    position: absolute;
+    top: -1px;
+    bottom: -1px;
+    left: -1px;
+    right: -1px;
+}
+
+.tab-boxes span {
+	 display: inline-block;
+    height: 100%;
+    width: 1px;
+}
 
 
 

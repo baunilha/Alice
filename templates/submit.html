@@ -28,6 +28,17 @@
 					<br>
 
 					<p>
+						<label><h3>Categorize by Mood:</h3></label>
+
+						{# comment - loop through mood and create checkboxes #}
+						{% for m in mood|sort %}
+							<label class="checkbox">
+							<input type="checkbox" name="mood" value="{{ m|replace(" ","_") }}" {% if m|replace(" ","_") in form.mood.data %}checked=checked{% endif %} > {{ m|title }}
+							</label>
+						{% endfor %}
+					</p>
+
+					<p>
 						<label><h3>Categorize by Interest:</h3></label>
 						<em><span class="help-block">(Select as many as you need)</span></em>
 
@@ -72,7 +83,7 @@
 					<h3>{{exp.title}}</h3>
 					<p>{{exp.description}}
 						<br>
-						[ {% for i in exp.interest %}{{ i|replace("_"," ")}} {% endfor %} - {{ exp.timestamp.strftime("%m/%d/%y")}} ]
+						[ {% for m in exp.mood %}{{ m|replace("_"," ")}} {% endfor %} - {% for i in exp.interest %}{{ i|replace("_"," ")}} {% endfor %} - {{ exp.timestamp.strftime("%m/%d/%y")}} ]
 					</p>
 					<a href="/experiences/{{ exp.slug }}" class="btn btn-warning">view</a>
 					<a href="experiences/delete/{{exp.id}}" class="btn btn-danger">delete</a>

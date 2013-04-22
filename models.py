@@ -20,8 +20,6 @@ class Location(mongoengine.Document):
 	# City, Price and hours are lists of Strings
 	city = mongoengine.StringField(max_length=50)
 	price = mongoengine.StringField()
-	# hourOpen = mongoengine.StringField()
-	# hourClose = mongoengine.StringField()
 
 	# Timestamp will record the date and time idea was created.
 	timestamp = mongoengine.DateTimeField(default=datetime.now())
@@ -37,6 +35,7 @@ class Experience(mongoengine.Document):
 	# Period of the day and interest are lists of Strings
 	period = mongoengine.ListField(mongoengine.StringField(max_length=30))
 	interest = mongoengine.ListField(mongoengine.StringField(max_length=30))
+	mood = mongoengine.ListField(mongoengine.StringField(max_length=30))
 
 	location_refs = mongoengine.ListField( mongoengine.ReferenceField(Location))
 

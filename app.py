@@ -88,12 +88,12 @@ ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
 
 # Create the lists that match the name of the ListField in the models.py
 period = ['Morning', 'Afternoon', 'Night']
-interest = ['Brunch Place', 'City Secrets', 'Cool & Cheap', 'Date Spots', 'Enjoy the Nature', 'Exploring NYC', 'Fun with Friends', 'I need Coffee!', 'Learn Something', "Let's Party!", 'Lifetime Experiences', 'Ready for Adventure', 'Relax', 'Special Eats', 'Unusual Edibles']
+interest = ['Fun with Friends', "Let's Party!", 'Show Time', 'Relax', 'Sips and Nibs', 'Flea Market', 'Munch', 'Special Eats', 'Unusual Edibles', 'City Secrets', 'Wonder Around', 'Learn Something']
+mood = ['Zippy', 'Chill', 'Hungry', 'Curious']
 
 # Create the lists for LOCATIONS that match the name of the ListField in the models.py
 city = ['New York', 'San Francisco']
 price = ['$','$$','$$$','$$$$','$$$$$']
-category = ['Bar', 'Museum', 'Park', 'Restaurant']
 
 
 # --------- Main Page, Add, View and Delete Experiences  -----------------------------------------------------------
@@ -145,6 +145,7 @@ def submit():
 
 	# get created lists
 	app.logger.debug(request.form.getlist('interest'))
+	app.logger.debug(request.form.getlist('mood'))
 	app.logger.debug(request.form.getlist('period'))
 	
 	# if form was submitted and it is valid...
@@ -184,6 +185,7 @@ def submit():
 				experience.title = request.form.get('title')
 				experience.slug = slugify(experience.title)
 				experience.interest = request.form.getlist('interest')
+				experience.mood = request.form.getlist('mood')
 				experience.period = request.form.getlist('period')
 				experience.description = request.form.get('description')
 				experience.postedby = request.form.get('postedby')
@@ -203,14 +205,19 @@ def submit():
 			for i in request.form.getlist('interest'):
 				photo_upload_form.interest.append_entry(i)
 
+		if request.form.getlist('mood'):
+			for m in request.form.getlist('mood'):
+				photo_upload_form.mood.append_entry(m)
+
 		if request.form.getlist('period'):
 			for p in request.form.getlist('period'):
-				photo_upload_form.interest.append_entry(p)
+				photo_upload_form.period.append_entry(p)
 		
 		# render the template
 		templateData = {
 			'experiences' : experiences,
 			'interest' : interest,
+			'mood': mood,
 			'period': period,
 			'form' : photo_upload_form
 		}
@@ -220,7 +227,7 @@ def submit():
 
 # Mood page
 @app.route("/mood")
-def mood():
+def mood_page():
 	# render the template, retrieve 'experiences' from the database
 	return render_template("03mood.html", experiences=models.Experience.objects())
 
@@ -349,6 +356,32 @@ def by_interest(int_name):
 
 	# render and return template
 	return render_template('interest_listing.html', **templateData)
+
+
+# Display categories by mood
+@app.route("/mood/<mood_name>")
+def by_mood(mood_name):
+
+	# try and get experiences where mood_name is inside the mood list
+	try:
+		experiences = models.Experience.objects(mood=mood_name)
+
+	# not found, abort w/ 404 page
+	except:
+		abort(404)
+
+	# prepare data for template
+	templateData = {
+		'current_mood' : {
+			'slug' : mood_name,
+			'name' : mood_name.replace('_',' ')
+		},
+		'experiences' : experiences,
+		'mood' : mood
+	}
+
+	# render and return template
+	return render_template('04mood_listing.html', **templateData)
 
 
 # --------- Search Pages!!!!  --------------------------------------------------------------------------
