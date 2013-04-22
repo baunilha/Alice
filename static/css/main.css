@@ -156,10 +156,16 @@ a:hover {
    background:#50224e;
 }
 
-#tab-bar-search {
+#icon-tab-search {
 	position:fixed;
 	left:0px;
     bottom:0px;
+}
+
+#tab-search {
+	margin-left: 71px;
+	width: 95%;
+	margin-top: 10px;
 }
 
 
