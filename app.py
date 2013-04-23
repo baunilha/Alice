@@ -380,8 +380,23 @@ def by_mood(mood_name):
 		'mood' : mood
 	}
 
-	# render and return template
-	return render_template('04mood_listing.html', **templateData)
+	if mood_name == "Zippy":
+		# render and return template
+		return render_template('04mood_listing01.html', **templateData)
+
+	if mood_name == "Chill":
+
+		return render_template('04mood_listing02.html', **templateData)
+
+	if mood_name == "Hungry":
+
+		return render_template('04mood_listing03.html', **templateData)
+
+	else: 
+
+		return render_template('04mood_listing04.html', **templateData)
+
+
 
 
 # --------- Search Pages!!!!  --------------------------------------------------------------------------

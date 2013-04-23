@@ -1,0 +1,92 @@
+{% extends "/layout.html" %}
+
+{% block styles %}{% endblock %}
+
+{% block body %}
+
+    <!-- Top bar with menu -->
+    <div class="navbar navbar-inverse navbar-fixed-top" id="menu-top">
+          <div class="navbar-inner">
+            <div class="container">
+                <img id="logo-small" src="{{ url_for('static', filename='img/logo-small.png') }}" height="115" width="74">
+            </div>
+          </div>
+    </div>
+    <br><br><br>
+
+
+    <!-- Showing Experiences from a specific mood -->
+    <div class="container middle">
+      <div class="row-fluid">
+        <h3>Mood: {{ current_mood.get('name')|title }}</h3>
+        <br>
+        
+        {% for experience in experiences %}
+            <li class="span3">
+                <div class="thumbnail">
+                  <div class="caption">
+                    <img src="https://s3.amazonaws.com/aliceapp/{{experience.filename}}" class="img-rounded"></a>
+      
+                      <h3>{{ experience.title }}</h3>
+                      <p><em>[ {% for m in experience.mood %}{{ m|replace("_"," ")}} {% endfor %} - {% for i in experience.interest %}{{ i|replace("_"," ")}} {% endfor %}]</em></p>
+                      <p><em>"{{ experience.description }}"</em></p>
+                      <a href="/experiences/{{ experience.slug }}" class="btn btn-warning">View</a>
+                  </div>
+                </div>
+            </li>  
+            {% endfor %}      
+      </div>
+    </div>
+    <br>
+
+    <!-- Different interests boxes -->
+    <div class="box-login">
+      <a href="/interest/Munch"><div class="box-interests">
+        <h3><img class="icons-med" src="{{ url_for('static', filename='img/icon-munch-m.png') }}" height="15%" width="15%">
+          Munch
+          <img class="icons-next" src="{{ url_for('static', filename='img/icon-next.png') }}" height="4%" width="4%">
+        </h3>
+      </div></a>
+
+      <a href="/interest/Special_Eats"><div class="box-interests">
+        <h3><img class="icons-med" src="{{ url_for('static', filename='img/icon-special-m.png') }}" height="15%" width="15%">
+          Special Eats
+           <img class="icons-next" src="{{ url_for('static', filename='img/icon-next.png') }}" height="4%" width="4%">
+        </h3>
+      </div></a>
+
+      <a href="/interest/Unusual_Edibles"><div class="box-interests">
+        <h3><img class="icons-med" src="{{ url_for('static', filename='img/icon-unusual-m.png') }}" height="15%" width="15%">
+          Unusual Edibles
+           <img class="icons-next" src="{{ url_for('static', filename='img/icon-next.png') }}" height="4%" width="4%">
+        </h3>
+      </div></a>
+    </div>
+
+    <br><br><br><br>
+
+    <!-- Tab bar in the footer -->
+    <div class="navbar navbar-inverse" id="footer">
+          <a href="/mood/Zippy"><div class="tab-boxes">
+            <span></span>
+            <img src="{{ url_for('static', filename='img/icon-zippy-tab.png') }}" height="49%" width="49%" >
+          </div></a>
+
+          <a href="/mood/Chill"><div class="tab-boxes">
+            <img src="{{ url_for('static', filename='img/icon-chill-tab.png') }}" height="49%" width="49%" style="margin-top:4px;">
+          </div></a>
+
+          <a href="/mood/Hungry"><div class="tab-boxes">
+            <img src="{{ url_for('static', filename='img/icon-hungry-tab.png') }}" height="49%" width="49%" style="margin-top:4px;">
+          </div></a>
+          
+          <a href="/mood/Curious"><div class="tab-boxes">
+            <img src="{{ url_for('static', filename='img/icon-curious-tab.png') }}" height="49%" width="49%" style="margin-top:4px;">
+          </div></a>
+    </div>
+  
+
+{% endblock %}
+
+
+{% block scripts %}{% endblock %}
