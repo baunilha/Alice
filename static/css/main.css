@@ -319,11 +319,16 @@ a:hover {
 }
 
 #text-highlight p {
+	display: -webkit-box;
 	text-align: justify;
-	width: 96%;
-	height: 90%;
+	max-width: 98%;
+	height: 58%;
 	line-height: 18px;
-}
+	-webkit-line-clamp: 3;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	}
 
 
 
