@@ -291,6 +291,18 @@ a:hover {
     margin-left: -5px;
 }
 
+.small-boxes img {
+	margin-top: -20px;
+}
+
+.small-boxes h6 {
+	margin-top: -38px;
+	color: #eff2f3;
+	font-style: italic;
+	font-weight: 400;
+	font-size: 11px;
+}
+
 #text-highlight {
 	background-color: #eff2f3;
 	width: 77.7%;
