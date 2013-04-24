@@ -8,7 +8,9 @@
     <div class="navbar navbar-inverse navbar-fixed-top" id="menu-top">
           <div class="navbar-inner">
             <div class="container">
-                <img id="logo-small" src="{{ url_for('static', filename='img/logo-small.png') }}" height="115" width="74">
+                <a href="javascript:history.go(-1)"><img class="icons-topbar" src="{{ url_for('static', filename='img/icon-back.png') }}" height="12%" width="12%"></a>
+                <a href="/"><img id="logo-small-menu" src="{{ url_for('static', filename='img/logo-small.png') }}" height="115" width="74"></a>
+                <a href="/admin"><img class="icons-topbar" id="icons-menu" src="{{ url_for('static', filename='img/icon-menu.png') }}" height="12%" width="12%"></a>
             </div>
           </div>
     </div>

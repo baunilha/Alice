@@ -8,18 +8,37 @@
     <div class="navbar navbar-inverse navbar-fixed-top" id="menu-top">
           <div class="navbar-inner">
             <div class="container">
-                <img id="logo-small" src="{{ url_for('static', filename='img/logo-small.png') }}" height="115" width="74">
+                <a href="javascript:history.go(-1)"><img class="icons-topbar" src="{{ url_for('static', filename='img/icon-back.png') }}" height="12%" width="12%"></a>
+                <a href="/"><img id="logo-small-menu" src="{{ url_for('static', filename='img/logo-small.png') }}" height="115" width="74"></a>
+                <a href="/admin"><img class="icons-topbar" id="icons-menu" src="{{ url_for('static', filename='img/icon-menu.png') }}" height="12%" width="12%"></a>
             </div>
           </div>
     </div>
-    <br><br><br>
+    <br><br><br><br>
+
+    <!-- Showing Experiences from a specific mood -->
+    <div class="box-login">
+        <div class="box-highlight">
+          <img class="icons-med image-highlight" src="{{ url_for('static', filename='img/dine-dark.jpg') }}" height="60%" width="60%">
+
+          <a href="/mood/Zippy"><div class="small-boxes">
+            <span></span>
+            <img src="{{ url_for('static', filename='img/icon-zippy-tab.png') }}" height="49%" width="49%" >
+          </div></a>
+
+          <a href="/mood/Chill"><div class="small-boxes" id="text-highlight">
+            <h3>Dining in the Dark
+            <img class="icons-next" src="{{ url_for('static', filename='img/icon-next.png') }}" height="4%" width="4%"></h3>
+            <p>They say that when you lose one of your senses, the others get intensified. Now imagine what might happen with your ...</p>
+          </div></a>
+        </div>
+    </div>
+
 
 
     <!-- Showing Experiences from a specific mood -->
     <div class="container middle">
       <div class="row-fluid">
-        <h3>Mood: {{ current_mood.get('name')|title }}</h3>
-        <br>
         
         {% for experience in experiences %}
             <li class="span3">
@@ -40,7 +59,7 @@
     <br>
 
     <!-- Different interests boxes -->
-    <div class="box-login">
+    <div class="box-login" id="interests">
       <a href="/interest/Fun_with_Friends"><div class="box-interests">
         <h3><img class="icons-med" src="{{ url_for('static', filename='img/icon-fun-m.png') }}" height="15%" width="15%">
           Fun with Friends

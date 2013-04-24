@@ -67,7 +67,7 @@ login_manager.refresh_view = "reauth"
 @login_manager.user_loader
 def load_user(id):
 	if id is None:
-		redirect('/')
+		redirect('/login')
 
 	user = User()
 	user.get_by_id(id)
@@ -98,9 +98,27 @@ price = ['$','$$','$$$','$$$$','$$$$$']
 
 # --------- Main Page, Add, View and Delete Experiences  -----------------------------------------------------------
 
-# this is our main page
+# This is the main page
 @app.route("/", methods=["GET", "POST"])
-def loginnew():
+@login_required
+def index():
+
+	# prepare the template data dictionary
+	templateData = {
+		'experiences': models.Experience.objects(),
+		'current_user' : current_user,
+		'users' : models.User.objects()
+	}
+
+	app.logger.debug(current_user)
+
+	# render the template, retrieve 'experiences' from the database
+	return render_template("03mood.html", **templateData)
+
+
+# this is the login page
+@app.route("/login", methods=["GET", "POST"])
+def login():
 
 	# get the login and registration forms
 	loginForm = models.LoginForm(request.form)
@@ -118,14 +136,14 @@ def loginnew():
 
 			if login_user(user, remember=remember):
 				flash("Logged in!")
-				return redirect(request.args.get("next") or '/mood')
+				return redirect(request.args.get("next") or '/')
 			else:
 
 				flash("unable to log you in","login")
 	
 		else:
 			flash("Incorrect email and password submission","login")
-			return redirect("/")
+			return redirect("/login")
 
 	else:
 
@@ -223,13 +241,6 @@ def submit():
 		}
 
 		return render_template("submit.html", **templateData)
-
-
-# Mood page
-@app.route("/mood")
-def mood_page():
-	# render the template, retrieve 'experiences' from the database
-	return render_template("03mood.html", experiences=models.Experience.objects())
 
 
 # pages for all experiences

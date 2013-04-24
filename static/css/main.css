@@ -72,6 +72,20 @@ a:hover {
 	margin-right: auto;
 }
 
+#logo-small-menu {
+	width: 74px;
+	display: inline;
+	margin-left: 62px;
+}
+
+.icons-topbar {
+	display: inline;
+	margin: 0px 30px 0px 30px;
+}
+
+#icons-menu {
+	margin-left: 92px;
+}
 
 
 /* Login Boxes
@@ -153,7 +167,6 @@ a:hover {
 
 #footer {
    position:fixed;
-   /*position: absolute;*/
    left:0px;
    height: 60px;
    bottom:0px;
@@ -176,6 +189,10 @@ a:hover {
 
 /* Interests Page - Inside Mood
 -------------------------------------------------- */
+
+#interests {
+	margin-top: -5px;
+}
 
 .box-interests {
 	width: 100%;
@@ -224,10 +241,81 @@ a:hover {
 }
 
 .tab-boxes span {
-	 display: inline-block;
+	display: inline-block;
     height: 100%;
     width: 1px;
 }
+
+
+/* Highlight boxes */
+
+.image-highlight {
+	width: 99.5%;
+	height: 200px;
+	margin: 1px 2px 0px 1px;
+}
+
+.box-highlight {
+	width: 100%;
+	background-color: #eff2f3;
+	height: 300px;
+	display: block;
+    float: left;
+    position: relative;
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.small-boxes {
+	width: 20%;
+	height: 32.25%;
+	background-color: #865586;
+	margin: 1px 5px 1px 1px;
+	display: block;
+    float: left;
+    position: relative;
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.small-boxes * {
+    vertical-align: middle;
+}
+
+.small-boxes span {
+	display: inline-block;
+    height: 100%;
+    width: 0px;
+    margin-left: -5px;
+}
+
+#text-highlight {
+	background-color: #eff2f3;
+	width: 77.7%;
+	margin-right: 1px;
+}
+
+#text-highlight h3 {
+	font-size: 23px;
+	text-align: left;
+	margin-top: 0px;
+	margin-bottom: 0px;
+	width: 86%;
+}
+
+#text-highlight img {
+	width: 6%;
+	margin: 10px -20px 0px 0px;
+}
+
+#text-highlight p {
+	text-align: justify;
+	width: 96%;
+	line-height: 18px;
+}
+
 
 
 
