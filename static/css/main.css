@@ -65,22 +65,26 @@ a:hover {
 	position: fixed;
 }
 
+#logo-small01 {
+	width: 74px;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
 #icons-back {
 	width: 50px;
 	margin-left: 7%;
-	display: inline;
 }
 
 #logo-small-menu {
 	width: 74px;
-	display: inline;
 	margin-left: 20%;
 }
 
 #icons-menu {
 	width: 50px;
 	margin-left: 24%;
-	display: inline;
 }
 
 
