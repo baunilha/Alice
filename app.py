@@ -116,43 +116,6 @@ def index():
 	return render_template("03mood.html", **templateData)
 
 
-# this is the login page
-@app.route("/login", methods=["GET", "POST"])
-def login():
-
-	# get the login and registration forms
-	loginForm = models.LoginForm(request.form)
-	
-	# is user trying to log in?
-	# 
-	if request.method == "POST" and 'email' in request.form:
-		email = request.form["email"]
-
-		user = User().get_by_email_w_password(email)
-		
-		# if user in database and password hash match then log in.
-	  	if user and flask_bcrypt.check_password_hash(user.password,request.form["password"]) and user.is_active():
-			remember = request.form.get("remember", "no") == "yes"
-
-			if login_user(user, remember=remember):
-				flash("Logged in!")
-				return redirect(request.args.get("next") or '/')
-			else:
-
-				flash("unable to log you in","login")
-	
-		else:
-			flash("Incorrect email and password submission","login")
-			return redirect("/login")
-
-	else:
-
-		templateData = {
-			'form' : loginForm
-		}
-
-		return render_template('/01login.html', **templateData)
-
 
 # this is the submit experiences page
 @app.route("/submit", methods=['GET','POST'])
@@ -366,7 +329,7 @@ def by_interest(int_name):
 	}
 
 	# render and return template
-	return render_template('interest_listing.html', **templateData)
+	return render_template('05interest_listing.html', **templateData)
 
 
 # Display categories by mood
@@ -691,6 +654,44 @@ def list_add_experience(list_id, experience_id):
 
 
 # --------- Login & Register -------------------------------------------------------------------------
+
+
+# this is the login page
+@app.route("/login", methods=["GET", "POST"])
+def login():
+
+	# get the login and registration forms
+	loginForm = models.LoginForm(request.form)
+	
+	# is user trying to log in?
+	# 
+	if request.method == "POST" and 'email' in request.form:
+		email = request.form["email"]
+
+		user = User().get_by_email_w_password(email)
+		
+		# if user in database and password hash match then log in.
+	  	if user and flask_bcrypt.check_password_hash(user.password,request.form["password"]) and user.is_active():
+			remember = request.form.get("remember", "no") == "yes"
+
+			if login_user(user, remember=remember):
+				flash("Logged in!")
+				return redirect(request.args.get("next") or '/')
+			else:
+
+				flash("unable to log you in","login")
+	
+		else:
+			flash("Incorrect email and password submission","login")
+			return redirect("/login")
+
+	else:
+
+		templateData = {
+			'form' : loginForm
+		}
+
+		return render_template('/01login.html', **templateData)
 
 
 #
