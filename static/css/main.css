@@ -321,6 +321,7 @@ a:hover {
 #text-highlight p {
 	text-align: justify;
 	width: 96%;
+	height: 90%;
 	line-height: 18px;
 }
 

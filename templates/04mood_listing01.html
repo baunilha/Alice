@@ -1,6 +1,12 @@
 {% extends "/layout.html" %}
 
-{% block styles %}{% endblock %}
+{% block styles %}
+<script type="text/javascript">
+    $(document).ready(function() {
+      $("#text-highlight").dotdotdot();
+    });
+</script>
+{% endblock %}
 
 {% block body %}
 
@@ -30,7 +36,7 @@
           <a href="/mood/Chill"><div class="small-boxes" id="text-highlight">
             <h3>Dining in the Dark
             <img class="icons-next" src="{{ url_for('static', filename='img/icon-next.png') }}" height="4%" width="4%"></h3>
-            <p>They say that when you lose one of your senses, the others get intensified. Now imagine what might happen with your ...</p>
+            <p>They say that when you lose one of your senses, the others get intensified. Now imagine what might happen with your taste if you dine in pitch dark? You don't need to imagine anymore because there are restaurants that offer this extraordinary experience for you.</p>
           </div></a>
         </div>
     </div>
