@@ -229,6 +229,25 @@ def experience_display(experience_slug):
 	}
 
 	# render and return the template
+	return render_template('06experience_entry.html', **templateData)
+
+
+# add location to experiences
+@app.route("/experiences/<experience_slug>/addlocation")
+def add_location(experience_slug):
+
+	# get experience by experience_slug
+	try:
+		experience = models.Experience.objects.get(slug=experience_slug)
+	except:
+		abort(404)
+
+	# prepare template data
+	templateData = {
+		'experience' : experience
+	}
+
+	# render and return the template
 	return render_template('experience_entry.html', **templateData)
 
 

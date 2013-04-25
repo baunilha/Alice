@@ -1,0 +1,104 @@
+{% extends "/layout.html" %}
+{% from "_form_helpers.html" import render_error, render_textarea %}
+
+{% block styles %}{% endblock %}
+
+{% block body %}
+
+<!-- Top bar with menu -->
+    <div class="navbar navbar-inverse navbar-fixed-top" id="menu-top">
+          <div class="navbar-inner">
+            <div class="container">
+                <a href="javascript:history.go(-1)"><img id="icons-back" src="{{ url_for('static', filename='img/icon-back.png') }}" height="12%" width="12%"></a>
+                <a href="/"><img id="logo-small-menu" src="{{ url_for('static', filename='img/logo-small.png') }}" height="115" width="74"></a>
+                <a href="/admin"><img id="icons-menu" src="{{ url_for('static', filename='img/icon-menu.png') }}" height="12%" width="12%"></a>
+            </div>
+          </div>
+    </div>
+    <br><br><br><br>
+
+    <!-- Showing Experience with details -->
+    <div class="box-login">
+        <div class="box-highlight">
+          <img class="icons-med image-highlight" src="{{ url_for('static', filename='img/dine-dark.jpg') }}" height="60%" width="60%">
+
+          <a href="/mood/Chill"><div class="small-boxes" id="text-highlight">
+            <h3>Dining in the Dark
+            <img class="icons-next" src="{{ url_for('static', filename='img/icon-next.png') }}" height="4%" width="4%"></h3>
+            <p>They say that when you lose one of your senses, the others get intensified. Now imagine what might happen with your ...</p>
+          </div></a>
+        </div>
+    </div>
+
+
+<!-- Display Experience -->
+<div class="container middle">
+    <div class="row-fluid">
+		<div class="span6">
+			<h2>{{ experience.title }}</h2>
+			<img src="https://s3.amazonaws.com/aliceapp/{{experience.filename}}" class="img-rounded"></a>
+			<p></p>
+			<br>
+			<p><em>[{% for p in experience.period %}{{ p|replace("_"," ")}} {% endfor %}]</em></p>
+			<p><em>[{% for i in experience.interest %}{{ i|replace("_"," ")}} {% endfor %}]</em></p>
+			<hr>
+			<p>{{ experience.description }}</p>
+
+			<hr>
+			<a href="/chooselist/{{ experience.id }}" class="btn btn-success">Add to a List</a>
+			<p></p>
+
+			<p><small>added: {{ experience.timestamp.strftime("%a %m/%d %I:%M%p ") }}</small></p>
+			<p><small>id: {{ experience.id }}</small></p>
+			<hr>
+		</div>	
+
+
+
+	<!-- Display locations -->
+
+		<div class="span4 offset1">
+			
+			{% for location in experience.location_refs %}
+			<div class="location">
+				<span class="location"><h2>{{ location.name }}</h2></span>
+				<p>Address: {{ location.address }}, {{ location.neighborhood }}</p>
+				<p>City: {{ location.city }}</p>
+				<p>Price: {{ location.price }}</p>
+				<p>Site: {{ location.website }}</p>
+				<p>Phone: {{ location.phone }}</p>
+				<p><small>{{ location.timestamp.strftime("%a %m/%d %I:%M%p ") }}</small></p>
+			</div>
+			<hr>
+			{% endfor %}
+		</div>
+	</div>
+
+</div>
+
+	<br><br><br><br>
+
+	<!-- Tab bar in the footer -->
+    <div class="navbar navbar-inverse" id="footer">
+          <a href="/mood/Zippy"><div class="tab-boxes">
+            <span></span>
+            <img src="{{ url_for('static', filename='img/icon-zippy-tab.png') }}" height="49%" width="49%" >
+          </div></a>
+
+          <a href="/mood/Chill"><div class="tab-boxes">
+            <img src="{{ url_for('static', filename='img/icon-chill-tab.png') }}" height="49%" width="49%" style="margin-top:4px;">
+          </div></a>
+
+          <a href="/mood/Hungry"><div class="tab-boxes">
+            <img src="{{ url_for('static', filename='img/icon-hungry-tab.png') }}" height="49%" width="49%" style="margin-top:4px;">
+          </div></a>
+          
+          <a href="/mood/Curious"><div class="tab-boxes">
+            <img src="{{ url_for('static', filename='img/icon-curious-tab.png') }}" height="49%" width="49%" style="margin-top:4px;">
+          </div></a>
+    </div> 
+
+{% endblock %}
+
+
+{% block scripts %}{% endblock %}
