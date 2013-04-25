@@ -33,6 +33,10 @@ h2 {
 	font-size: 28px;
 }
 
+hr {
+	border-bottom: 2px solid #c8c8c8;
+}
+
 /* Navigation Bar
 -------------------------------------------------- */
 
@@ -415,7 +419,67 @@ h2 .icons-med {
 /* Detailed experience page
 -------------------------------------------------- */
 
+.box-experience {
+	width: 100%;
+	background-color: #eff2f3;
+	height: 360px;
+	display: block;
+    float: left;
+    position: relative;
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+}
 
+#text-experience {
+	background-color: #eff2f3;
+	width: 98%;
+	height: 42.25%;
+	margin-right: 0%;
+}
+
+#text-experience h3 {
+	font-size: 24px;
+	text-align: left;
+	margin-top: 0%;
+	margin-bottom: 0%;
+	margin-left: 2%;
+	width: 86%;
+}
+
+#text-experience img {
+	width: 10%;
+	margin: -1.15% -16.1% 0% 0%;
+}
+
+#text-experience p {
+	display: -webkit-box;
+	text-align: justify;
+	max-width: 98%;
+	height: 61%;
+	margin-left: 2%;
+	margin-bottom: 0%;
+	line-height: 18px;
+	-webkit-line-clamp: 5;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+#text-experience h6 {
+	color: #865586;
+	font-style: italic;
+	font-weight: 400;
+	font-size: 13px;
+	text-align: left;
+	margin-left: 2%;
+	margin-top: -2%;
+	margin-bottom: 0%;
+}
+
+#text-experience hr {
+	margin: 1.2% 0.3% 1.2% 1.6%;
+}
 
 
 
