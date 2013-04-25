@@ -429,6 +429,7 @@ h2 .icons-med {
     display: table-cell;
     text-align: center;
     vertical-align: middle;
+    margin-bottom: 5%;
 }
 
 #text-experience {
@@ -479,6 +480,67 @@ h2 .icons-med {
 
 #text-experience hr {
 	margin: 1.2% 0.3% 1.2% 1.6%;
+}
+
+.box-location {
+	width: 100%;
+	background-color: #eff2f3;
+	height: 120px;
+	display: block;
+    float: left;
+    position: relative;
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+    margin-bottom: 14px;
+}
+
+.image-location {
+	width: 35%;
+	height: 98%;
+	margin: 1px 2px 0px 1px;
+	float: left;
+}
+
+.location-text {
+	width: 63%;
+	height: 98%;
+	background-color: #eff2f3;
+	margin: 1px 0px 1px 3px;
+	display: block;
+    float: left;
+    position: relative;
+    display: table-cell;
+}
+
+.location-text h3 {
+	font-size: 22px;
+	text-align: left;
+	margin-top: -3px;
+	height: 31%;
+	margin-bottom: 5px;
+	width: 88%;
+	-webkit-line-clamp: 1;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+}
+
+.location-text img {
+	width: 6%;
+	margin: -13% 3% 0% 0%;
+}
+
+.location-text p {
+	display: -webkit-box;
+	text-align: justify;
+	max-width: 97%;
+	height: 62%;
+	margin-bottom: 0px;
+	line-height: 18px;
+	-webkit-line-clamp: 4;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
 
 
