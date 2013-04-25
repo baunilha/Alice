@@ -383,22 +383,25 @@ h2 .icons-med {
 .list-text h3 {
 	font-size: 23px;
 	text-align: left;
-	margin-top: 0px;
 	margin-top: -3px;
-	margin-bottom: 0px;
+	height: 31%;
+	margin-bottom: 5px;
 	width: 88%;
+	-webkit-line-clamp: 1;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
 }
 
 .list-text img {
 	width: 6%;
-	margin: 12px -21px 0px 0px;
+	margin: -13% 3% 0% 0%;
 }
 
 .list-text p {
 	display: -webkit-box;
 	text-align: justify;
 	max-width: 97%;
-	height: 70%;
+	height: 65%;
 	margin-bottom: 0px;
 	line-height: 18px;
 	-webkit-line-clamp: 4;

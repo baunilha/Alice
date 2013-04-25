@@ -19,8 +19,9 @@
 
     <!-- Showing Experiences from a specific category -->
     <div class="box-login">
+
       <!-- Shows the title of the category with their icon  -->
-      <h2><img class="icons-med" src="{{ url_for('static', filename='img/icon-special-m.png') }}" height="13%" width="13%"> {{ current_interest.get('name')|title }}</h2>
+      <h2><img class="icons-med" src="../static/img/{{ current_interest.get('slug') }}.png" height="13%" width="13%"> {{ current_interest.get('name')|title }}</h2>
 
       {% for experience in experiences %}
 
@@ -28,48 +29,12 @@
         <img class="icons-med image-list" src="https://s3.amazonaws.com/aliceapp/{{experience.filename}}" height="60%" width="60%">
 
         <div class="list-text">
-          <a href="/experiences/{{ experience.slug }}"><h3>{{ experience.title }}
-            <img class="icons-next" src="{{ url_for('static', filename='img/icon-next.png') }}" height="4%" width="4%"></h3></a>
+          <a href="/experiences/{{ experience.slug }}"><h3>{{ experience.title }}</h3>
+            <img class="icons-next" src="{{ url_for('static', filename='img/icon-next.png') }}" height="4%" width="4%"></a>
             <p>{{ experience.description }}</p>
         </div>
       </div>
     {% endfor %}  
-    </div>
-
-
-    <!-- Showing Experiences from a specific category -->
-    <div class="container middle">
-      <div class="row-fluid">
-        <br>
-        
-        {% for experience in experiences %}
-            <li class="span3">
-                <div class="thumbnail">
-                  <div class="caption">
-                    <img src="https://s3.amazonaws.com/aliceapp/{{experience.filename}}" class="img-rounded"></a>
-      
-                      <h3>{{ experience.title }}</h3>
-                      <p><em>[ {% for i in experience.interest %}{{ i|replace("_"," ")}} {% endfor %}]</em></p>
-                      <p><em>"{{ experience.description }}"</em></p>
-                      <a href="/experiences/{{ experience.slug }}" class="btn btn-warning">View</a>
-                  </div>
-                </div>
-            </li>  
-            {% endfor %}      
-      </div>
-    </div>
-
-
-
-          <div class="box-list">
-        <img class="icons-med image-list" src="{{ url_for('static', filename='img/dine-dark.jpg') }}" height="60%" width="60%">
-
-        <div class="list-text">
-          <h3>Dining in the Dark
-            <img class="icons-next" src="{{ url_for('static', filename='img/icon-next.png') }}" height="4%" width="4%"></h3>
-            <p>They say that when you lose one of your senses, the others get intensified. Now imagine what might happen with your ...</p>
-        </div>
-      </div>
     </div>
 
     <br><br><br><br>
