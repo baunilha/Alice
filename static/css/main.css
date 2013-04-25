@@ -359,6 +359,7 @@ h2 .icons-med {
     display: table-cell;
     text-align: center;
     vertical-align: middle;
+    margin-bottom: 14px;
 }
 
 .image-list {
@@ -385,12 +386,12 @@ h2 .icons-med {
 	margin-top: 0px;
 	margin-top: -3px;
 	margin-bottom: 0px;
-	width: 86%;
+	width: 88%;
 }
 
 .list-text img {
 	width: 6%;
-	margin: 12px -28px 0px 0px;
+	margin: 12px -21px 0px 0px;
 }
 
 .list-text p {
