@@ -26,6 +26,13 @@ a:hover {
 	text-decoration: none;
 }
 
+h2 {
+	text-shadow: 1px 1px 1px #fbfcfd;
+	color: #50224e;
+	font-family: 'Roboto Condensed', sans-serif;
+	font-size: 28px;
+}
+
 /* Navigation Bar
 -------------------------------------------------- */
 
@@ -335,6 +342,69 @@ a:hover {
 	}
 
 
+/* List of Exeperience Page - Inside a Category
+-------------------------------------------------- */
+
+h2 .icons-med {
+	margin: 5px 1px 8px -4px;
+}
+
+.box-list {
+	width: 100%;
+	background-color: #eff2f3;
+	height: 120px;
+	display: block;
+    float: left;
+    position: relative;
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.image-list {
+	width: 35%;
+	height: 98%;
+	margin: 1px 2px 0px 1px;
+	float: left;
+}
+
+.list-text {
+	width: 63%;
+	height: 98%;
+	background-color: #eff2f3;
+	margin: 1px 0px 1px 3px;
+	display: block;
+    float: left;
+    position: relative;
+    display: table-cell;
+}
+
+.list-text h3 {
+	font-size: 23px;
+	text-align: left;
+	margin-top: 0px;
+	margin-top: -3px;
+	margin-bottom: 0px;
+	width: 86%;
+}
+
+.list-text img {
+	width: 6%;
+	margin: 12px -28px 0px 0px;
+}
+
+.list-text p {
+	display: -webkit-box;
+	text-align: justify;
+	max-width: 97%;
+	height: 70%;
+	margin-bottom: 0px;
+	line-height: 18px;
+	-webkit-line-clamp: 4;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	}
 
 
 

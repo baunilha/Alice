@@ -4,35 +4,39 @@
 
 {% block body %}
 
-    <!-- Search Bar -->
-    <div class="row-fluid">
-        <div class="span12 dois" style="position: static; top: 0px; margin-top: 43px; ">
-            <div class="content-container">
-                <form class="navbar-search" action="/search" method="post"><img src="{{ url_for('static', filename='img/search-icon.png') }}" alt="" height="40px" width="40px">
-                  <input type="text" class="search-query" id="search" name="slist" placeholder="Search for experiences">
-                  </textarea>
-                </form>
+    <!-- Top bar with menu -->
+    <div class="navbar navbar-inverse navbar-fixed-top" id="menu-top">
+          <div class="navbar-inner">
+            <div class="container">
+                <a href="javascript:history.go(-1)"><img id="icons-back" src="{{ url_for('static', filename='img/icon-back.png') }}" height="12%" width="12%"></a>
+                <a href="/"><img id="logo-small-menu" src="{{ url_for('static', filename='img/logo-small.png') }}" height="115" width="74"></a>
+                <a href="/admin"><img id="icons-menu" src="{{ url_for('static', filename='img/icon-menu.png') }}" height="12%" width="12%"></a>
             </div>
-        </div>
+          </div>
     </div>
+    <br><br><br>
 
-    <!-- Navigation Area -->
-    <div class="row-fluid">
-        <div class="span12 tres">
-                <ul class="nav nav-pills">
-                  <li class="active"><a href="/experiences"><span class="icon_nav"></span>Everything</a></li>
-                  <li class=""><a href="/interest/Brunch_Place"><span class="icon_nav"></span>Brunch Place</a></li>
-                  <li class=""><a href="/interest/Relax"><span class="icon_nav"></span>Relax</a></li>
-                  <li class=""><a href="/interest/Date_Spot"><span class="icon_nav"></span>Date Spot</a></li>
-                </ul>  
+
+    <!-- Showing Experiences from a specific category -->
+    <div class="box-login">
+      <!-- Shows the title of the category with their icon  -->
+      <h2><img class="icons-med" src="{{ url_for('static', filename='img/icon-special-m.png') }}" height="13%" width="13%"> {{ current_interest.get('name')|title }}</h2>
+
+      <div class="box-list">
+        <img class="icons-med image-list" src="{{ url_for('static', filename='img/dine-dark.jpg') }}" height="60%" width="60%">
+
+        <div class="list-text">
+          <h3>Dining in the Dark
+            <img class="icons-next" src="{{ url_for('static', filename='img/icon-next.png') }}" height="4%" width="4%"></h3>
+            <p>They say that when you lose one of your senses, the others get intensified. Now imagine what might happen with your ...</p>
         </div>
+      </div>
     </div>
 
 
     <!-- Showing Experiences from a specific category -->
     <div class="container middle">
       <div class="row-fluid">
-        <h3>Interest: {{ current_interest.get('name')|title }}</h3>
         <br>
         
         {% for experience in experiences %}
@@ -52,20 +56,27 @@
       </div>
     </div>
 
-          <!-- Pagination -->
-      <div class="container">
-          <div class="pagination pagination-centered">
-            <ul>
-              <li class="disabled"><a href="#">Prev</a></li>
-              <li class="disabled"><a href="#">1</a></li>
-              <li class="active"><a href="#">2</a></li>
-              <li class="active"><a href="#">3</a></li>
-              <li class="active"><a href="#">4</a></li>
-              <li class="active"><a href="#">5</a></li>
-              <li class="active"><a href="#">Next</a></li>
-            </ul>
-          </div>
-      </div>    
+    <br><br><br><br>
+
+    <!-- Tab bar in the footer -->
+    <div class="navbar navbar-inverse" id="footer">
+          <a href="/mood/Zippy"><div class="tab-boxes">
+            <span></span>
+            <img src="{{ url_for('static', filename='img/icon-zippy-tab.png') }}" height="49%" width="49%" >
+          </div></a>
+
+          <a href="/mood/Chill"><div class="tab-boxes">
+            <img src="{{ url_for('static', filename='img/icon-chill-tab.png') }}" height="49%" width="49%" style="margin-top:4px;">
+          </div></a>
+
+          <a href="/mood/Hungry"><div class="tab-boxes">
+            <img src="{{ url_for('static', filename='img/icon-hungry-tab.png') }}" height="49%" width="49%" style="margin-top:4px;">
+          </div></a>
+          
+          <a href="/mood/Curious"><div class="tab-boxes">
+            <img src="{{ url_for('static', filename='img/icon-curious-tab.png') }}" height="49%" width="49%" style="margin-top:4px;">
+          </div></a>
+    </div> 
 
 {% endblock %}
 
