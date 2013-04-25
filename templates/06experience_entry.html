@@ -20,42 +20,17 @@
     <!-- Showing Experience with details -->
     <div class="box-login">
         <div class="box-experience">
-          <img class="icons-med image-highlight" src="{{ url_for('static', filename='img/dine-dark.jpg') }}" height="60%" width="60%">
+          <img class="icons-med image-highlight" src="https://s3.amazonaws.com/aliceapp/{{experience.filename}}" height="60%" width="60%">
 
           <a href="/mood/Chill"><div class="small-boxes" id="text-experience">
-            <h3>Dining in the Dark
+            <h3>{{ experience.title }}
             <img class="icons-next" src="{{ url_for('static', filename='img/bookmark.png') }}" height="50%" width="50%"></h3>
-            <h6>Munch // Night</h6>
+            <h6>{% for i in experience.interest %}{{ i|replace("_"," ")}} {% endfor %} // {% for p in experience.period %}{{ p|replace("_"," ")}} {% endfor %}</h6>
             <hr>
-            <p>They say that when you lose one of your senses, the others get intensified. Now imagine what might happen with your taste if you dine in pitch dark? You don't need to imagine anymore because there are restaurants that offer this extraordinary experience for you.</p>
+            <p>{{ experience.description }}</p>
           </div></a>
         </div>
     </div>
-
-
-<!-- Display Experience -->
-<div class="container middle">
-    <div class="row-fluid">
-		<div class="span6">
-			<h2>{{ experience.title }}</h2>
-			<img src="https://s3.amazonaws.com/aliceapp/{{experience.filename}}" class="img-rounded"></a>
-			<p></p>
-			<br>
-			<p><em>[{% for p in experience.period %}{{ p|replace("_"," ")}} {% endfor %}]</em></p>
-			<p><em>[{% for i in experience.interest %}{{ i|replace("_"," ")}} {% endfor %}]</em></p>
-			<hr>
-			<p>{{ experience.description }}</p>
-
-			<hr>
-			<a href="/chooselist/{{ experience.id }}" class="btn btn-success">Add to a List</a>
-			<p></p>
-
-			<p><small>added: {{ experience.timestamp.strftime("%a %m/%d %I:%M%p ") }}</small></p>
-			<p><small>id: {{ experience.id }}</small></p>
-			<hr>
-		</div>	
-
-
 
 	<!-- Display locations -->
 
@@ -76,7 +51,6 @@
 		</div>
 	</div>
 
-</div>
 
 	<br><br><br><br>
 
