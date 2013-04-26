@@ -232,69 +232,202 @@ def experience_display(experience_slug):
 	return render_template('06experience_entry.html', **templateData)
 
 
-# add location to experiences
-@app.route("/experiences/<experience_slug>/addlocation")
+# # location page
+# @app.route("/experiences/<experience_slug>/<location_slug>")
+# def add_location(experience_slug, location_slug):
+
+# 	# get experience by experience_slug
+# 	try:
+# 		experience = models.Experience.objects.get(slug=experience_slug)
+# 		experience = models.Location.objects.get(slug=location_slug)
+# 	except:
+# 		abort(404)
+
+# 	# prepare template data
+# 	templateData = {
+# 		'experience' : experience
+# 	}
+
+# 	# render and return the template
+# 	return render_template('experience_entry.html', **templateData)
+
+
+# the form to submit
+# add location to experiences form 
+@app.route("/experiences/<experience_slug>/location", methods=['GET', 'POST'])
 def add_location(experience_slug):
 
+	# get Location form from models.py based on the photo
+	photo_upload_location = models.photo_upload_location(request.form)
+
 	# get experience by experience_slug
-	try:
+	experience = models.Experience.objects.get(slug=experience_slug)
+
+
+	# if form was submitted and it is valid...
+	if request.method == "POST" and photo_upload_location.validate():
+		
+		uploaded_file = request.files['photoupload']
+		
+		# Uploading is fun
+		# 1 - Generate a file name with the datetime prefixing filename
+		# 2 - Connect to s3
+		# 3 - Get the s3 bucket, put the file
+		# 4 - After saving to s3, save data to database
+
+		if uploaded_file and allowed_file(uploaded_file.filename):
+			# create filename, prefixed with datetime
+			now = datetime.datetime.now()
+			filename = now.strftime('%Y%m%d%H%M%s') + "-" + secure_filename(uploaded_file.filename)
+			# thumb_filename = now.strftime('%Y%m%d%H%M%s') + "-" + secure_filename(uploaded_file.filename)
+
+			# connect to s3
+			s3conn = boto.connect_s3(os.environ.get('AWS_ACCESS_KEY_ID'),os.environ.get('AWS_SECRET_ACCESS_KEY'))
+
+			# open s3 bucket, create new Key/file
+			# set the mimetype, content and access control
+			b = s3conn.get_bucket(os.environ.get('AWS_BUCKET')) # bucket name defined in .env
+			k = b.new_key(b)
+			k.key = filename
+			k.set_metadata("Content-Type", uploaded_file.mimetype)
+			k.set_contents_from_string(uploaded_file.stream.read())
+			k.make_public()
+
+			# save information to MONGO database
+			# did something actually save to S3
+			if k and k.size > 0:
+
+				# create a location
+				location = models.Location()
+				location.name = request.form.get('name')
+				location.slug = slugify(location.name)
+				location.description = request.form.get('description')
+				location.address = request.form.get('address')
+				location.neighborhood = request.form.get('neighborhood')
+				location.city = request.form.get('city')
+				location.price = request.form.get('price')
+				location.website = request.form.get('website')
+				location.phone = request.form.get('phone')
+				location.filename = filename # same filename of s3 bucket file				
+
+				try:
+					# for reference field, save the location
+					location.save() # saves a separate Location document (not embedded)
+
+					# append location to experience
+					experience.location_refs.append(location)
+
+					# save the experience object
+					experience.save()
+
+				except:
+					e = sys.exc_info()
+					app.logger.error(e)
+
+			return redirect('/experiences/%s' % experience.slug)
+
+		else:
+			return "uhoh there was an error with the picture " + uploaded_file.filename
+
+	else:
+
+		# get experience by experience_slug
 		experience = models.Experience.objects.get(slug=experience_slug)
-	except:
-		abort(404)
 
-	# prepare template data
-	templateData = {
-		'experience' : experience
-	}
+		# prepare template data
+		templateData = {
+			'experience' : experience,
+			'form' : photo_upload_location
+		}
 
-	# render and return the template
-	return render_template('experience_entry.html', **templateData)
+		# render and return the template
+		return render_template('experience_entry.html', **templateData)
 
 
-# submit locations for experiences
-@app.route("/experiences/<experience_id>/location", methods=['POST'])
+# the action of submitting
+# submit to the database the location for experience
+@app.route("/experiences/<experience_id>/location", methods=['GET', 'POST'])
 def submit_location(experience_id):
-
-	# show location details (retrieving the data from the database)
-	name = request.form.get('name')
-	address = request.form.get('address')
-	neighborhood = request.form.get('neighborhood')
-	website = request.form.get('website')
-	city = request.form.get('city')
-	price = request.form.get('price')
-	phone = request.form.get('phone')
-
-	if name == '' or address == '' or neighborhood == '':
-		# no name or comment, return to page
-		return redirect(request.referrer)
 
 	# get experience by experience_slug
 	try:
 		experience = models.Experience.objects.get(id=experience_id)
+
 	except:
 		# error, return to where you came from
 		return redirect(request.referrer)
 
-	# create a location
-	location = models.Location()
-	location.name = request.form.get('name')
-	location.address = request.form.get('address')
-	location.neighborhood = request.form.get('neighborhood')
-	location.city = request.form.get('city')
-	location.price = request.form.get('price')
-	location.website = request.form.get('website')
-	location.phone = request.form.get('phone')
+	# get Location form from models.py based on the photo
+	photo_upload_location = models.photo_upload_location(request.form)
 
-	# for reference field, save the location
-	location.save() # saves a separate Location document (not embedded)
+	# if form was submitted and it is valid...
+	if request.method == "POST" and photo_upload_list.validate():
+		
+		uploaded_file = request.files['photoupload']
+		
+		# Uploading is fun
+		# 1 - Generate a file name with the datetime prefixing filename
+		# 2 - Connect to s3
+		# 3 - Get the s3 bucket, put the file
+		# 4 - After saving to s3, save data to database
 
-	# append location to experience
-	experience.location_refs.append(location)
+		if uploaded_file and allowed_file(uploaded_file.filename):
+			# create filename, prefixed with datetime
+			now = datetime.datetime.now()
+			filename = now.strftime('%Y%m%d%H%M%s') + "-" + secure_filename(uploaded_file.filename)
+			# thumb_filename = now.strftime('%Y%m%d%H%M%s') + "-" + secure_filename(uploaded_file.filename)
 
-	# save the experience object
-	experience.save()
+			# connect to s3
+			s3conn = boto.connect_s3(os.environ.get('AWS_ACCESS_KEY_ID'),os.environ.get('AWS_SECRET_ACCESS_KEY'))
 
-	return redirect('/experiences/%s' % experience.slug)
+			# open s3 bucket, create new Key/file
+			# set the mimetype, content and access control
+			b = s3conn.get_bucket(os.environ.get('AWS_BUCKET')) # bucket name defined in .env
+			k = b.new_key(b)
+			k.key = filename
+			k.set_metadata("Content-Type", uploaded_file.mimetype)
+			k.set_contents_from_string(uploaded_file.stream.read())
+			k.make_public()
+
+			# save information to MONGO database
+			# did something actually save to S3
+			if k and k.size > 0:
+
+				# create a location
+				location = models.Location()
+				location.name = request.form.get('name')
+				location.slug = slugify(Location.name)
+				location.description = request.form.get('description')
+				location.address = request.form.get('address')
+				location.neighborhood = request.form.get('neighborhood')
+				location.city = request.form.get('city')
+				location.price = request.form.get('price')
+				location.website = request.form.get('website')
+				location.phone = request.form.get('phone')
+				location.filename = filename # same filename of s3 bucket file				
+
+				try:
+					# for reference field, save the location
+					location.save() # saves a separate Location document (not embedded)
+
+					# append location to experience
+					experience.location_refs.append(location)
+
+					# save the experience object
+					experience.save()
+
+				except:
+					e = sys.exc_info()
+					app.logger.error(e)
+
+			return redirect('/experiences/%s' % experience.slug)
+
+		else:
+			return "uhoh there was an error with the picture " + uploaded_file.filename
+
+	else:
+		# error, return to where you came from
+		return redirect(request.referrer)
 
 
 

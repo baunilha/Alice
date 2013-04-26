@@ -12,10 +12,15 @@ from datetime import datetime
 
 class Location(mongoengine.Document):
 	name = mongoengine.StringField(max_length=50)
+	slug = mongoengine.StringField()
+	description = mongoengine.StringField(max_length=500, verbose_name="Description")
 	address = mongoengine.StringField()
 	neighborhood = mongoengine.StringField(max_length=50)
 	website = mongoengine.StringField(max_length=50)
 	phone = mongoengine.StringField(max_length=50)
+
+	# Save the image filename from AmazonS3
+	filename = mongoengine.StringField()
 
 	# City, Price and hours are lists of Strings
 	city = mongoengine.StringField(max_length=50)
@@ -23,6 +28,15 @@ class Location(mongoengine.Document):
 
 	# Timestamp will record the date and time idea was created.
 	timestamp = mongoengine.DateTimeField(default=datetime.now())
+
+Locationform = model_form(Location)
+
+# Create a WTForm form for the photo upload.
+# This form will inhirit the List model above
+# It will have all the fields of the List model
+# We are adding in a separate field for the file upload called 'photoupload'
+class photo_upload_location(Locationform):
+	photoupload = FileField('Upload an image file', validators=[])
 
 
 class Experience(mongoengine.Document):

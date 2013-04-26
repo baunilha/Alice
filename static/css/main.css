@@ -514,11 +514,11 @@ h2 .icons-med {
 }
 
 .location-text h3 {
-	font-size: 22px;
+	font-size: 20px;
 	text-align: left;
-	margin-top: -3px;
+	margin-top: -2%;
+	margin-bottom: -2%;
 	height: 31%;
-	margin-bottom: 5px;
 	width: 88%;
 	-webkit-line-clamp: 1;
 	-webkit-box-orient: vertical;
@@ -526,21 +526,40 @@ h2 .icons-med {
 }
 
 .location-text img {
-	width: 6%;
-	margin: -13% 3% 0% 0%;
+	width: 5%;
+	margin: -9% 3% 0% 0%;
 }
 
 .location-text p {
 	display: -webkit-box;
 	text-align: justify;
 	max-width: 97%;
-	height: 62%;
+	height: 57%;
 	margin-bottom: 0px;
-	line-height: 18px;
+	line-height: 125%;
 	-webkit-line-clamp: 4;
 	-webkit-box-orient: vertical;
 	overflow: hidden;
 	text-overflow: ellipsis;
+}
+
+.location-text hr {
+	margin: 0.8% 2.3% 0.2% 0.6%;
+	border-bottom: 1px solid #c8c8c8;
+}
+
+.location-text h6 {
+	color: #865485;
+	font-style: italic;
+	font-weight: bold;
+	font-size: 12px;
+	text-align: left;
+	margin: 0% 0% 0% 1%;
+}
+
+#spacing {
+	height: 100px;
+	color: blue;
 }
 
 
