@@ -695,7 +695,7 @@ def choose_list(experience_id):
 		'experience' : experience
 	}
 
-	return render_template('choose_list.html', **templateData)
+	return render_template('08choose_list.html', **templateData)
 
 
 

@@ -24,7 +24,7 @@
 
           <div class="small-boxes" id="text-experience">
             <h3>{{ experience.title }}
-            <img class="icons-next" src="{{ url_for('static', filename='img/bookmark.png') }}" height="50%" width="50%"></h3>
+            <a href="/chooselist/{{ experience.id }}"><img class="icons-next" src="{{ url_for('static', filename='img/bookmark.png') }}" height="50%" width="50%"></a></h3>
             <h6>{% for i in experience.interest %}{{ i|replace("_"," ")}} {% endfor %} // {% for p in experience.period %}{{ p|replace("_"," ")}} {% endfor %}</h6>
             <hr>
             <p>{{ experience.description }}</p>

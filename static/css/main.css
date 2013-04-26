@@ -717,5 +717,15 @@ h2 .icons-med {
 }
 
 
+/* Choose a list page
+-------------------------------------------------- */
+
+.choose {
+	color: #946994;
+	line-height: 30px;
+	font-size: 25px;
+	margin-bottom: 5%;
+}
+
 
 

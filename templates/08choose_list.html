@@ -1,4 +1,4 @@
-{% extends "/layout_alice.html" %}
+{% extends "/layout.html" %}
 {% from "_form_helpers.html" import render_error, render_textarea %}
 
 
@@ -19,36 +19,73 @@
 	}
 </script>
 
-<!-- Display List -->
-<div class="container middle">
-    <div class="row-fluid">
+<!-- Top bar with menu -->
+    <div class="navbar navbar-inverse navbar-fixed-top" id="menu-top">
+          <div class="navbar-inner">
+            <div class="container">
+                <a href="javascript:history.go(-1)"><img id="icons-back" src="{{ url_for('static', filename='img/icon-back.png') }}" height="12%" width="12%"></a>
+                <a href="/"><img id="logo-small-menu" src="{{ url_for('static', filename='img/logo-small.png') }}" height="115" width="74"></a>
+                <a href="/admin"><img id="icons-menu" src="{{ url_for('static', filename='img/icon-menu.png') }}" height="12%" width="12%"></a>
+            </div>
+          </div>
+    </div>
+    <br><br><br><br>
 
-    	<h3>Choose one of your lists to place the experience in!</h3>
 
-    	<p>
-    		<!-- Displays the lists that this user created --> 
-			<label><h3>* {{ current_user.username }}'s lists:</h3></label>
-			
-			{# comment - loop through bookType and create a dropdown menu #}
-			<form name="formlist" method="POST" action="" enctype="multipart/form-data">
-            <label class="dropdown">
-            <select name="allLists" id="listId" onchange="checkOption();">
-            {% for list in allLists|sort %}
-            <option value='{{ list.id }}' > {{ list.listName }}
-            {% endfor %}
-            </select>
-            </label>
-            <input class='btn btn-warning btn-large' type='submit' value='Add to List'>
-        	</form>
-		</p> 
-        <h3>Or</h3>
-        <a href="/create"class="btn btn-large btn-warning">Create new list</a>      
-	</div>
+    <div class="container middle">
+        <!-- Login with existing account -->
+        <div class="row-fluid">
+            <div class="box-login">                        
+                {# comment - loop through bookType and create a dropdown menu #}
+                <form name="formlist" class="well" method="POST" action="" enctype="multipart/form-data">
+                    <!-- Displays the lists that this user created --> 
+                    <h3 class="choose">Choose one of your lists:</h3>
+                    <h3><img src="{{ url_for('static', filename='img/spiral.png') }}" height="10%" width="10%"> {{ current_user.username }}'s lists:</h3>
+                    <label class="dropdown">
+                        <select name="allLists" id="listId" onchange="checkOption();">
+                            {% for list in allLists|sort %}
+                            <option value='{{ list.id }}' > {{ list.listName }}
+                            {% endfor %}
+                        </select>
+                    </label>
+                    <br>
+                    <input class='btn btn-large btn-block btn-purple' type='submit' value='Add to List'>
+                </form>
+            </div>
 
-    <script>firstOption();</script>
+        </div>
 
-</div>
+        <!-- Link to Register Page -->
+        <div class="row-fluid">
+            <div class="box-login">
+                <div class="well">
+                    <h3 class="choose">You can also create a new list:</h3>
+                    <a href="/create" class="btn btn-large btn-block btn-purple">Create</a>
+                </div>
+            </div>
+        </div>
+        <script>firstOption();</script>
+    </div>
 
+    <!-- Tab bar in the footer -->
+    <div class="navbar navbar-inverse" id="footer">
+          <a href="/mood/Zippy"><div class="tab-boxes">
+            <span></span>
+            <img src="{{ url_for('static', filename='img/icon-zippy-tab.png') }}" height="49%" width="49%" >
+          </div></a>
+
+          <a href="/mood/Chill"><div class="tab-boxes">
+            <img src="{{ url_for('static', filename='img/icon-chill-tab.png') }}" height="49%" width="49%" style="margin-top:4px;">
+          </div></a>
+
+          <a href="/mood/Hungry"><div class="tab-boxes">
+            <img src="{{ url_for('static', filename='img/icon-hungry-tab.png') }}" height="49%" width="49%" style="margin-top:4px;">
+          </div></a>
+          
+          <a href="/mood/Curious"><div class="tab-boxes">
+            <img src="{{ url_for('static', filename='img/icon-curious-tab.png') }}" height="49%" width="49%" style="margin-top:4px;">
+          </div></a>
+    </div> 
 
 {% endblock %}
 
