@@ -19,42 +19,49 @@
 
     <!-- Showing Experience with details -->
     <div class="box-login">
-        <div class="box-experience">
-          <img class="icons-med image-highlight" src="https://s3.amazonaws.com/aliceapp/{{experience.filename}}" height="60%" width="60%">
+        <div class="box-place">
+          <img class="icons-med image-highlight" id="img-place" src="https://s3.amazonaws.com/aliceapp/{{location.filename}}" height="60%" width="60%">
 
-          <div class="small-boxes" id="text-experience">
-            <h3>{{ experience.title }}
-            <img class="icons-next" src="{{ url_for('static', filename='img/bookmark.png') }}" height="50%" width="50%"></h3>
-            <h6>{% for i in experience.interest %}{{ i|replace("_"," ")}} {% endfor %} // {% for p in experience.period %}{{ p|replace("_"," ")}} {% endfor %}</h6>
+          <div class="small-boxes" id="text-place">
+            <h3>{{ location.name }}
+            <img class="icons-next" src="../static/img/{{ location.price }}.png" height="50%" width="50%"></h3>
+            <h6> </h6>
             <hr>
-            <p>{{ experience.description }}</p>
+            <p>{{ location.description }}</p>
           </div>
         </div>
     </div>
 
-	<!-- Display locations -->
-
-
-    <!-- Showing Locations from a specific experience -->
+	<!-- Display Map & Address -->
     <div class="box-login">
-
-      {% for location in experience.location_refs %}
-
-      <div class="box-location">
-        <img class="icons-med image-location" src="https://s3.amazonaws.com/aliceapp/{{location.filename}}" height="60%" width="60%">
-
-        <div class="location-text">
-          <a href="/location/{{ location.slug }}"><h3>{{ location.name }}</h3>
-            <img class="icons-next" src="{{ url_for('static', filename='img/icon-next.png') }}" height="4%" width="4%"></a>
-            <p>{{ location.description }}</p>
-            <hr>
-            <h6>{{ location.address }} - {{ location.neighborhood }}</h6>
+        <div class="box-map">
+          <img class="icons-med image-highlight" id="img-map" src="{{ url_for('static', filename='img/map00.png') }}" height="60%" width="60%">
+          <hr>
+          <div class="small-boxes" id="text-map">
+            <h5>{{ location.address }}</h5>
+            <h5>{{ location.neighborhood }}, {{ location.city }}</h5>
+          </div>
         </div>
-      </div>
-    {% endfor %}  
     </div>
 
-    <div id="spacing"></div>
+
+    <!-- Display website & phone -->
+    <div class="box-login">
+        <div class="box-contact">
+          <a href="http://{{ location.website }}"><div class="small-boxes" id="text-contact">
+            <h5>Website</h5>
+            <h5 class="contacts">{{ location.website }}</h5>
+          </div></a>
+          <div class="small-boxes" id="vertical-hr"></div>
+          <div class="small-boxes" id="text-contact">
+            <h5>Phone</h5>
+            <h5 class="contacts">{{ location.phone }}</h5>
+          </div>
+        </div>
+    </div>
+    
+
+   
 
 	<!-- Tab bar in the footer -->
     <div class="navbar navbar-inverse" id="footer">

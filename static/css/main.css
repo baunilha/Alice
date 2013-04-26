@@ -374,7 +374,7 @@ h2 .icons-med {
 }
 
 .list-text {
-	width: 63%;
+	width: 62%;
 	height: 98%;
 	background-color: #eff2f3;
 	margin: 1px 0px 1px 3px;
@@ -503,7 +503,7 @@ h2 .icons-med {
 }
 
 .location-text {
-	width: 63%;
+	width: 62%;
 	height: 98%;
 	background-color: #eff2f3;
 	margin: 1px 0px 1px 3px;
@@ -560,6 +560,160 @@ h2 .icons-med {
 #spacing {
 	height: 100px;
 	color: blue;
+}
+
+
+/* Detailed location page
+-------------------------------------------------- */
+
+.box-place {
+	width: 100%;
+	background-color: #eff2f3;
+	height: 278px;
+	display: block;
+    float: left;
+    position: relative;
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+    margin-bottom: 5%;
+}
+
+#img-place {
+	height: 50%;
+}
+
+#text-place {
+	background-color: #eff2f3;
+	width: 98%;
+	height: 49%;
+	margin-right: 0%;
+}
+
+#text-place h3 {
+	font-size: 24px;
+	text-align: left;
+	margin-top: 0%;
+	margin-bottom: 0%;
+	margin-left: 2%;
+	width: 86%;
+}
+
+#text-place img {
+	width: 5.5%;
+	margin: 2.5% -14.5% 0% 0%;
+}
+
+#text-place p {
+	display: -webkit-box;
+	text-align: justify;
+	width: 98%;
+	height: 65%;
+	margin-left: 2%;
+	margin-bottom: 0%;
+	line-height: 18px;
+	-webkit-line-clamp: 5;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+#text-place h6 {
+	color: #946994;
+	font-style: italic;
+	font-weight: 400;
+	font-size: 13px;
+	text-align: left;
+	margin-left: 2%;
+	margin-top: -2%;
+	margin-bottom: 0%;
+}
+
+#text-place hr {
+	margin: 1.2% 0.3% 1.2% 1.6%;
+}
+
+.box-map {
+	width: 100%;
+	background-color: #eff2f3;
+	height: 200px;
+	display: block;
+    float: left;
+    position: relative;
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+    margin-bottom: 5%;
+}
+
+.box-map hr {
+	margin: 0.1% 0% 0% 0%;
+}
+
+#text-map {
+	background-color: #eff2f3;
+	width: 100%;
+	height: 20%;
+	margin: 2.5% 0% 0% 0%;
+}
+
+#text-map h5 {
+	font-size: 16px;
+	font-family: 'Roboto Condensed', sans-serif;
+	color: #946994;
+	font-style: italic;
+	text-align: center;
+	line-height: 17px;
+	margin-top: 0%;
+	margin-bottom: 0%;
+	margin-left: 0%;
+	width: 100%;
+}
+
+#img-map {
+	height: 70%;
+}
+
+.box-contact {
+	width: 100%;
+	background-color: #eff2f3;
+	height: 60px;
+	display: block;
+    float: left;
+    position: relative;
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+    margin-bottom: 80px;
+}
+
+#text-contact {
+	background-color: #eff2f3;
+	width: 49.75%;
+	height: 20%;
+	margin: 2.5% 0% 0% 0%;
+}
+
+#text-contact h5 {
+	font-size: 15px;
+	font-family: 'Roboto Condensed', sans-serif;
+	text-align: center;
+	line-height: 20px;
+	margin-top: 0%;
+	margin-bottom: 0%;
+	margin-left: 0%;
+	width: 100%;
+}
+
+#vertical-hr {
+	width:0.5%;
+	height:100%;
+	background-color: #c8c8c8;
+	margin: 0.2% 0% 0% 0%;
+}
+
+.contacts {
+	color: #946994;
 }
 
 

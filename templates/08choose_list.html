@@ -1,0 +1,59 @@
+{% extends "/layout_alice.html" %}
+{% from "_form_helpers.html" import render_error, render_textarea %}
+
+
+{% block body %}
+
+<script>
+    // Select the first item of the list
+    function firstOption() {
+        var selectOption = document.formlist.listId.options[0].value;
+        document.formlist.action = "/list/" + selectOption + "/add/{{ experience.id }}";
+    }
+
+	// Function to get the value from the dropdown and change the url in the submit button
+	function checkOption() {
+		var select = document.formlist.listId.selectedIndex;
+		var selectOption = document.formlist.listId.options[select].value;
+		document.formlist.action = "/list/" + selectOption + "/add/{{ experience.id }}";
+	}
+</script>
+
+<!-- Display List -->
+<div class="container middle">
+    <div class="row-fluid">
+
+    	<h3>Choose one of your lists to place the experience in!</h3>
+
+    	<p>
+    		<!-- Displays the lists that this user created --> 
+			<label><h3>* {{ current_user.username }}'s lists:</h3></label>
+			
+			{# comment - loop through bookType and create a dropdown menu #}
+			<form name="formlist" method="POST" action="" enctype="multipart/form-data">
+            <label class="dropdown">
+            <select name="allLists" id="listId" onchange="checkOption();">
+            {% for list in allLists|sort %}
+            <option value='{{ list.id }}' > {{ list.listName }}
+            {% endfor %}
+            </select>
+            </label>
+            <input class='btn btn-warning btn-large' type='submit' value='Add to List'>
+        	</form>
+		</p> 
+        <h3>Or</h3>
+        <a href="/create"class="btn btn-large btn-warning">Create new list</a>      
+	</div>
+
+    <script>firstOption();</script>
+
+</div>
+
+
+{% endblock %}
+
+
+{% block styles %}{% endblock %}
+{% block scripts %}
+
+{% endblock %}
