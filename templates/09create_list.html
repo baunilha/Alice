@@ -24,8 +24,8 @@
                 <form class="well" method="POST" action="" enctype="multipart/form-data">
 
                     <!-- Displays the lists that this user created --> 
-                    <h3 class="create">Create a new list:</h3>
-                   	<hr>
+                    <h3 class="create">Create a new list</h3>
+
 
 				    {% if form.errors %}
 						<ul class="errors">
@@ -46,8 +46,7 @@
 					</div>
 
 					<div class="small-boxes small-create" id="small-right">
-					<div id="box-pic"><h4>Upload an image file:</h4></div>
-					{{ form.photoupload }}
+					<input class="btn" type="file" name="photoupload" id="photoupload">
 					</div>
 
 					<div class="small-boxes small-create" id="box-descrip">
