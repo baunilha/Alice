@@ -588,7 +588,7 @@ def create():
 
 		app.logger.debug(current_user)
 
-		return render_template("create_list.html", **templateData)
+		return render_template("09create_list.html", **templateData)
 
 
 # pages for all lists

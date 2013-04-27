@@ -1,0 +1,122 @@
+{% extends "/layout.html" %}
+{% from "_form_helpers.html" import render_error, render_textarea %}
+
+{% block body %}
+
+<!-- Top bar with menu -->
+    <div class="navbar navbar-inverse navbar-fixed-top" id="menu-top">
+          <div class="navbar-inner">
+            <div class="container">
+                <a href="javascript:history.go(-1)"><img id="icons-back" src="{{ url_for('static', filename='img/icon-back.png') }}" height="12%" width="12%"></a>
+                <a href="/"><img id="logo-small-menu" src="{{ url_for('static', filename='img/logo-small.png') }}" height="115" width="74"></a>
+                <a href="/admin"><img id="icons-menu" src="{{ url_for('static', filename='img/icon-menu.png') }}" height="12%" width="12%"></a>
+            </div>
+          </div>
+    </div>
+    <br><br><br><br>
+
+
+    <div class="container middle">
+        <!-- Login with existing account -->
+        <div class="row-fluid">
+            <div class="box-login" id="create-list">                        
+
+                <form class="well" method="POST" action="" enctype="multipart/form-data">
+
+                    <!-- Displays the lists that this user created --> 
+                    <h3 class="create">Create a new list:</h3>
+                   	<hr>
+
+				    {% if form.errors %}
+						<ul class="errors">
+							{% for field_name, field_errors in form.errors|dictsort if field_errors %}
+								{% for error in field_errors %}
+									<li class="alert alert-error">
+										{{ form[field_name].label.text }} - {{ error }}
+									</li>
+								{% endfor %}
+							{% endfor %}
+						</ul>
+					{% endif %}
+
+					<div class="small-boxes small-create">
+                    <h4>Name your list (Be creative!)</h4>
+					{{ form.listName(id="input-create") }}
+					<br>
+					</div>
+
+					<div class="small-boxes small-create" id="small-right">
+					<div id="box-pic"><h4>Upload an image file:</h4></div>
+					{{ form.photoupload }}
+					</div>
+
+					<div class="small-boxes small-create" id="box-descrip">
+					<h4>Add a description</h4>
+					{{ render_textarea(form.listDescription, cols="50", rows="3") }} {# render_textarea inside _form_helpers.html #}
+					<br>
+					</div>
+
+					<br><br>
+					<input class="btn btn-large btn-block btn-purple" type="submit" value="Create List">
+				</form>
+            </div>
+
+        </div>
+    </div>
+
+<!-- Display Experience -->
+<div class="container middle">
+    <div class="row-fluid">
+
+		<div class="span5">
+
+			<div class="span7">
+				<h2>Recently created lists:</h2>
+				<hr>
+				{% for l in listsCreated %}
+					<a title="{{l.listName}}" alt="Title:{{l.listName}}. Description: {{l.listDescription}}" href="https://s3.amazonaws.com/aliceapp/{{l.filename}}">
+					<img src="https://s3.amazonaws.com/aliceapp/{{l.filename}}" class="img-rounded"></a>
+					<br>
+					<h3>{{l.listName}}</h3>
+					<p>{{l.listDescription}}</p>
+					<p>[ Location: {% for c in l.city %}{{ c|replace("_"," ")}}{% endfor %} | Created by: {{ l.user.username }} | Date: {{ l.timestamp.strftime("%m/%d/%y")}} ]</p>
+					<a href="/lists/{{ l.slug }}" class="btn btn-warning">view</a>
+					<a href="lists/delete/{{l.id}}" class="btn btn-danger">delete</a>
+					<hr>
+				{% endfor %}
+			</div>
+		</div>
+	</div>	
+</div><!-- row -->
+	
+<!-- Tab bar in the footer -->
+    <div class="navbar navbar-inverse" id="footer">
+          <a href="/mood/Zippy"><div class="tab-boxes">
+            <span></span>
+            <img src="{{ url_for('static', filename='img/icon-zippy-tab.png') }}" height="49%" width="49%" class="icons-tabbar" >
+          </div></a>
+
+          <a href="/mood/Chill"><div class="tab-boxes">
+            <img src="{{ url_for('static', filename='img/icon-chill-tab.png') }}" height="49%" width="49%" style="margin-top:4px;" class="icons-tabbar">
+          </div></a>
+
+          <a href="/mood/Hungry"><div class="tab-boxes">
+            <img src="{{ url_for('static', filename='img/icon-hungry-tab.png') }}" height="49%" width="49%" style="margin-top:4px;" class="icons-tabbar">
+          </div></a>
+          
+          <a href="/mood/Curious"><div class="tab-boxes">
+            <img src="{{ url_for('static', filename='img/icon-curious-tab.png') }}" height="49%" width="49%" style="margin-top:4px;" class="icons-tabbar">
+          </div></a>
+    </div> 
+
+{% endblock %}
+
+
+{% block styles %}
+<style>
+img {
+	width:320px;
+}
+</style>
+{% endblock %}
+{% block scripts %}{% endblock %}

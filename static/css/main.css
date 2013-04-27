@@ -729,3 +729,56 @@ h2 .icons-med {
 
 
 
+/* Create a new list page
+-------------------------------------------------- */
+
+.create {
+	color: #50224e;
+	line-height: 30px;
+	font-size: 25px;
+	margin-bottom: 5%;
+	text-align: center;
+}
+
+.icons-tabbar {
+	width: 45px;
+}
+
+#create-list h4 {
+	width: 93%;
+	font-size: 100%;
+	margin: 2% 0%;
+	font-weight: normal;
+}
+
+#input-create, #create-list textarea {
+	width: 85%;
+}
+
+.small-create {
+	width: 60%;
+	background-color: transparent;
+	margin: 1px 1px 1px 1px;
+	display: block;
+	float: left;
+	text-align: left;
+}
+
+#small-right {
+	width: 38%;
+}
+
+#box-pic {
+	width: 100%;
+	height: 100px;
+	background-color: white;
+}
+
+#box-descrip {
+	margin-top: -30%;
+}
+
+#photoupload {
+	height: 60px;
+	line-height: 63px;
+}
