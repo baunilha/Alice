@@ -833,6 +833,39 @@ h2 .icons-med {
 	margin: 33% 0% 33% 3%;
 }
 
-#spiral {
+.spiral {
 	width: 12%;
+}
+
+
+
+
+/* User's profile page
+-------------------------------------------------- */
+
+
+.btn-gray {
+	color: #50224e;
+	text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+	background-color: #dadada;
+	background-image: -moz-linear-gradient(top, #fefefe, #dadada);
+	background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#fefefe), to(#dadada));
+	background-image: -webkit-linear-gradient(top, #fefefe, #dadada);
+	background-image: -o-linear-gradient(top, #fefefe, #dadada);
+	background-image: linear-gradient(to bottom, #fefefe, #dadada);
+	background-repeat: repeat-x;
+	border-color: #fefefe #dadada #dadada;
+	border-radius: 0px;
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fefefe', endColorstr='#dadada', GradientType=0);
+	filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+}
+
+.btn-gray:hover,
+.btn-gray:active,
+.btn-gray.active,
+.btn-gray.disabled,
+.btn-gray[disabled] {
+  color: #50224e;
+  background-color: #dadada;
+  *background-color: #dadada;
 }

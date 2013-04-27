@@ -1,0 +1,83 @@
+{% extends "layout.html" %}
+
+{% block styles %}{% endblock %}
+
+{% block body %}
+
+<!-- Top bar with menu -->
+    <div class="navbar navbar-inverse navbar-fixed-top" id="menu-top">
+          <div class="navbar-inner">
+            <div class="container">
+                <a href="javascript:history.go(-1)"><img id="icons-back" src="{{ url_for('static', filename='img/icon-back.png') }}" height="12%" width="12%"></a>
+                <a href="/"><img id="logo-small-menu" src="{{ url_for('static', filename='img/logo-small.png') }}" height="115" width="74"></a>
+                <a href="/admin"><img id="icons-menu" src="{{ url_for('static', filename='img/icon-menu.png') }}" height="12%" width="12%"></a>
+            </div>
+          </div>
+    </div>
+    <br><br><br><br>
+
+<!-- Welcome back message and logged in alert -->
+<div class="container middle">
+    <div class="box-login">
+    	<h2><img class="icons-med" id="spiral" src="../static/img/spiral.png" height="13%" width="13%"> {{ current_user.username }}'s lists</h2>
+		{# display any Flash/Session messages #}
+		{% with messages = get_flashed_messages() %}
+			{% if messages %}
+				{% for message in messages %}
+				  <p><span class="alert alert-success">{{ message }}</span></p>
+				{% endfor %}
+			{% endif %}
+		{% endwith %}
+		{# end of Flash/Sesssion messages #}
+			
+			<!-- Displays the lists that this user created -->            
+        <div class="box-login">
+
+          {% for l in allLists %}
+
+            <div class="box-location">
+              <img class="icons-med image-location" src="https://s3.amazonaws.com/aliceapp/{{l.filename}}" height="60%" width="60%">
+
+              <div class="location-text">
+                <a href="/lists/{{ l.slug }}"><h3>{{ l.listName }}</h3>
+                  <img class="icons-next" src="{{ url_for('static', filename='img/icon-next.png') }}" height="4%" width="4%"></a>
+                  <p>{{l.listDescription}}</p>
+                  <hr>
+                  <h6>by: {{ l.user.username }}</h6>
+              </div>
+            </div>
+
+        {% endfor %}  
+        </div>
+	</div>
+</div>
+
+
+<br><br><br><br>
+<div class="container middle">
+    <div class="box-login">
+      <a href="/logout" class="btn btn-large btn-block btn-gray">Logout</a>
+    </div>
+</div>
+
+<!-- Tab bar in the footer -->
+    <div class="navbar navbar-inverse" id="footer">
+          <a href="/mood/Zippy"><div class="tab-boxes">
+            <span></span>
+            <img src="{{ url_for('static', filename='img/icon-zippy-tab.png') }}" height="49%" width="49%" class="icons-tabbar" >
+          </div></a>
+
+          <a href="/mood/Chill"><div class="tab-boxes">
+            <img src="{{ url_for('static', filename='img/icon-chill-tab.png') }}" height="49%" width="49%" style="margin-top:4px;" class="icons-tabbar">
+          </div></a>
+
+          <a href="/mood/Hungry"><div class="tab-boxes">
+            <img src="{{ url_for('static', filename='img/icon-hungry-tab.png') }}" height="49%" width="49%" style="margin-top:4px;" class="icons-tabbar">
+          </div></a>
+          
+          <a href="/mood/Curious"><div class="tab-boxes">
+            <img src="{{ url_for('static', filename='img/icon-curious-tab.png') }}" height="49%" width="49%" style="margin-top:4px;" class="icons-tabbar">
+          </div></a>
+    </div> 
+
+{% endblock %}

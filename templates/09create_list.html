@@ -18,7 +18,6 @@
 
     <div class="container middle">
         <!-- Login with existing account -->
-        <div class="row-fluid">
             <div class="box-login" id="create-list">                        
 
                 <form class="well" method="POST" action="" enctype="multipart/form-data">
@@ -64,17 +63,13 @@
 					<input class="btn btn-large btn-block btn-purple" type="submit" value="Create List">
 				</form>
             </div>
-
-        </div>
     </div>
 
 <!-- Display Experience -->
 <div class="container middle">
-    <div class="row-fluid">
-
 		<div class="box-login">
 			<hr>
-			<h2><img class="icons-med" id="spiral" src="../static/img/spiral.png" height="13%" width="13%"> Recently created lists:</h2>
+			<h2><img class="icons-med spiral" src="../static/img/spiral.png" height="13%" width="13%"> Recently created lists:</h2>
 
 	      <div class="box-login">
 
@@ -84,7 +79,7 @@
 		        <img class="icons-med image-location" src="https://s3.amazonaws.com/aliceapp/{{l.filename}}" height="60%" width="60%">
 
 		        <div class="location-text">
-		          <a href="/location/{{ l.slug }}"><h3>{{ l.listName }}</h3>
+		          <a href="/lists/{{ l.slug }}"><h3>{{ l.listName }}</h3>
 		            <img class="icons-next" src="{{ url_for('static', filename='img/icon-next.png') }}" height="4%" width="4%"></a>
 		            <p>{{l.listDescription}}</p>
 		            <hr>
@@ -94,7 +89,6 @@
 		    {% endfor %}  
 		    </div>
 		</div>
-	</div>	
 </div><!-- row -->
 	
 <!-- Tab bar in the footer -->

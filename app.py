@@ -833,7 +833,7 @@ def admin_main():
 		'experiences': models.Experience.objects()
 	}
 
-	return render_template('admin.html', **templateData)
+	return render_template('10admin.html', **templateData)
 
 
 
@@ -854,7 +854,7 @@ def reauth():
 def logout():
 	logout_user()
 	flash("Logged out.")
-	return redirect("/")
+	return redirect("/login")
 
 
 
