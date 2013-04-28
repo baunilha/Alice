@@ -471,7 +471,7 @@ def search():
 		'search_str' : search_str
 	}
 
-	return render_template("search.html", **templateData)
+	return render_template("12search.html", **templateData)
 
 
 # Search Lists
