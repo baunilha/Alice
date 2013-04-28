@@ -83,7 +83,7 @@
 		            <img class="icons-next" src="{{ url_for('static', filename='img/icon-next.png') }}" height="4%" width="4%"></a>
 		            <p>{{l.listDescription}}</p>
 		            <hr>
-		            <h6>by: {{ l.user.username }}</h6>
+		            <a href="/lists/{{ l.user.username }}"><h6>by: {{ l.user.username }}</h6></a>
 		        </div>
 		      </div>
 		    {% endfor %}  

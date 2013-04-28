@@ -1,0 +1,80 @@
+{% extends "/layout.html" %}
+{% from "_form_helpers.html" import render_error, render_textarea %}
+
+
+{% block body %}
+
+
+<!-- Top bar with menu -->
+    <div class="navbar navbar-inverse navbar-fixed-top" id="menu-top">
+          <div class="navbar-inner">
+            <div class="container">
+                <a href="javascript:history.go(-1)"><img id="icons-back" src="{{ url_for('static', filename='img/icon-back.png') }}" height="12%" width="12%"></a>
+                <a href="/"><img id="logo-small-menu" src="{{ url_for('static', filename='img/logo-small.png') }}" height="115" width="74"></a>
+                <a href="/admin"><img id="icons-menu" src="{{ url_for('static', filename='img/icon-menu.png') }}" height="12%" width="12%"></a>
+            </div>
+          </div>
+    </div>
+    <br><br><br><br>
+
+    <!-- Showing List with details -->
+    <div class="box-login">
+        <div class="box-experience">
+          <img class="icons-med image-highlight" src="https://s3.amazonaws.com/aliceapp/{{listsCreated.filename}}" height="60%" width="60%">
+
+          <div class="small-boxes" id="text-experience">
+            <h3>{{ listsCreated.listName }}</h3>
+            <h6>Created by {{ listsCreated.user.username }}</h6>
+            <hr>
+            <p>{{ listsCreated.listDescription }}</p>
+          </div>
+        </div>
+    </div>
+
+
+    <!-- Showing Experiences from a specific list -->
+    <div class="box-login">
+
+      {% for exp in listsCreated.experiences %}
+
+      <div class="box-list">
+        <img class="icons-med image-list" src="https://s3.amazonaws.com/aliceapp/{{exp.filename}}" height="60%" width="60%">
+
+        <div class="list-text">
+          <a href="/experiences/{{ exp.slug }}"><h3>{{ exp.title }}</h3>
+            <img class="icons-next" src="{{ url_for('static', filename='img/icon-next.png') }}" height="4%" width="4%"></a>
+            <p>{{ exp.description }}</p>
+        </div>
+      </div>
+    {% endfor %}  
+    </div>
+
+
+		 
+
+
+<!-- Tab bar in the footer -->
+    <div class="navbar navbar-inverse" id="footer">
+          <a href="/mood/Zippy"><div class="tab-boxes">
+            <span></span>
+            <img src="{{ url_for('static', filename='img/icon-zippy-tab.png') }}" height="49%" width="49%" class="icons-tabbar" >
+          </div></a>
+
+          <a href="/mood/Chill"><div class="tab-boxes">
+            <img src="{{ url_for('static', filename='img/icon-chill-tab.png') }}" height="49%" width="49%" style="margin-top:4px;" class="icons-tabbar">
+          </div></a>
+
+          <a href="/mood/Hungry"><div class="tab-boxes">
+            <img src="{{ url_for('static', filename='img/icon-hungry-tab.png') }}" height="49%" width="49%" style="margin-top:4px;" class="icons-tabbar">
+          </div></a>
+          
+          <a href="/mood/Curious"><div class="tab-boxes">
+            <img src="{{ url_for('static', filename='img/icon-curious-tab.png') }}" height="49%" width="49%" style="margin-top:4px;" class="icons-tabbar">
+          </div></a>
+    </div> 
+
+{% endblock %}
+
+
+{% block styles %}{% endblock %}
+{% block scripts %}{% endblock %}

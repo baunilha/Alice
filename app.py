@@ -615,33 +615,20 @@ def list_display(list_slug):
 	}
 
 	# render and return the template
-	return render_template('list_entry.html', **templateData)
+	return render_template('11list_entry.html', **templateData)
 
 
 # not working
 # Display all the lists for a given user.
-@app.route('/lists/<username>')
-@login_required
-def user_list(username):
+@app.route('/lists/<user_name>')
+def user_list(user_name):
 
-	# Does requested username exists, 404 if not
-	try:
-		user = models.User.objects.get(username=username)
-
-	except Exception:
-		e = sys.exc_info()
-		app.logger.error(e)
-		abort(404)
-
-	# get content that is linked to user, 
-	user_list = models.List.objects(user=user)
-
-	# prepare the template data dictionary
 	templateData = {
-		'user' : user,
+		'user_now' : models.User.objects(username=user_name),
+		'user_name' : user_name,
+		'allLists' : models.List.objects(user=user_name),
 		'current_user' : current_user,
-		'user_list' : user_list,
-		'users' : models.User.objects()
+		'experiences': models.Experience.objects()
 	}
 
 	return render_template('lists_user.html', **templateData)
