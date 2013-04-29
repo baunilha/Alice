@@ -412,10 +412,24 @@ def by_mood(mood_name):
 	# try and get experiences where mood_name is inside the mood list
 	try:
 		experiences = models.Experience.objects(mood=mood_name)
+		# get the first 3 interests inside Experience
+		ints = models.Experience.objects.fields(slice__interest=[0,2])
 
 	# not found, abort w/ 404 page
 	except:
 		abort(404)
+
+	# get the first 3 interests inside Experience
+	# ints = models.Experience.objects.fields(slice__interest=[0,2])
+
+	interest = ()
+
+	for i in ints:
+
+		interest = str(i)
+
+		# get the last experience of a specific interest
+		exp_highlight = models.Experience.objects(interest=interest).order_by('-timestamp')
 
 	# prepare data for template
 	templateData = {
@@ -424,10 +438,14 @@ def by_mood(mood_name):
 			'name' : mood_name.replace('_',' ')
 		},
 		'experiences' : experiences,
-		'mood' : mood
+		'mood' : mood,
+		'interest' : interest,
+		'exp_highlight' : exp_highlight,
+		'ints' : ints,
 	}
 
 	if mood_name == "Zippy":
+
 		# render and return template
 		return render_template('04mood_listing01.html', **templateData)
 
@@ -496,7 +514,7 @@ def slist():
 		'search_str' : search_str
 	}
 
-	return render_template("search_list.html", **templateData)
+	return render_template("13search_list.html", **templateData)
 
 
 # --------- Create a new List  --------------------------------------------------------------------------
@@ -510,8 +528,6 @@ def create():
 	# get List form from models.py based on the photo
 	photo_upload_list = models.photo_upload_list(request.form)
 
-	# get created lists
-	app.logger.debug(request.form.getlist('city'))
 	
 	# if form was submitted and it is valid...
 	if request.method == "POST" and photo_upload_list.validate():
@@ -550,7 +566,6 @@ def create():
 				createList.listName = request.form.get('listName')
 				createList.slug = slugify(createList.listName)
 				createList.listDescription = request.form.get('listDescription')
-				createList.city = request.form.getlist('city')
 				createList.postedby = request.form.get('postedby')
 				createList.filename = filename # same filename of s3 bucket file
 				#link to current user
@@ -572,17 +587,12 @@ def create():
 	else:
 		# get existing listsCreated
 		listsCreated = models.List.objects.order_by('timestamp')
-
-		if request.form.getlist('city'):
-			for c in request.form.getlist('city'):
-				photo_upload_list.city.append_entry(c)
 		
 		# render the template
 		templateData = {
 			'current_user' : current_user,
 			'users' : models.User.objects(),
 			'listsCreated' : listsCreated,
-			'city' : city,
 			'form' : photo_upload_list
 		}
 
@@ -634,7 +644,6 @@ def user_list(user_name):
 	return render_template('lists_user.html', **templateData)
 
 
-
 # To delete a List
 @app.route('/lists/delete/<list_id>')
 def delete_list(list_id):
@@ -664,7 +673,7 @@ def delete_list(list_id):
 
 
 
-# User profile page
+# Choose a list from the user to put the experience in
 @app.route('/chooselist/<experience_id>')
 @login_required
 def choose_list(experience_id):
@@ -687,7 +696,6 @@ def choose_list(experience_id):
 
 
 # save an experience in a list
-# not working
 @app.route("/list/<list_id>/add/<experience_id>", methods=['GET','POST'])
 def list_add_experience(list_id, experience_id):
 
@@ -814,8 +822,12 @@ def register():
 @login_required
 def admin_main():
 
+	# get existing listsCreated
+	listsCreated = models.List.objects.order_by('timestamp')
+
 	templateData = {
 		'allLists' : models.List.objects(user=current_user.id),
+		'listsCreated' : listsCreated,
 		'current_user' : current_user,
 		'experiences': models.Experience.objects()
 	}

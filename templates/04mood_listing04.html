@@ -14,52 +14,54 @@
             </div>
           </div>
     </div>
-    <br><br><br><br>
+    <br><br>
 
     <!-- Showing Experiences from a specific mood -->
     <div class="box-login">
-        <div class="box-highlight">
-          <img class="icons-med image-highlight" src="{{ url_for('static', filename='img/dine-dark.jpg') }}" height="60%" width="60%">
+      <!--  Carousel -->
+      <!--  consult Bootstrap docs at 
+            http://twitter.github.com/bootstrap/javascript.html#carousel -->
+      <div id="this-carousel-id" class="carousel slide">
+        <div class="carousel-inner box-highlight">
 
-          <a href="/mood/Munch"><div class="small-boxes">
-            <span></span>
-            <img src="{{ url_for('static', filename='img/icon-munch-s.png') }}" height="49%" width="49%" >
-            <h6>Munch</h6>
-          </div></a>
+          {% for experience in experiences %}
 
-          <a href="/mood/Chill"><div class="small-boxes" id="text-highlight">
-            <h3>Dining in the Dark
-            <img class="icons-next" src="{{ url_for('static', filename='img/icon-next.png') }}" height="4%" width="4%"></h3>
-            <p>They say that when you lose one of your senses, the others get intensified. Now imagine what might happen with your ...</p>
-          </div></a>
-        </div>
-    </div>
+              <div class="item active">
+                <img class="icons-med image-highlight" src="https://s3.amazonaws.com/aliceapp/{{experience.filename}}" height="100%" width="100%"/>
 
+                <div>
+                  <a href="/mood/Munch"><div class="small-boxes" id="purple-small-box">
+                  <span></span>
+                    <img src="{{ url_for('static', filename='img/icon-munch-s.png') }}" height="49%" width="49%" >
+                    <h6>Munch</h6>
+                  </div></a>
 
-    <!-- Showing Experiences from a specific mood -->
-    <div class="container middle">
-      <div class="row-fluid">
-        <h3>Mood: {{ current_mood.get('name')|title }}</h3>
-        <br>
-        
-        {% for experience in experiences %}
-            <li class="span3">
-                <div class="thumbnail">
-                  <div class="caption">
-                    <img src="https://s3.amazonaws.com/aliceapp/{{experience.filename}}" class="img-rounded"></a>
-      
-                      <h3>{{ experience.title }}</h3>
-                      <p><em>[ {% for m in experience.mood %}{{ m|replace("_"," ")}} {% endfor %} - {% for i in experience.interest %}{{ i|replace("_"," ")}} {% endfor %}]</em></p>
-                      <p><em>"{{ experience.description }}"</em></p>
-                      <a href="/experiences/{{ experience.slug }}" class="btn btn-warning">View</a>
-                  </div>
+                  <a href="/mood/Chill">
+                    <div class="small-boxes" id="text-highlight">
+                      <h3>{{ experience.title }}
+                        <img class="icons-next" src="{{ url_for('static', filename='img/icon-next.png') }}" height="4%" width="4%">
+                      </h3>
+                      <p>{{ experience.description }}</p>
+                    </div>
+                  </a>
                 </div>
-            </li>  
-            {% endfor %}      
-      </div>
-    </div>
-    <br>
+              </div>
 
+          {% endfor %}   
+
+        </div><!-- .carousel-inner -->
+        <!--  next and previous controls here
+              href values must reference the id for this carousel -->
+          <a class="carousel-control left" href="#this-carousel-id" data-slide="prev">&lsaquo;</a>
+          <a class="carousel-control right" href="#this-carousel-id" data-slide="next">&rsaquo;</a>
+      </div><!-- .carousel -->
+      <!-- end carousel -->
+
+    </div>
+
+
+
+  <div class="container middle">
     <!-- Different interests boxes -->
     <div class="box-login">
       <a href="/interest/City_Secrets"><div class="box-interests">
@@ -83,6 +85,7 @@
         </h3>
       </div></a>
     </div>
+  </div>
 
     <br><br><br><br>
 

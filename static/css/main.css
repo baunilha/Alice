@@ -314,6 +314,10 @@ hr {
 	font-size: 11px;
 }
 
+#purple-small-box {
+	height: 97px;
+}
+
 #text-highlight {
 	background-color: #eff2f3;
 	width: 76.5%;
@@ -330,7 +334,7 @@ hr {
 
 #text-highlight img {
 	width: 6%;
-	margin: 10px -20px 0px 0px;
+	margin: 5% -10% 0% 0%;
 }
 
 #text-highlight p {
@@ -345,6 +349,18 @@ hr {
 	text-overflow: ellipsis;
 	}
 
+.carousel-control {
+	margin-top: -12%;
+}
+
+.carousel {
+	margin-bottom: 1.1%;
+}
+
+#this-carousel-id {
+	height: 300px;
+	margin-top: 7%;
+}
 
 /* List of Exeperience Page - Inside a Category
 -------------------------------------------------- */
@@ -868,4 +884,20 @@ h2 .icons-med {
   color: #50224e;
   background-color: #dadada;
   *background-color: #dadada;
+}
+
+
+#tab-search-list {
+	margin-left: 24%;
+	width: 73%;
+	margin-top: 3%;
+}
+
+#search-list {
+	margin-top: -14%;
+	height: 48px;
+}
+
+#search-inner {
+	height: 48px;
 }

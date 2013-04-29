@@ -52,13 +52,55 @@
 	</div>
 </div>
 
+<hr>
 
-<br><br><br><br>
+<!-- Display Recently created experiences -->
+<div class="container middle">
+    <div class="box-login">
+      <h2><img class="icons-med spiral" src="../static/img/spiral.png" height="13%" width="13%"> Recently created lists</h2>
+
+        <div class="box-login">
+
+          {% for l in listsCreated %}
+
+          <div class="box-location">
+            <img class="icons-med image-location" src="https://s3.amazonaws.com/aliceapp/{{l.filename}}" height="60%" width="60%">
+
+            <div class="location-text">
+              <a href="/lists/{{ l.slug }}"><h3>{{ l.listName }}</h3>
+                <img class="icons-next" src="{{ url_for('static', filename='img/icon-next.png') }}" height="4%" width="4%"></a>
+                <p>{{l.listDescription}}</p>
+                <hr>
+                <a href="/lists/{{ l.user.username }}"><h6>by: {{ l.user.username }}</h6></a>
+            </div>
+          </div>
+        {% endfor %}  
+        </div>
+    </div>
+</div>
+
+
+ <!-- Search bar -->
+ <br>
+ <img id="icons-search-list" src="{{ url_for('static', filename='img/tab-bar-search.png') }}" height="66" width="81">
+    <div class="navbar navbar-inverse" id="search-list">
+          <div class="navbar-inner" id="search-inner">
+            <div class="container">
+                <form action="/slist" method="post">
+                <input class="input-medium" id="tab-search-list" name="search" type="text" placeholder="Search for lists"></textarea>
+                </form>
+            </div>
+          </div>
+    </div>
+
+<hr>
+
 <div class="container middle">
     <div class="box-login">
       <a href="/logout" class="btn btn-large btn-block btn-gray">Logout</a>
     </div>
 </div>
+<br><br><br><br>
 
 <!-- Tab bar in the footer -->
     <div class="navbar navbar-inverse" id="footer">
