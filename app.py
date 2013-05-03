@@ -103,10 +103,14 @@ price = ['$','$$','$$$','$$$$','$$$$$']
 @login_required
 def index():
 
+	# get existing experiences
+	experience = models.Experience.objects.order_by('-timestamp')
+
 	# prepare the template data dictionary
 	templateData = {
 		'experiences': models.Experience.objects(),
 		'current_user' : current_user,
+		'experience': experience,
 		'users' : models.User.objects()
 	}
 
@@ -415,25 +419,10 @@ def by_mood(mood_name):
 	# try and get experiences where mood_name is inside the mood list
 	try:
 		experiences = models.Experience.objects(mood=mood_name)
-		# get the first 3 interests inside Experience
-		ints = models.Experience.objects.fields(slice__interest=[0,2])
 
 	# not found, abort w/ 404 page
 	except:
 		abort(404)
-
-	# get the first 3 interests inside Experience
-	# ints = models.Experience.objects.fields(slice__interest=[0,2])
-
-	interest = ()
-
-	for i in ints:
-
-		interest = str(i)
-		# interest = str(models.Experience.objects.fields(slice__interest=[0,2]))
-
-		# get the last experience of a specific interest
-		exp_highlight = models.Experience.objects(interest='Relax').order_by('-timestamp')
 
 	# prepare data for template
 	templateData = {
@@ -443,25 +432,114 @@ def by_mood(mood_name):
 		},
 		'experiences' : experiences,
 		'mood' : mood,
-		'interest' : interest,
-		'exp_highlight' : exp_highlight,
-		'ints' : ints,
+		'interest' : interest
 	}
 
 	if mood_name == "Zippy":
+
+		# Separate the first interest and make it the active div on the carousel
+		firstInterest = ['Fun_with_Friends']
+		firstinterestExperiences = []
+
+		# loop through interest
+		for firstInt in firstInterest:
+			exp_from_db = models.Experience.objects(interest=firstInt).order_by('-timestamp').first()
+			firstinterestExperiences.append( exp_from_db )
+		
+		templateData['firstinterestExperiences'] = firstinterestExperiences
+
+		# get the other 2 interests that are left from this mood and show the last entry on the carousel
+		tmpInterests = ["Let's_Party!", 'Show_Time']
+		interestExperiences = []
+		
+		# loop through interest
+		for tmpInt in tmpInterests:
+			exp_from_db = models.Experience.objects(interest=tmpInt).order_by('-timestamp').first()
+			interestExperiences.append( exp_from_db )
+		
+		templateData['interestExperiences'] = interestExperiences
 
 		# render and return template
 		return render_template('04mood_listing01.html', **templateData)
 
 	if mood_name == "Chill":
 
+		# Separate the first interest and make it the active div on the carousel
+		firstInterest = ['Relax']
+		firstinterestExperiences = []
+
+		# loop through interest
+		for firstInt in firstInterest:
+			exp_from_db = models.Experience.objects(interest=firstInt).order_by('-timestamp').first()
+			firstinterestExperiences.append( exp_from_db )
+		
+		templateData['firstinterestExperiences'] = firstinterestExperiences
+
+		# get the other 2 interests that are left from this mood and show the last entry on the carousel
+		tmpInterests = ['Sips_and_Nibs', 'Flea_Market']
+		interestExperiences = []
+		
+		# loop through intereste
+		for tmpInt in tmpInterests:
+			exp_from_db = models.Experience.objects(interest=tmpInt).order_by('-timestamp').first()
+			interestExperiences.append( exp_from_db )
+		
+		templateData['interestExperiences'] = interestExperiences
+
+
 		return render_template('04mood_listing02.html', **templateData)
 
 	if mood_name == "Hungry":
 
+		# Separate the first interest and make it the active div on the carousel
+		firstInterest = ['Special_Eats']
+		firstinterestExperiences = []
+
+		# loop through interest
+		for firstInt in firstInterest:
+			exp_from_db = models.Experience.objects(interest=firstInt).order_by('-timestamp').first()
+			firstinterestExperiences.append( exp_from_db )
+		
+		templateData['firstinterestExperiences'] = firstinterestExperiences
+
+		# get the other 2 interests that are left from this mood and show the last entry on the carousel
+		tmpInterests = ['Munch', 'Unusual_Edibles']
+		interestExperiences = []
+		
+		# loop through intereste
+		for tmpInt in tmpInterests:
+			exp_from_db = models.Experience.objects(interest=tmpInt).order_by('-timestamp').first()
+			interestExperiences.append( exp_from_db )
+
+		# app.logger.info(interestExperiences[1].title)
+
+		templateData['interestExperiences'] = interestExperiences
+
 		return render_template('04mood_listing03.html', **templateData)
 
 	else: 
+
+		# Separate the first interest and make it the active div on the carousel
+		firstInterest = ['City_Secrets']
+		firstinterestExperiences = []
+
+		# loop through interest
+		for firstInt in firstInterest:
+			exp_from_db = models.Experience.objects(interest=firstInt).order_by('-timestamp').first()
+			firstinterestExperiences.append( exp_from_db )
+		
+		templateData['firstinterestExperiences'] = firstinterestExperiences
+
+		# get the other 2 interests that are left from this mood and show the last entry on the carousel
+		tmpInterests = ['Wonder_Around', 'Learn_Something']
+		interestExperiences = []
+		
+		# loop through intereste
+		for tmpInt in tmpInterests:
+			exp_from_db = models.Experience.objects(interest=tmpInt).order_by('-timestamp').first()
+			interestExperiences.append( exp_from_db )
+		
+		templateData['interestExperiences'] = interestExperiences
 
 		return render_template('04mood_listing04.html', **templateData)
 
