@@ -392,7 +392,7 @@ def by_interest(int_name):
 
 	# try and get experiences where int_name is inside the interest list
 	try:
-		experiences = models.Experience.objects(interest=int_name)
+		experiences = models.Experience.objects(interest=int_name).limit(5)
 
 	# not found, abort w/ 404 page
 	except:
@@ -492,7 +492,7 @@ def by_mood(mood_name):
 	if mood_name == "Hungry":
 
 		# Separate the first interest and make it the active div on the carousel
-		firstInterest = ['Special_Eats']
+		firstInterest = ['Munch']
 		firstinterestExperiences = []
 
 		# loop through interest
@@ -503,7 +503,7 @@ def by_mood(mood_name):
 		templateData['firstinterestExperiences'] = firstinterestExperiences
 
 		# get the other 2 interests that are left from this mood and show the last entry on the carousel
-		tmpInterests = ['Munch', 'Unusual_Edibles']
+		tmpInterests = ['Special_Eats', 'Unusual_Edibles']
 		interestExperiences = []
 		
 		# loop through intereste
