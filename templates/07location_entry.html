@@ -35,11 +35,17 @@
 	<!-- Display Map & Address -->
     <div class="box-login">
         <div class="box-map">
-          <img class="icons-med image-highlight" id="img-map" src="{{ url_for('static', filename='img/map00.png') }}" height="60%" width="60%">
+          <a href="https://maps.google.com/maps?q={{ location.address }}+{{ location.neighborhood }}+{{ location.city }}">
+            <img id="img-map" height="70%" width="99.5%" src="http://maps.googleapis.com/maps/api/staticmap?zoom=16&size=360x160&markers=color:purple|{{ location.address }}+{{ location.neighborhood }}+{{ location.city }}&sensor=false">
+          </a>
+
+         <!--  <img class="icons-med image-highlight" id="img-map" src="{{ url_for('static', filename='img/map00.png') }}" height="60%" width="60%"> -->
           <hr>
           <div class="small-boxes" id="text-map">
-            <h5>{{ location.address }}</h5>
-            <h5>{{ location.neighborhood }}, {{ location.city }}</h5>
+            <a href="https://maps.google.com/maps?q={{ location.address }}+{{ location.neighborhood }}+{{ location.city }}">
+              <h5>{{ location.address }}</h5>
+              <h5>{{ location.neighborhood }}, {{ location.city }}</h5>
+            </a>
           </div>
         </div>
     </div>

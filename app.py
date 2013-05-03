@@ -368,7 +368,10 @@ def location(location_slug):
 
 	# prepare template data
 	templateData = {
-		'location' : location
+		'location' : location,
+		'address_map' : location.address.replace(' ','+'),
+		'neighborhood_map' : location.neighborhood.replace(' ','+'),
+		'city_map' : location.city.replace(' ','+')
 	}
 
 	# render and return the template
@@ -427,9 +430,10 @@ def by_mood(mood_name):
 	for i in ints:
 
 		interest = str(i)
+		# interest = str(models.Experience.objects.fields(slice__interest=[0,2]))
 
 		# get the last experience of a specific interest
-		exp_highlight = models.Experience.objects(interest=interest).order_by('-timestamp')
+		exp_highlight = models.Experience.objects(interest='Relax').order_by('-timestamp')
 
 	# prepare data for template
 	templateData = {
