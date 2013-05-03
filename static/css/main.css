@@ -202,17 +202,19 @@ hr {
 -------------------------------------------------- */
 
 #interests {
-	margin-top: -5px;
+
 }
 
 .box-interests {
 	width: 100%;
 	background-color: #eff2f3;
 	height: 65px;
+	margin: 0% 0% 5px 0%;
 }
 
 .box-interests h3 {
 	font-size: 23px;
+	margin: 0% 0% 0% 0%;
 }
 
 .icons-med {
@@ -261,7 +263,7 @@ hr {
 /* Highlight boxes */
 
 .image-highlight {
-	width: 99.5%;
+	width: 66.5%;
 	height: 200px;
 	margin: 1px 2px 0px 1px;
 }
@@ -325,11 +327,12 @@ hr {
 }
 
 #text-highlight h3 {
-	font-size: 23px;
+	font-size: 20px;
+	line-height: 33px;
 	text-align: left;
 	margin-top: 0px;
 	margin-bottom: 0px;
-	width: 86%;
+	width: 89%;
 }
 
 #text-highlight img {
