@@ -105,6 +105,9 @@ hr {
 .box-login {
 	margin: 0 auto;
 	max-width: 416px;
+	box-shadow: rgba(0, 0, 0, 0.14) 0px 1px 4px 1px;
+	-webkit-box-shadow: rgba(0, 0, 0, 0.14) 0px 1px 4px 1px;
+	-moz-box-shadow: rgba(0, 0, 0, 0.14) 0px 1px 4px 1px;
 }
 
 .well {
@@ -208,8 +211,11 @@ hr {
 .box-interests {
 	width: 100%;
 	background-color: #eff2f3;
-	height: 65px;
+	height: 60px;
 	margin: 0% 0% 5px 0%;
+	box-shadow: rgba(0, 0, 0, 0.14) 0px 1px 4px 1px;
+	-webkit-box-shadow: rgba(0, 0, 0, 0.14) 0px 1px 4px 1px;
+	-moz-box-shadow: rgba(0, 0, 0, 0.14) 0px 1px 4px 1px;
 }
 
 .box-interests h3 {
@@ -218,7 +224,7 @@ hr {
 }
 
 .icons-med {
-	margin: 8px 10px;
+	margin: 2% 4%;
 }
 
 .icons-next {
@@ -264,14 +270,14 @@ hr {
 
 .image-highlight {
 	width: 99.5%;
-	height: 66.5%;
+	height: 61%;
 	margin: 1px 2px 0px 1px;
 }
 
 .box-highlight {
 	width: 100%;
 	background-color: #eff2f3;
-	height: 300px;
+	height: 256px;
 	display: block;
     float: left;
     position: relative;
@@ -309,11 +315,12 @@ hr {
 }
 
 .small-boxes h6 {
-	margin-top: -38px;
+	margin-top: -56%;
 	color: #eff2f3;
 	font-style: italic;
 	font-weight: 400;
 	font-size: 11px;
+	line-height: 10px;
 }
 
 #purple-small-box {
@@ -327,8 +334,8 @@ hr {
 }
 
 #text-highlight h3 {
-	font-size: 20px;
-	line-height: 33px;
+	font-size: 19px;
+	line-height: 27px;
 	text-align: left;
 	margin-top: 0px;
 	margin-bottom: 0px;
@@ -336,17 +343,17 @@ hr {
 }
 
 #text-highlight img {
-	width: 6%;
-	margin: 5% -10% 0% 0%;
+	width: 5%;
+	margin: 2.5% -10% 0% 0%;
 }
 
 #text-highlight p {
 	display: -webkit-box;
 	text-align: justify;
-	max-width: 98%;
+	max-width: 100%;
 	height: 58%;
-	line-height: 18px;
-	-webkit-line-clamp: 3;
+	line-height: 17px;
+	-webkit-line-clamp: 4;
 	-webkit-box-orient: vertical;
 	overflow: hidden;
 	text-overflow: ellipsis;
@@ -361,7 +368,7 @@ hr {
 }
 
 #this-carousel-id {
-	height: 300px;
+	height: 256px;
 	margin-top: 7%;
 }
 
