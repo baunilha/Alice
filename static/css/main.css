@@ -105,9 +105,6 @@ hr {
 .box-login {
 	margin: 0 auto;
 	max-width: 416px;
-	box-shadow: rgba(0, 0, 0, 0.14) 0px 1px 4px 1px;
-	-webkit-box-shadow: rgba(0, 0, 0, 0.14) 0px 1px 4px 1px;
-	-moz-box-shadow: rgba(0, 0, 0, 0.14) 0px 1px 4px 1px;
 }
 
 .well {
@@ -119,6 +116,7 @@ hr {
 	-webkit-border-radius: 0px;
 	-moz-border-radius: 0px;
 	border-radius: 0px;
+	margin-bottom: 3%;
 }
 
 
@@ -315,12 +313,12 @@ hr {
 }
 
 .small-boxes h6 {
-	margin-top: -56%;
+	margin-top: -58%;
 	color: #eff2f3;
 	font-style: italic;
 	font-weight: 400;
-	font-size: 11px;
-	line-height: 10px;
+	font-size: 74%;
+	line-height: 92%;
 }
 
 #purple-small-box {
@@ -370,6 +368,9 @@ hr {
 #this-carousel-id {
 	height: 256px;
 	margin-top: 7%;
+	box-shadow: rgba(0, 0, 0, 0.14) 0px 1px 4px 1px;
+	-webkit-box-shadow: rgba(0, 0, 0, 0.14) 0px 1px 4px 1px;
+	-moz-box-shadow: rgba(0, 0, 0, 0.14) 0px 1px 4px 1px;
 }
 
 /* List of Exeperience Page - Inside a Category
@@ -390,6 +391,9 @@ h2 .icons-med {
     text-align: center;
     vertical-align: middle;
     margin-bottom: 14px;
+    box-shadow: rgba(0, 0, 0, 0.14) 0px 1px 4px 1px;
+	-webkit-box-shadow: rgba(0, 0, 0, 0.14) 0px 1px 4px 1px;
+	-moz-box-shadow: rgba(0, 0, 0, 0.14) 0px 1px 4px 1px;
 }
 
 .image-list {
@@ -411,11 +415,11 @@ h2 .icons-med {
 }
 
 .list-text h3 {
-	font-size: 22px;
+	font-size: 20px;
 	text-align: left;
-	margin-top: -3px;
+	margin-top: -2%;
 	height: 31%;
-	margin-bottom: 5px;
+	margin-bottom: 0%;
 	width: 88%;
 	-webkit-line-clamp: 1;
 	-webkit-box-orient: vertical;
@@ -423,18 +427,18 @@ h2 .icons-med {
 }
 
 .list-text img {
-	width: 6%;
-	margin: -13% 3% 0% 0%;
+	width: 5%;
+	margin: -11% 3% 0% 0%;
 }
 
 .list-text p {
 	display: -webkit-box;
 	text-align: justify;
 	max-width: 97%;
-	height: 65%;
+	height: 72%;
 	margin-bottom: 0px;
-	line-height: 18px;
-	-webkit-line-clamp: 4;
+	line-height: 17px;
+	-webkit-line-clamp: 5;
 	-webkit-box-orient: vertical;
 	overflow: hidden;
 	text-overflow: ellipsis;
@@ -448,14 +452,24 @@ h2 .icons-med {
 .box-experience {
 	width: 100%;
 	background-color: #eff2f3;
-	height: 360px;
+	height: 300px;
+	margin-top: 1.5%;
 	display: block;
     float: left;
     position: relative;
     display: table-cell;
     text-align: center;
     vertical-align: middle;
-    margin-bottom: 5%;
+    margin-bottom: 3%;
+    box-shadow: rgba(0, 0, 0, 0.14) 0px 1px 4px 1px;
+	-webkit-box-shadow: rgba(0, 0, 0, 0.14) 0px 1px 4px 1px;
+	-moz-box-shadow: rgba(0, 0, 0, 0.14) 0px 1px 4px 1px;
+}
+
+.image-experience {
+	width: 99.5%;
+	height: 52%;
+	margin: 1px 2px 0px 1px;
 }
 
 #text-experience {
@@ -466,7 +480,8 @@ h2 .icons-med {
 }
 
 #text-experience h3 {
-	font-size: 24px;
+	font-size: 23px;
+	line-height: 33px;
 	text-align: left;
 	margin-top: 0%;
 	margin-bottom: 0%;
@@ -483,7 +498,7 @@ h2 .icons-med {
 	display: -webkit-box;
 	text-align: justify;
 	max-width: 98%;
-	height: 61%;
+	height: 59%;
 	margin-left: 2%;
 	margin-bottom: 0%;
 	line-height: 18px;
@@ -500,7 +515,7 @@ h2 .icons-med {
 	font-size: 13px;
 	text-align: left;
 	margin-left: 2%;
-	margin-top: -2%;
+	margin-top: -1%;
 	margin-bottom: 0%;
 }
 
@@ -519,6 +534,9 @@ h2 .icons-med {
     text-align: center;
     vertical-align: middle;
     margin-bottom: 14px;
+    box-shadow: rgba(0, 0, 0, 0.14) 0px 1px 4px 1px;
+	-webkit-box-shadow: rgba(0, 0, 0, 0.14) 0px 1px 4px 1px;
+	-moz-box-shadow: rgba(0, 0, 0, 0.14) 0px 1px 4px 1px;
 }
 
 .image-location {
@@ -546,6 +564,7 @@ h2 .icons-med {
 	margin-bottom: -2%;
 	height: 31%;
 	width: 88%;
+	line-height: 36px;
 	-webkit-line-clamp: 1;
 	-webkit-box-orient: vertical;
 	overflow: hidden;
@@ -588,6 +607,14 @@ h2 .icons-med {
 	color: blue;
 }
 
+.small-boxes-experience {
+	margin: 1px 5px 1px 1px;
+	float: left;
+	position: relative;
+	display: table-cell;
+	text-align: center;
+	vertical-align: middle;
+}
 
 /* Detailed location page
 -------------------------------------------------- */
@@ -595,24 +622,28 @@ h2 .icons-med {
 .box-place {
 	width: 100%;
 	background-color: #eff2f3;
-	height: 278px;
+	height: 250px;
 	display: block;
     float: left;
     position: relative;
     display: table-cell;
     text-align: center;
     vertical-align: middle;
-    margin-bottom: 5%;
+    margin-bottom: 3%;
+    margin-top: 1.5%;
+	box-shadow: rgba(0, 0, 0, 0.14) 0px 1px 4px 1px;
+	-webkit-box-shadow: rgba(0, 0, 0, 0.14) 0px 1px 4px 1px;
+	-moz-box-shadow: rgba(0, 0, 0, 0.14) 0px 1px 4px 1px;
 }
 
 #img-place {
-	height: 50%;
+	height: 60%;
 }
 
 #text-place {
 	background-color: #eff2f3;
 	width: 98%;
-	height: 49%;
+	height: 39%;
 	margin-right: 0%;
 }
 
@@ -634,10 +665,10 @@ h2 .icons-med {
 	display: -webkit-box;
 	text-align: justify;
 	width: 98%;
-	height: 65%;
+	height: 53%;
 	margin-left: 2%;
 	margin-bottom: 0%;
-	line-height: 18px;
+	line-height: 17px;
 	-webkit-line-clamp: 5;
 	-webkit-box-orient: vertical;
 	overflow: hidden;
@@ -669,7 +700,10 @@ h2 .icons-med {
     display: table-cell;
     text-align: center;
     vertical-align: middle;
-    margin-bottom: 5%;
+    margin-bottom: 3%;
+    box-shadow: rgba(0, 0, 0, 0.14) 0px 1px 4px 1px;
+	-webkit-box-shadow: rgba(0, 0, 0, 0.14) 0px 1px 4px 1px;
+	-moz-box-shadow: rgba(0, 0, 0, 0.14) 0px 1px 4px 1px;
 }
 
 .box-map hr {
@@ -711,6 +745,9 @@ h2 .icons-med {
     text-align: center;
     vertical-align: middle;
     margin-bottom: 80px;
+    box-shadow: rgba(0, 0, 0, 0.14) 0px 1px 4px 1px;
+	-webkit-box-shadow: rgba(0, 0, 0, 0.14) 0px 1px 4px 1px;
+	-moz-box-shadow: rgba(0, 0, 0, 0.14) 0px 1px 4px 1px;
 }
 
 #text-contact {

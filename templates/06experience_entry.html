@@ -15,19 +15,19 @@
             </div>
           </div>
     </div>
-    <br><br><br><br>
+    <br><br><br>
 
     <!-- Showing Experience with details -->
     <div class="box-login">
         <div class="box-experience">
-          <img class="icons-med image-highlight" src="https://s3.amazonaws.com/aliceapp/{{experience.filename}}" height="60%" width="60%">
+          <img class="icons-med image-experience" src="https://s3.amazonaws.com/aliceapp/{{experience.filename}}" height="60%" width="60%">
 
-          <div class="small-boxes" id="text-experience">
+          <div class="small-boxes-experience" id="text-experience">
             <h3>{{ experience.title }}
             <a href="/chooselist/{{ experience.id }}"><img class="icons-next" src="{{ url_for('static', filename='img/bookmark.png') }}" height="50%" width="50%"></a></h3>
             <h6>{% for i in experience.interest %}{{ i|replace("_"," ")}} {% endfor %} // {% for p in experience.period %}{{ p|replace("_"," ")}} {% endfor %}</h6>
             <hr>
-            <p>{{ experience.description }}</p>
+            <p>If you think you know everything about the city take the scavenger hunt challenge! Stroll around gathering clues, solving puzzles, and spend the day discovering new things. Choose the theme that you are most curious about and invite your team.</p>
           </div>
         </div>
     </div>
