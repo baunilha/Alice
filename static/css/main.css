@@ -438,10 +438,8 @@ h2 .icons-med {
 	height: 73%;
 	margin-bottom: 0px;
 	line-height: 17px;
-	-webkit-line-clamp: 5;
 	-webkit-box-orient: vertical;
 	overflow: hidden;
-	text-overflow: ellipsis;
 	}
 
 
