@@ -498,7 +498,7 @@ h2 .icons-med {
 	display: -webkit-box;
 	text-align: justify;
 	max-width: 98%;
-	height: 57%;
+	height: 60%;
 	margin-left: 2%;
 	margin-bottom: 0%;
 	line-height: 18px;
@@ -603,8 +603,8 @@ h2 .icons-med {
 }
 
 #spacing {
-	height: 100px;
-	color: blue;
+	color: transparent;
+	margin-bottom: 5%;
 }
 
 .small-boxes-experience {
