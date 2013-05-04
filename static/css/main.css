@@ -452,7 +452,7 @@ h2 .icons-med {
 .box-experience {
 	width: 100%;
 	background-color: #eff2f3;
-	height: 300px;
+	height: 317px;
 	margin-top: 1.5%;
 	display: block;
     float: left;
@@ -468,14 +468,14 @@ h2 .icons-med {
 
 .image-experience {
 	width: 99.5%;
-	height: 52%;
+	height: 49%;
 	margin: 1px 2px 0px 1px;
 }
 
 #text-experience {
 	background-color: #eff2f3;
 	width: 98%;
-	height: 42.25%;
+	height: 49%;
 	margin-right: 0%;
 }
 
@@ -498,7 +498,7 @@ h2 .icons-med {
 	display: -webkit-box;
 	text-align: justify;
 	max-width: 98%;
-	height: 59%;
+	height: 57%;
 	margin-left: 2%;
 	margin-bottom: 0%;
 	line-height: 18px;
@@ -622,7 +622,7 @@ h2 .icons-med {
 .box-place {
 	width: 100%;
 	background-color: #eff2f3;
-	height: 250px;
+	height: 274px;
 	display: block;
     float: left;
     position: relative;
@@ -637,13 +637,13 @@ h2 .icons-med {
 }
 
 #img-place {
-	height: 60%;
+	height: 56%;
 }
 
 #text-place {
 	background-color: #eff2f3;
 	width: 98%;
-	height: 39%;
+	height: 43%;
 	margin-right: 0%;
 }
 
@@ -657,7 +657,7 @@ h2 .icons-med {
 }
 
 #text-place img {
-	width: 5.5%;
+	width: 6.5%;
 	margin: 2.5% -14.5% 0% 0%;
 }
 
@@ -665,11 +665,10 @@ h2 .icons-med {
 	display: -webkit-box;
 	text-align: justify;
 	width: 98%;
-	height: 53%;
+	height: 60%;
 	margin-left: 2%;
 	margin-bottom: 0%;
 	line-height: 17px;
-	-webkit-line-clamp: 5;
 	-webkit-box-orient: vertical;
 	overflow: hidden;
 	text-overflow: ellipsis;
