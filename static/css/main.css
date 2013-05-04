@@ -368,6 +368,7 @@ hr {
 #this-carousel-id {
 	height: 256px;
 	margin-top: 7%;
+	margin-bottom: 1.5%;
 	box-shadow: rgba(0, 0, 0, 0.14) 0px 1px 4px 1px;
 	-webkit-box-shadow: rgba(0, 0, 0, 0.14) 0px 1px 4px 1px;
 	-moz-box-shadow: rgba(0, 0, 0, 0.14) 0px 1px 4px 1px;
