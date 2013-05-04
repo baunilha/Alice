@@ -502,10 +502,8 @@ h2 .icons-med {
 	margin-left: 2%;
 	margin-bottom: 0%;
 	line-height: 18px;
-	-webkit-line-clamp: 5;
 	-webkit-box-orient: vertical;
 	overflow: hidden;
-	text-overflow: ellipsis;
 }
 
 #text-experience h6 {
@@ -672,7 +670,6 @@ h2 .icons-med {
 	line-height: 17px;
 	-webkit-box-orient: vertical;
 	overflow: hidden;
-	text-overflow: ellipsis;
 }
 
 #text-place h6 {
