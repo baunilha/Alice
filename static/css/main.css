@@ -526,7 +526,7 @@ h2 .icons-med {
 .box-location {
 	width: 100%;
 	background-color: #eff2f3;
-	height: 120px;
+	height: 132px;
 	display: block;
     float: left;
     position: relative;
@@ -548,7 +548,7 @@ h2 .icons-med {
 
 .location-text {
 	width: 62%;
-	height: 98%;
+	height: 99%;
 	background-color: #eff2f3;
 	margin: 1px 0px 1px 3px;
 	display: block;
@@ -562,7 +562,7 @@ h2 .icons-med {
 	text-align: left;
 	margin-top: -2%;
 	margin-bottom: -2%;
-	height: 31%;
+	height: 27%;
 	width: 88%;
 	line-height: 36px;
 	-webkit-line-clamp: 1;
@@ -579,7 +579,7 @@ h2 .icons-med {
 	display: -webkit-box;
 	text-align: justify;
 	max-width: 97%;
-	height: 57%;
+	height: 53%;
 	margin-bottom: 0px;
 	line-height: 125%;
 	-webkit-line-clamp: 4;
@@ -598,6 +598,7 @@ h2 .icons-med {
 	font-style: italic;
 	font-weight: bold;
 	font-size: 12px;
+	line-height: 15px;
 	text-align: left;
 	margin: 0% 0% 0% 1%;
 }

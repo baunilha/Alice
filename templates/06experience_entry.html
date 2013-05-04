@@ -48,7 +48,8 @@
             <img class="icons-next" src="{{ url_for('static', filename='img/icon-next.png') }}" height="4%" width="4%"></a>
             <p>If you think you know everything about the city take the scavenger hunt challenge! Stroll around gathering clues, solving puzzles, and spend the day discovering new things. Choose the theme that you are most curious about and invite your team.</p>
             <hr>
-            <h6>{{ location.address }} - {{ location.neighborhood }}</h6>
+            <h6>{{ location.address }}</h6>
+            <h6>{{ location.neighborhood }}</h6>
         </div>
       </div>
     {% endfor %}  
