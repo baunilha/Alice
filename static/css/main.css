@@ -383,7 +383,7 @@ h2 .icons-med {
 .box-list {
 	width: 100%;
 	background-color: #eff2f3;
-	height: 120px;
+	height: 122px;
 	display: block;
     float: left;
     position: relative;
@@ -435,7 +435,7 @@ h2 .icons-med {
 	display: -webkit-box;
 	text-align: justify;
 	max-width: 97%;
-	height: 72%;
+	height: 73%;
 	margin-bottom: 0px;
 	line-height: 17px;
 	-webkit-line-clamp: 5;
@@ -665,7 +665,7 @@ h2 .icons-med {
 	display: -webkit-box;
 	text-align: justify;
 	width: 98%;
-	height: 63%;
+	height: 66%;
 	margin-left: 2%;
 	margin-bottom: 0%;
 	line-height: 17px;
