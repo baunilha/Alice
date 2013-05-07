@@ -579,10 +579,8 @@ h2 .icons-med {
 	height: 53%;
 	margin-bottom: 0px;
 	line-height: 125%;
-	-webkit-line-clamp: 4;
 	-webkit-box-orient: vertical;
 	overflow: hidden;
-	text-overflow: ellipsis;
 }
 
 .location-text hr {
