@@ -27,7 +27,7 @@
             <a href="/chooselist/{{ experience.id }}"><img class="icons-next" src="{{ url_for('static', filename='img/bookmark.png') }}" height="50%" width="50%"></a></h3>
             <h6>{% for i in experience.interest %}{{ i|replace("_"," ")}} {% endfor %} // {% for p in experience.period %}{{ p|replace("_"," ")}} {% endfor %}</h6>
             <hr>
-            <p>If you think you know everything about the city take the scavenger hunt challenge! Stroll around gathering clues, solving puzzles, and spend the day discovering new things. Choose the theme that you are most curious about and invite your team.</p>
+            <p>{{ experience.description }}</p>
           </div>
         </div>
     </div>
@@ -46,7 +46,7 @@
         <div class="location-text">
           <a href="/location/{{ location.slug }}"><h3>{{ location.name }}</h3>
             <img class="icons-next" src="{{ url_for('static', filename='img/icon-next.png') }}" height="4%" width="4%"></a>
-            <p>If you think you know everything about the city take the scavenger hunt challenge! Stroll around gathering clues, solving puzzles, and spend the day discovering new things. Choose the theme that you are most curious about and invite your team.</p>
+            <p>{{ location.description }}</p>
             <hr>
             <h6>{{ location.address }}</h6>
             <h6>{{ location.neighborhood }}</h6>
