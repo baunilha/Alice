@@ -32,7 +32,9 @@
                 <img src="{{ url_for('static', filename='img/box4.png') }}" height="49%" width="49%" >
             </a>
             <br><br>
-            <a href="/experiences/{{ experience.slug }}">
+            {% for experience in experiences %}
+            <a href="/experiences/{{ experience.slug|first() }}">
+            {% endfor %}
                 <img src="{{ url_for('static', filename='img/box-surprise.png') }}" height="100%" width="100%" >
             </a>
         </div>
