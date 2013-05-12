@@ -351,10 +351,8 @@ hr {
 	max-width: 100%;
 	height: 58%;
 	line-height: 17px;
-	-webkit-line-clamp: 4;
 	-webkit-box-orient: vertical;
 	overflow: hidden;
-	text-overflow: ellipsis;
 	}
 
 .carousel-control {
@@ -373,6 +371,11 @@ hr {
 	-webkit-box-shadow: rgba(0, 0, 0, 0.14) 0px 1px 4px 1px;
 	-moz-box-shadow: rgba(0, 0, 0, 0.14) 0px 1px 4px 1px;
 }
+
+#learn-something {
+	font-size: 22px;
+}
+
 
 /* List of Exeperience Page - Inside a Category
 -------------------------------------------------- */
@@ -644,7 +647,7 @@ h2 .icons-med {
 }
 
 #text-place h3 {
-	font-size: 24px;
+	font-size: 21px;
 	text-align: left;
 	margin-top: 0%;
 	margin-bottom: 0%;
@@ -653,7 +656,7 @@ h2 .icons-med {
 }
 
 #text-place img {
-	width: 6.5%;
+	width: 10%;
 	margin: 2.5% -14.5% 0% 0%;
 }
 
@@ -941,4 +944,83 @@ h2 .icons-med {
 
 #search-inner {
 	height: 48px;
+}
+
+
+
+
+
+/*   Detailed List Screen    */
+
+.box-listB {
+	width: 100%;
+	background-color: #eff2f3;
+	height: 275px;
+	margin-top: 1.5%;
+	display: block;
+    float: left;
+    position: relative;
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+    margin-bottom: 3%;
+    box-shadow: rgba(0, 0, 0, 0.14) 0px 1px 4px 1px;
+	-webkit-box-shadow: rgba(0, 0, 0, 0.14) 0px 1px 4px 1px;
+	-moz-box-shadow: rgba(0, 0, 0, 0.14) 0px 1px 4px 1px;
+}
+
+.image-listB {
+	width: 99.5%;
+	height: 60%;
+	margin: 1px 2px 0px 1px;
+}
+
+#text-listB {
+	background-color: #eff2f3;
+	width: 98%;
+	height: 39%;
+	margin-right: 0%;
+}
+
+#text-listB h6 {
+	color: #865586;
+	font-style: italic;
+	font-weight: 400;
+	font-size: 13px;
+	text-align: left;
+	margin-left: 2%;
+	margin-top: -1%;
+	margin-bottom: 0%;
+}
+
+#text-listB h3 {
+	font-size: 23px;
+	line-height: 33px;
+	text-align: left;
+	margin-top: 0%;
+	margin-bottom: 0%;
+	margin-left: 2%;
+	width: 86%;
+}
+
+#text-listB img {
+	width: 10%;
+	margin: -1.15% -16.1% 0% 0%;
+}
+
+
+#text-listB hr {
+	margin: 1.2% 0.3% 1.2% 1.6%;
+}
+
+#text-listB p {
+	display: -webkit-box;
+	text-align: justify;
+	max-width: 98%;
+	height: 52%;
+	margin-left: 2%;
+	margin-bottom: 0%;
+	line-height: 18px;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
 }

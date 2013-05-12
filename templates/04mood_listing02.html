@@ -25,13 +25,13 @@
 
           {% for experience in firstinterestExperiences %}
 
-              <div class="item">
+              <div class="item active">
                 <img class="icons-med image-highlight" src="https://s3.amazonaws.com/aliceapp/{{experience.filename}}" height="100%" width="100%"/>
 
                 <div>
                   <a href="/mood/{{ experience.interest|first() }}"><div class="small-boxes" id="purple-small-box">
                   <span></span>
-                    <img src="../static/img/{{ experience.interest|first() }}_s.png" height="49%" width="49%" >
+                    <img src="../static/img/{{ experience.interest|first() }}_s.png" height="65%" width="65%" >
                     <h6>{{ experience.interest|first()|replace("_", " ") }}</h6>
                   </div></a>
 
@@ -54,13 +54,13 @@
                 <img class="icons-med image-highlight" src="https://s3.amazonaws.com/aliceapp/{{experience.filename}}" height="100%" width="100%"/>
 
                 <div>
-                  <a href="/mood/Munch"><div class="small-boxes" id="purple-small-box">
+                  <a href="/mood/{{ experience.interest|first() }}"><div class="small-boxes" id="purple-small-box">
                   <span></span>
-                    <img src="{{ url_for('static', filename='img/icon-munch-s.png') }}" height="49%" width="49%" >
-                    <h6>{{ experience.interest }}</h6>
+                    <img src="../static/img/{{ experience.interest|first() }}_s.png" height="65%" width="65%" >
+                    <h6>{{ experience.interest|first()|replace("_", " ") }}</h6>
                   </div></a>
 
-                  <a href="/mood/Chill">
+                  <a href="/experiences/{{ experience.slug }}">
                     <div class="small-boxes" id="text-highlight">
                       <h3>{{ experience.title }}
                         <img class="icons-next" src="{{ url_for('static', filename='img/icon-next.png') }}" height="4%" width="4%">
